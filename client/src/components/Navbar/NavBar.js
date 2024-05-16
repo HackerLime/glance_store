@@ -13,6 +13,7 @@ const NavBar = () => {
 		<div
 			style={{
 				borderBottom: '1px solid rgb(193, 193, 193)',
+				margin: '0 0 23px 0'
 			}}>
 			<Container
 				style={{ padding: '20px 0 20px 0' }}
