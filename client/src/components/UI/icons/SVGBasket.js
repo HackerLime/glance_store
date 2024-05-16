@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SVGBasket = () => {
+const SVGBasket = ({ color }) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -9,13 +9,13 @@ const SVGBasket = () => {
 			fill="none"
 		>
 			<path
-				stroke="#454545"
+				stroke={color}
 				strokeLinejoin="round"
 				strokeWidth={2}
 				d="M8.5 22c-.56 0-1-.45-1-1 0-.56.44-1 1-1 .55 0 1 .44 1 1 0 .55-.45 1-1 1ZM18.5 22c-.56 0-1-.45-1-1 0-.56.44-1 1-1 .55 0 1 .44 1 1 0 .55-.45 1-1 1Z"
 			/>
 			<path
-				stroke="#454545"
+				stroke={color}
 				strokeLinecap="round"
 				strokeLinejoin="round"
 				strokeWidth={2}

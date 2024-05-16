@@ -1,11 +1,18 @@
 import React from 'react'
+import ShopCarousel from './Carousel/ShopCarousel'
+import { Container } from 'react-bootstrap'
+import ShopCatalog from './Catalog/ShopCatalog'
+import ShopPromotions from './Promotion/ShopPromotions'
 
 
 const Shop = () => {
-	return (
-		<div>
 
-		</div>
+	return (
+		<Container >
+			<ShopCarousel />
+			<ShopCatalog />
+			<ShopPromotions />
+		</Container>
 	)
 }
 

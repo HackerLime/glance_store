@@ -3,9 +3,7 @@ import SVGSearch from '../UI/icons/SVGSearch'
 import classes from './NavBarSearch.module.css'
 const NavBarSearch = () => {
 	const [active, setActive] = useState(false)
-	const randomfunc = () => {
 
-	}
 	return (
 		<div
 			className={
@@ -15,7 +13,7 @@ const NavBarSearch = () => {
 					classes.mySearch_active
 			}>
 			<input
-				onFocus={e => setActive(true)}
+				onFocus={() => setActive(true)}
 				onBlur={() => setActive(false)}
 				placeholder='Поиск'
 				className={classes.myInput}
