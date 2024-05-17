@@ -1,13 +1,13 @@
 import React from 'react'
 
-const SVGFBStarF = () => {
+const SVGFBStarF = (props) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			width={27}
 			height={25}
 			fill="none"
-
+			{...props}
 		>
 			<path
 				fill="#750DC5"
