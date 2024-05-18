@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Image } from 'react-bootstrap'
+import Image from 'react-bootstrap/Image'
 import smartphoneimg from '../UI/icons/catalog/smartphone.svg'
 import notebookimg from '../UI/icons/catalog/notebook.svg'
 import pcimg from '../UI/icons/catalog/pc.svg'

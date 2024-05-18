@@ -14,8 +14,8 @@ const ReviewImages = () => {
 	return (
 		<div className='d-flex'>
 			{images.map((i, idx) =>
-				<div style={{ margin: '0 16px 0 0' }}>
-					<Image key={i.id} src={i.img} />
+				<div key={i.id} style={{ margin: '0 16px 0 0' }}>
+					<Image src={i.img} />
 				</div>
 			)}
 		</div>

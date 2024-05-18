@@ -1,6 +1,6 @@
 import React from 'react'
 import ShopCarousel from './Carousel/ShopCarousel'
-import { Container } from 'react-bootstrap'
+import Container from 'react-bootstrap/Container'
 import ShopCatalog from './Catalog/ShopCatalog'
 import ShopPromotions from './Promotion/ShopPromotions'
 
