@@ -7,7 +7,7 @@ function App() {
 	return (
 		<div className="App" style={{ backgroundColor: '#f6f6f6' }}>
 			<NavBar />
-			<Device />
+			<Shop />
 		</div>
 	)
 }
