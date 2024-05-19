@@ -1,0 +1,6 @@
+export const SHOP_ROUTE = '/shop'
+export const BASKET_ROUTE = '/basket'
+export const CATALOG_ROUTE = '/catalog'
+export const ADMIN_ROUTE = '/admin'
+export const REGISTRATION_ROUTE = '/auth'
+export const LOGIN_ROUTE = '/auth'
