@@ -4,7 +4,7 @@ import SVGFBStar from '../UI/icons/SVGFBStar'
 import SVGFBStarF from '../UI/icons/SVGFBStarF'
 import FeedbackItems from './feedback/FeedbackItems'
 
-const DeviceFooter = () => {
+const DevicePageFooter = () => {
 	const feedBack = { reviews: 325, ratings: 2000, middleRating: 5 }
 
 	return (
@@ -32,4 +32,4 @@ const DeviceFooter = () => {
 	)
 }
 
-export default DeviceFooter
+export default DevicePageFooter

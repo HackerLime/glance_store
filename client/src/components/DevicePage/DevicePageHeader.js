@@ -1,7 +1,7 @@
 import React from 'react'
-import { Container, Image } from 'react-bootstrap'
+import Image from 'react-bootstrap/Image'
 import lessThanImg from '../UI/icons/device/lessThan.svg'
-const DeviceHeader = () => {
+const DevicePageHeader = () => {
 	return (
 		<div style={{ margin: '0 0 40px 0' }}>
 			<div style={{ margin: '0 0 32px 0' }}><h2 style={{ fontSize: 14, lineHeight: '19px' }}>Хлебные/Крошки</h2></div>
@@ -12,4 +12,4 @@ const DeviceHeader = () => {
 	)
 }
 
-export default DeviceHeader
+export default DevicePageHeader
