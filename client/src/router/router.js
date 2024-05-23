@@ -3,7 +3,9 @@ import Admin from "../components/pages/Admin";
 import Auth from "../components/pages/Auth";
 import Basket from "../components/pages/Basket";
 import Catalog from "../components/pages/Catalog";
-import { ADMIN_ROUTE, BASKET_ROUTE, CATALOG_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from "./paths";
+import DevicePage from '../components/pages/DevicePage'
+import { ADMIN_ROUTE, BASKET_ROUTE, CATALOG_ROUTE, DEVICEPAGE_ROUTE, LOGIN_ROUTE, PROFILE_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from "./paths";
+import Profile from "../components/pages/Profile";
 
 export const publicRoutes = [
 	{
@@ -22,6 +24,10 @@ export const publicRoutes = [
 		path: CATALOG_ROUTE,
 		component: <Catalog />
 	},
+	{
+		path: DEVICEPAGE_ROUTE + '/:id',
+		component: <DevicePage />
+	},
 ]
 
 export const privateRoutes = [
@@ -32,5 +38,9 @@ export const privateRoutes = [
 	{
 		path: ADMIN_ROUTE,
 		component: <Admin />
+	},
+	{
+		path: PROFILE_ROUTE,
+		component: <Profile />
 	}
 ]

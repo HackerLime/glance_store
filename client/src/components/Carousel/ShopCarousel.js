@@ -10,10 +10,10 @@ const ShopCarousel = () => {
 		{ id: 3, title: 'Рассрочка', description: '0-0-12', img: 'https://resizer.mail.ru/p/f34aea96-8ef9-5dad-90eb-18d4d28ff196/AQAKvq191IIgMOi07mcoQkDlqAFawd8LedZBAEt0eES3jnhlUCj5WPNsbyxBjV-D5KtxkOAO5tTWbAnkuzN7lcW-cUk.jpg' }
 	])
 	return (
-		<Carousel style={{ margin: '0 0 40px 0' }} variant='dark'>
+		<Carousel style={{ margin: '0 auto 40px auto', maxWidth: 1200 }} variant='dark'>
 			{carouselItems.map(item =>
 				<Carousel.Item key={item.id} >
-					<div style={{ objectFit: 'cover', objectPosition: 'center', background: `url(${item.img}) 50% no-repeat`, height: 260, width: 1280 }}></div>
+					<div style={{ objectFit: 'cover', objectPosition: 'center', background: `url(${item.img}) 50% no-repeat`, height: 260, margin: '0px auto', overflow: 'hidden' }}></div>
 					<Carousel.Caption >
 						<h3>{item.title}</h3>
 						<p>{item.description}</p>

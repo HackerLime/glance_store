@@ -6,7 +6,7 @@ import DeviceStore from './store/deviceStore'
 import UserStore from './store/userStore'
 import GarbageStore from './store/garbageStore'
 
-const Context = createContext(null)
+export const Context = createContext(null)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
