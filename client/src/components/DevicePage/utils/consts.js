@@ -1,0 +1,6 @@
+export const otziv1 = require('../../../assets/otziv1.png')
+export const otziv2 = require('../../../assets/otziv2.png')
+export const otziv3 = require('../../../assets/otziv3.png')
+export const otziv4 = require('../../../assets/otziv4.png')
+export const otziv5 = require('../../../assets/otziv5.png')
+export const otziv6 = require('../../../assets/otziv6.png')

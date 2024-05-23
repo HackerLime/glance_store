@@ -1,0 +1,16 @@
+@font-face {
+	font-family:'Disket-Mono';
+	src: url('../../../fonts/Disket-Mono-Regular.ttf');
+}
+
+.myLogo{
+font-family: 'Disket-mono';
+font-style: normal;
+font-size: 28px;
+line-height: 32px;
+background: linear-gradient(266.92deg, #260DC1 6.29%, #59006F 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+text-fill-color: transparent;
+}

@@ -1,0 +1,38 @@
+.deviceWrapper{
+	max-width: 169px;
+	margin: 0 0 24px 0;
+}
+.deviceCarousel{
+	margin: 0 0 20px 0;
+}
+.deviceCarouselText{
+	font-size: 20px;
+	margin: 0 0 16px 0;
+	text-decoration: none;
+	color: rgb(12,12,12);
+}
+.devicePrice{
+	margin: 0 0 16px 0;
+}
+.deviceStockPrice{
+	color: rgb(171,171,171);
+	font-size: 14px;
+	font-weight: 300;
+	text-decoration: line-through;
+}
+.deviceMainPrice{
+	font-size: 20px;
+	font-weight: 500;
+	margin: 0 8px 0 0;
+}
+.deviceInStock{
+font-size: 14px;
+font-weight: 300;
+}
+.deviceHeartIcon{
+	background: rgb(248, 252, 255);
+	padding: 8px 12px;
+	border-radius: 8px;
+	box-shadow: 1px 1px 20px 0px rgba(0, 0, 0, 0.1);
+
+}
