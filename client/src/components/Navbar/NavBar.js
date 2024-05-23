@@ -1,22 +1,18 @@
 import React from 'react'
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
+import Navbar from 'react-bootstrap/Navbar'
 import ShopLogo from '../UI/logo/ShopLogo'
 import NavBarSearch from './NavBarSearch'
 import NavBarMenu from './NavBarMenu'
 import Container from 'react-bootstrap/Container'
 const NavBar = () => {
-
-
 	return (
-
-		<div
+		<Navbar
+			fixed='top'
 			style={{
+				background: 'rgb(246,246,246)',
 				borderBottom: '1px solid rgb(193, 193, 193)',
-				margin: '0 0 23px 0'
 			}}>
 			<Container
-				style={{ padding: '20px 0 20px 0' }}
 				className='d-flex justify-content-between align-items-center'>
 				<div
 					style={{
@@ -30,7 +26,7 @@ const NavBar = () => {
 					className='flex-grow-1'><NavBarSearch /></div>
 				<div className='flex-grow-1'><NavBarMenu /></div>
 			</Container>
-		</div>
+		</Navbar>
 
 
 	)
