@@ -8,7 +8,7 @@ import tabletimg from '../UI/icons/catalog/tablet.svg'
 import soundbarimg from '../UI/icons/catalog/soundbar.svg'
 
 const ShopCatalog = () => {
-	const [catalogItems, setCatalogItems] = useState([
+	const [devices, setDevices] = useState([
 		{ id: 1, name: 'Смартфоны', img: smartphoneimg },
 		{ id: 2, name: 'Ноутбуки', img: notebookimg },
 		{ id: 3, name: 'Компьютеры', img: pcimg },
@@ -22,7 +22,7 @@ const ShopCatalog = () => {
 		>
 			<h6 style={{ fontSize: 32, margin: '0 0 28px 0' }}>Каталог</h6>
 			<div className='d-flex justify-content-between'>
-				{catalogItems.map(i =>
+				{devices.map(i =>
 					<div
 						style={{ cursor: 'pointer' }}
 						className='d-flex flex-column justify-content-center align-items-center' key={i.id}>
