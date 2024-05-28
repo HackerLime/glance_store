@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Image from 'react-bootstrap/Image'
 import iphoneImg from '../UI/icons/device/bigIphone.svg'
-import MyButton from '../UI/buttons/MyButton'
 import ColorPalette from './palette/ColorPalette'
 import DeviceInfo from './info/DeviceInfo'
 import DeviceTypeBrandName from './DeviceTypeNameBrand.js/DeviceTypeBrandName'

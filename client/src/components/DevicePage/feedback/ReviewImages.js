@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image } from 'react-bootstrap'
+import Image from 'react-bootstrap/Image'
 import { otziv1, otziv2, otziv3, otziv4, otziv5, otziv6 } from '../utils/consts'
 
 const images = [

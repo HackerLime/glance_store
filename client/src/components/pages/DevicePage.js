@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container'
 import DevicePageHeader from '../DevicePage/DevicePageHeader'
 import DevicePageMain from '../DevicePage/DevicePageMain'
 import DevicePageFooter from '../DevicePage/DevicePageFooter'
-const Device = () => {
+const DevicePage = () => {
 
 	return (
 		<Container>
@@ -17,4 +17,4 @@ const Device = () => {
 	)
 }
 
-export default Device
+export default DevicePage

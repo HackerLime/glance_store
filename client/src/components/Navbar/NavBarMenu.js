@@ -2,11 +2,13 @@ import React, { useContext, useState } from 'react'
 import SVGCatalog from '../UI/icons/SVGCatalog'
 import SVGBasket from '../UI/icons/SVGBasket'
 import SVGProfile from '../UI/icons/SVGProfile'
-import { Link } from 'react-router-dom'
-import { ADMIN_ROUTE, BASKET_ROUTE, CATALOG_ROUTE, PROFILE_ROUTE } from '../../router/paths'
+import { Link, useNavigate } from 'react-router-dom'
+import { ADMIN_ROUTE, BASKET_ROUTE, CATALOG_ROUTE, LOGIN_ROUTE, PROFILE_ROUTE } from '../../router/paths'
 import { Context } from '../../index'
 import { observer } from 'mobx-react-lite'
+import Button from 'react-bootstrap/Button'
 const NavBarMenu = observer(() => {
+	const navigate = useNavigate()
 	const menuItems = [
 		{ id: 1, element: <SVGCatalog />, name: 'Каталог', route: { CATALOG_ROUTE } },
 		{ id: 2, element: <SVGBasket />, name: 'Корзина', route: { BASKET_ROUTE } },
@@ -18,6 +20,9 @@ const NavBarMenu = observer(() => {
 
 	const { user } = useContext(Context)
 
+	const logout = () => {
+		user.setIsAuth(false)
+	}
 
 	return (
 		<div className='d-flex'
@@ -53,6 +58,15 @@ const NavBarMenu = observer(() => {
 						<div style={{ color: profileColor }}>Профиль</div>
 					</Link>
 				</div>
+			}
+			{user.isAuth ?
+				<div className='d-flex'>
+					<Button className='me-2' onClick={() => logout()} >Выйти</Button>
+					<Button onClick={() => navigate(ADMIN_ROUTE)} >Админка</Button>
+				</div>
+
+				:
+				<Button onClick={() => navigate(LOGIN_ROUTE)}>Авторизация</Button>
 			}
 		</div>
 	)

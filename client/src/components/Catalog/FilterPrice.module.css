@@ -1,0 +1,13 @@
+.pricesFirstElem{
+max-width: 89px;
+}
+.pricesLastElem{
+	max-width: 106px;
+}
+.pricesMiddleLine{
+	display: flex;
+	flex-grow: 1;
+	min-width: 62px;
+	background: #C1C1C1;
+	height: 1px;
+}
