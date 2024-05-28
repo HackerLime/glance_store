@@ -1,8 +1,10 @@
 import React from 'react'
+import BasketEmpty from '../UI/basket/BasketEmpty'
 
 const Basket = () => {
 	return (
-		<div>Basket</div>
+
+		<div><BasketEmpty /></div>
 	)
 }
 

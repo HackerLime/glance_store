@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 function App() {
 	return (
-		<div className="App" style={{ backgroundColor: '#f6f6f6', paddingTop: 91 }}>
+		<div className="App" style={{ backgroundColor: '#f6f6f6', paddingTop: 91, paddingBottom: 200 }}>
 			<BrowserRouter>
 				<NavBar />
 				<AppRouter />
