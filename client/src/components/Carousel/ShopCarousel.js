@@ -1,8 +1,9 @@
+import { observer } from 'mobx-react-lite'
 import React, { useState } from 'react'
 import Carousel from 'react-bootstrap/Carousel'
 
 
-const ShopCarousel = () => {
+const ShopCarousel = observer(() => {
 
 	const [carouselItems, setCarouselItems] = useState([
 		{ id: 1, title: 'Скидки', description: 'На весь ассортимент', img: 'https://resizer.mail.ru/p/f34aea96-8ef9-5dad-90eb-18d4d28ff196/AQAKvq191IIgMOi07mcoQkDlqAFawd8LedZBAEt0eES3jnhlUCj5WPNsbyxBjV-D5KtxkOAO5tTWbAnkuzN7lcW-cUk.jpg' },
@@ -22,6 +23,6 @@ const ShopCarousel = () => {
 			)}
 		</Carousel  >
 	)
-}
+})
 
 export default ShopCarousel

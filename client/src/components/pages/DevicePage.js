@@ -4,7 +4,8 @@ import Container from 'react-bootstrap/Container'
 import DevicePageHeader from '../DevicePage/DevicePageHeader'
 import DevicePageMain from '../DevicePage/DevicePageMain'
 import DevicePageFooter from '../DevicePage/DevicePageFooter'
-const DevicePage = () => {
+import { observer } from 'mobx-react-lite'
+const DevicePage = observer(() => {
 
 	return (
 		<Container>
@@ -15,6 +16,6 @@ const DevicePage = () => {
 			</div>
 		</Container>
 	)
-}
+})
 
 export default DevicePage

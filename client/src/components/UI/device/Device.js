@@ -6,7 +6,8 @@ import DeviceInStock from './DeviceInStock'
 import DeviceFavoriteIcon from './DeviceFavoriteIcon'
 import DeviceName from './DeviceName'
 import DeviceImages from './DeviceImages'
-const Device = ({ device }) => {
+import { observer } from 'mobx-react-lite'
+const Device = observer(({ device }) => {
 
 	return (
 		<div className={`d-flex flex-column ${classes.deviceWrapper}`} >
@@ -22,6 +23,6 @@ const Device = ({ device }) => {
 			</div>
 		</div>
 	)
-}
+})
 
 export default Device
