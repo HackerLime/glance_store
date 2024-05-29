@@ -5,7 +5,8 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 import Device from '../device/Device';
-const DevicesSlider = (props) => {
+import { observer } from 'mobx-react-lite';
+const DevicesSlider = observer((props) => {
 
 	return (
 		<Swiper
@@ -21,6 +22,6 @@ const DevicesSlider = (props) => {
 			)}
 		</Swiper>
 	)
-}
+})
 
 export default DevicesSlider

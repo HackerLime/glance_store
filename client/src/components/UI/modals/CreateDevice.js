@@ -4,12 +4,15 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Dropdown from 'react-bootstrap/Dropdown';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 import { Context } from '../../../index'
 import { observer } from 'mobx-react-lite';
 const CreateDevice = observer(({ show, setShow }) => {
 
 	const { device } = useContext(Context)
-
+	const [info, setInfo] = useState([1, 2, 3])
 
 	const hideModal = () => {
 		setShow(false)
@@ -45,7 +48,16 @@ const CreateDevice = observer(({ show, setShow }) => {
 						</Dropdown.Menu>
 					</Dropdown>
 					<Form.Control className='mb-2' placeholder='Введите название' />
-					<Form.Control type='number' placeholder='Введите стоимость' />
+					<Form.Control className='mb-2' type='number' placeholder='Введите стоимость' />
+					<Form.Control className='mb-3' type='file' />
+					<Button className='mb-3' variant='outline-dark'>Добавить характеристики</Button>
+					{info.map((i, idx) =>
+						<Row key={idx} className='mb-2' >
+							<Col ><Form.Control /></Col>
+							<Col ><Form.Control /></Col>
+							<Col md={3}><Button variant='danger'>Удалить</Button></Col>
+						</Row>
+					)}
 				</Modal.Body>
 				<Modal.Footer>
 					<Button variant="outline-danger" onClick={() => hideModal()}>
