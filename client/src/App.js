@@ -3,7 +3,7 @@ import NavBar from './components/Navbar/NavBar';
 import AppRouter from './components/AppRouter';
 import { BrowserRouter } from 'react-router-dom';
 import { Context } from './index';
-import { fetchBrands, fetchTypes } from './http/deviceAPI';
+import { fetchBrands, fetchDevices, fetchTypes } from './http/deviceAPI';
 import { observer } from 'mobx-react-lite';
 
 const App = observer(() => {
@@ -13,6 +13,7 @@ const App = observer(() => {
 		setIsLoading(true)
 		fetchBrands().then(data => device.setBrands(data)).catch(e => console.log(`Ошибка fetchBrands ${e.message}`))
 		fetchTypes().then(data => device.setTypes(data)).catch(e => console.log(`Ошибка fetchTypes ${e.message}`))
+		fetchDevices().then(data => device.setDevices(data.rows)).catch(e => console.log(`Ошибка fetchDevices ${e.message}`))
 		setIsLoading(false)
 	}, [])
 

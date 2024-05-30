@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode, Pagination } from 'swiper/modules';
 import 'swiper/css';
@@ -6,7 +6,9 @@ import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 import Device from '../device/Device';
 import { observer } from 'mobx-react-lite';
+import { Context } from '../../../index';
 const DevicesSlider = observer((props) => {
+
 
 	return (
 		<Swiper
