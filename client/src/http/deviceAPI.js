@@ -21,6 +21,17 @@ export const createType = async (name) => {
 	return data
 }
 
+export const fetchDevices = async () => {
+	const { data } = await $host.get('/api/device')
+	return data
+}
+
+export const fetchOneDevice = async (id) => {
+	const { data } = await $host.get(`/api/device/${id}`)
+	return data
+}
+
+
 /* export const createDevice = async () => {
 	const device = await $authHost
 } */

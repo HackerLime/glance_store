@@ -6,9 +6,9 @@ import DeviceInfo from './info/DeviceInfo'
 import DeviceTypeBrandName from './DeviceTypeNameBrand.js/DeviceTypeBrandName'
 import DeviceAddBasket from './palette/addBasket/DeviceAddBasket'
 
-const DevicePageMain = () => {
-	const device = { id: 1, name: 'iPhone 13 128GB', type: 'Смартфон', brand: 'Apple ', price: 75999 }
-	const deviceInfo = { id: 1, title: 'Какой то тайтл', description: 'Какой то дескр' }
+const DevicePageMain = ({ device }) => {
+
+
 	const [palette, setPallete] = useState([
 		{ id: 1, name: 'Красный', color: 'rgb(255, 0, 0)' },
 		{ id: 2, name: 'Черный', color: 'rgb(12, 12, 12)' },
@@ -19,12 +19,17 @@ const DevicePageMain = () => {
 	return (
 		<div className='d-flex justify-content-between' style={{ margin: '0 0 40px 0' }}>
 			<div>
-				<div style={{ backgroundColor: 'rgb(248, 252, 255)', borderRadius: '8px' }}><Image src={iphoneImg} style={{ width: 411, height: 590 }} /></div>
+				<div style={{ backgroundColor: 'rgb(248, 252, 255)', borderRadius: '8px' }}><Image src={process.env.REACT_APP_API_URL + '/' + device.img} style={{ width: 411, height: 590 }} /></div>
 			</div>
 			<div style={{ maxWidth: 354 }}>
 				<DeviceTypeBrandName device={device} />
 				<ColorPalette palette={palette} />
-				<DeviceInfo deviceInfo={deviceInfo} />
+
+				{device.info.length ?
+					<DeviceInfo deviceInfo={device.info} />
+					:
+					''
+				}
 			</div>
 			<div>
 				<DeviceAddBasket device={device} />
