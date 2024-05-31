@@ -4,9 +4,10 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import { Link, useLocation } from 'react-router-dom';
 import { LOGIN_ROUTE, REGISTRATION_ROUTE } from '../../router/paths';
+import { observer } from 'mobx-react-lite';
 
 
-const Auth = () => {
+const Auth = observer(() => {
 	const location = useLocation()
 	let isLogin = location.pathname === '/login'
 	return (
@@ -31,6 +32,6 @@ const Auth = () => {
 			</Form>
 		</Container>
 	)
-}
+})
 
 export default Auth

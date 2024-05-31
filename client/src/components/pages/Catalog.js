@@ -10,7 +10,11 @@ import SVGTile from '../UI/icons/catalog/catalogpage/SVGTile'
 import SVGList from '../UI/icons/catalog/catalogpage/SVGList'
 import BlueLine from '../UI/lines/BlueLine'
 import DeviceAsList from '../UI/device/deviceaslist/DeviceAsList'
-const Catalog = () => {
+import { observer } from 'mobx-react-lite'
+
+
+const Catalog = observer(() => {
+
 	const { device } = useContext(Context)
 	const filterOptions = [
 		{ id: 1, name: '512 ГБ' },
@@ -71,6 +75,6 @@ const Catalog = () => {
 			</div>
 		</Container >
 	)
-}
+})
 
 export default Catalog

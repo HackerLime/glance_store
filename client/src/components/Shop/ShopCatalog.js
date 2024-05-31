@@ -6,8 +6,9 @@ import pcimg from '../UI/icons/catalog/pc.svg'
 import tvimg from '../UI/icons/catalog/tv.svg'
 import tabletimg from '../UI/icons/catalog/tablet.svg'
 import soundbarimg from '../UI/icons/catalog/soundbar.svg'
+import { observer } from 'mobx-react-lite'
 
-const ShopCatalog = () => {
+const ShopCatalog = observer(() => {
 	const [devices, setDevices] = useState([
 		{ id: 1, name: 'Смартфоны', img: smartphoneimg },
 		{ id: 2, name: 'Ноутбуки', img: notebookimg },
@@ -37,6 +38,6 @@ const ShopCatalog = () => {
 			</div>
 		</div>
 	)
-}
+})
 
 export default ShopCatalog
