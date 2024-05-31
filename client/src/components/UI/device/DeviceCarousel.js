@@ -10,7 +10,8 @@ const DeviceCarousel = ({ device }) => {
 				<div
 					style={{ backgroundColor: 'rgb(248, 252, 255)', position: 'relative' }}
 				>
-					<Image src={process.env.REACT_APP_API_URL + '/' + device.img} />
+					<Image
+						src={process.env.REACT_APP_API_URL + '/' + device.img} />
 					{device.percent ?
 						<h4
 							style={{ position: 'absolute', top: 0, right: 0, backgroundColor: '#EBBA1A', fontSize: 18, padding: 8, borderRadius: 8 }}
