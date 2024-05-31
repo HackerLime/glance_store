@@ -11,7 +11,7 @@ const Device = observer(({ device }) => {
 
 	return (
 		<div className={`d-flex flex-column ${classes.deviceWrapper}`} >
-			<DeviceImages style={{ border: '1px solid red', minHeight: 216 }} device={device} />
+			<DeviceImages className='d-flex align-items-center' style={{ border: '1px solid red', height: "216px" }} device={device} />
 			<DeviceName device={device} />
 			<DevicePrice device={device} />
 			<div className='d-flex justify-content-between align-items-center' style={{ margin: '0 0 20px 0' }}>

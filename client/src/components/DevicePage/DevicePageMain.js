@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import Image from 'react-bootstrap/Image'
-import iphoneImg from '../UI/icons/device/bigIphone.svg'
 import ColorPalette from './palette/ColorPalette'
 import DeviceInfo from './info/DeviceInfo'
 import DeviceTypeBrandName from './DeviceTypeNameBrand.js/DeviceTypeBrandName'
 import DeviceAddBasket from './palette/addBasket/DeviceAddBasket'
 
 const DevicePageMain = ({ device }) => {
+	console.log(device.info)
 
 
 	const [palette, setPallete] = useState([
@@ -25,11 +25,11 @@ const DevicePageMain = ({ device }) => {
 				<DeviceTypeBrandName device={device} />
 				<ColorPalette palette={palette} />
 
-				{device.info.length ?
+				{/* 	{device.info.length ?
 					<DeviceInfo deviceInfo={device.info} />
 					:
 					''
-				}
+				} */}
 			</div>
 			<div>
 				<DeviceAddBasket device={device} />
