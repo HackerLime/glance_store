@@ -3,9 +3,11 @@ import ShopCarousel from '../Carousel/ShopCarousel'
 import Container from 'react-bootstrap/Container'
 import ShopCatalog from '../Shop/ShopCatalog'
 import ShopPromotions from '../Promotion/ShopPromotions'
+import { observer } from 'mobx-react-lite'
 
 
-const Shop = () => {
+const Shop = observer(() => {
+
 
 	return (
 		<Container >
@@ -14,6 +16,6 @@ const Shop = () => {
 			<ShopPromotions />
 		</Container>
 	)
-}
+})
 
 export default Shop

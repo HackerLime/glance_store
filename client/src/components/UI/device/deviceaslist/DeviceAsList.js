@@ -6,7 +6,8 @@ import DeviceFavoriteIcon from '../DeviceFavoriteIcon'
 import DeviceName from '../DeviceName'
 import DeviceImages from '../DeviceImages'
 import BlueLine from '../../lines/BlueLine'
-const DeviceAsList = ({ device }) => {
+import { observer } from 'mobx-react-lite'
+const DeviceAsList = observer(({ device }) => {
 	return (
 		<div>
 			<BlueLine />
@@ -30,6 +31,6 @@ const DeviceAsList = ({ device }) => {
 			</div>
 		</div>
 	)
-}
+})
 
 export default DeviceAsList

@@ -4,7 +4,8 @@ import Button from 'react-bootstrap/Button';
 import CreateBrand from '../UI/modals/CreateBrand';
 import CreateType from '../UI/modals/CreateType';
 import CreateDevice from '../UI/modals/CreateDevice';
-const Admin = () => {
+import { observer } from 'mobx-react-lite';
+const Admin = observer(() => {
 	const [brandVisible, setBrandVisible] = useState(false)
 	const [typeVisible, setTypeVisible] = useState(false)
 	const [deviceVisible, setDeviceVisible] = useState(false)
@@ -21,6 +22,6 @@ const Admin = () => {
 			</div>
 		</Container >
 	)
-}
+})
 
 export default Admin
