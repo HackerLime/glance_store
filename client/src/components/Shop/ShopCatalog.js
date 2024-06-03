@@ -23,6 +23,7 @@ const ShopCatalog = observer(() => {
 		>
 			<h6 style={{ fontSize: 32, margin: '0 0 28px 0' }}>Каталог</h6>
 			<div className='d-flex justify-content-between'>
+
 				{devices.map(i =>
 					<div
 						style={{ cursor: 'pointer' }}

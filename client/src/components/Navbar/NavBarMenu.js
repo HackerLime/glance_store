@@ -22,6 +22,7 @@ const NavBarMenu = observer(() => {
 
 	const logout = () => {
 		user.setIsAuth(false)
+		localStorage.removeItem('token')
 	}
 
 	return (
