@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import DevicePageHeader from '../DevicePage/DevicePageHeader'
 import Container from 'react-bootstrap/Container'
 import FilterVariant from '../Catalog/FilterVariant'
@@ -11,11 +11,16 @@ import SVGList from '../UI/icons/catalog/catalogpage/SVGList'
 import BlueLine from '../UI/lines/BlueLine'
 import DeviceAsList from '../UI/device/deviceaslist/DeviceAsList'
 import { observer } from 'mobx-react-lite'
+import { fetchBrands, fetchDevices, fetchTypes } from '../../http/deviceAPI'
 
 
 const Catalog = observer(() => {
-
 	const { device } = useContext(Context)
+	useEffect(() => {
+		fetchBrands().then(data => device.setBrands(data)).catch(e => console.log(`Ошибка fetchBrands ${e.message}`))
+		fetchTypes().then(data => device.setTypes(data)).catch(e => console.log(`Ошибка fetchTypes ${e.message}`))
+		fetchDevices().then(data => device.setDevices(data.rows)).catch(e => console.log(`Ошибка fetchDevices ${e.message}`))
+	}, [])
 	const filterOptions = [
 		{ id: 1, name: '512 ГБ' },
 		{ id: 2, name: '128 ГБ' },

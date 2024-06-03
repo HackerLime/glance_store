@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite'
 import { useParams } from 'react-router-dom'
 import { fetchOneDevice } from '../../http/deviceAPI'
 const DevicePage = observer(() => {
-	const [device, setDevice] = useState({})
+	const [device, setDevice] = useState({ info: [] })
 	const { id } = useParams()
 
 	useEffect(() => {
