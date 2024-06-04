@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Context } from './index';
 import { observer } from 'mobx-react-lite';
 import { check } from './http/userAPI';
+import LoadingAnimation from './components/UI/loadingAnimation/LoadingAnimation';
 
 const App = observer(() => {
 	const { user } = useContext(Context)
@@ -24,10 +25,10 @@ const App = observer(() => {
 	}, [])
 
 	if (isLoading) {
-		return <h1>Загрузка...</h1>
+		return <LoadingAnimation />
 	}
 	return (
-		<div className="App" style={{ backgroundColor: '#f6f6f6', paddingTop: 91, paddingBottom: 200 }}>
+		<div className="App" style={{ paddingTop: 91, paddingBottom: 200 }}>
 			<BrowserRouter>
 				<NavBar />
 				<AppRouter />
