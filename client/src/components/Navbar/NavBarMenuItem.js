@@ -6,6 +6,7 @@ const NavBarMenuItem = (props) => {
 	return (
 		<div
 			{...props}
+			style={{ marginRight: props.id === 1 ? '10px' : '0' }}
 		>
 			<Link
 				to={props.route}

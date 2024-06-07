@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Image from 'react-bootstrap/Image'
 import smartphoneimg from '../UI/icons/catalog/smartphone.svg'
 import notebookimg from '../UI/icons/catalog/notebook.svg'
 import pcimg from '../UI/icons/catalog/pc.svg'
@@ -7,6 +6,7 @@ import tvimg from '../UI/icons/catalog/tv.svg'
 import tabletimg from '../UI/icons/catalog/tablet.svg'
 import soundbarimg from '../UI/icons/catalog/soundbar.svg'
 import { observer } from 'mobx-react-lite'
+import ShopCatalogItem from './ShopCatalogItem'
 
 const ShopCatalog = observer(() => {
 	const [devices, setDevices] = useState([
@@ -25,16 +25,7 @@ const ShopCatalog = observer(() => {
 			<div className='d-flex justify-content-between'>
 
 				{devices.map(i =>
-					<div
-						style={{ cursor: 'pointer' }}
-						className='d-flex flex-column justify-content-center align-items-center' key={i.id}>
-						<div
-							className='d-flex align-items-center justify-content-center'
-							style={{ width: 200, height: 246, backgroundColor: '#BCC5FF', borderRadius: '8px', margin: '0 0 12px 0' }}>
-							<Image src={i.img} />
-						</div>
-						<p style={{ fontSize: 20, margin: 0 }}>{i.name}</p>
-					</div>
+					<ShopCatalogItem key={i.id} img={i.img} name={i.name} />
 				)}
 			</div>
 		</div>
