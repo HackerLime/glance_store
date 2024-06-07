@@ -10,15 +10,16 @@ import SVGCatalog from '../UI/icons/SVGCatalog'
 import SVGProfile from '../UI/icons/SVGProfile'
 import SVGBasket from '../UI/icons/SVGBasket'
 const NavBarMenu = observer(() => {
-	const [hoverColor, setHoverColor] = useState('#454545')
+
+
 
 	const navigate = useNavigate()
 	const [publicMenuItems, setPublicMenuItems] = useState([
-		{ id: 1, icon: <SVGCatalog color={hoverColor} />, name: 'Каталог', route: CATALOG_ROUTE },
+		{ id: 1, icon: <SVGCatalog color={'#454545'} />, name: 'Каталог', route: CATALOG_ROUTE },
 	])
 	const [privateMenuItems, setPrivateMenuItems] = useState([
-		{ id: 1, icon: <SVGBasket color={hoverColor} />, name: 'Корзина', route: BASKET_ROUTE },
-		{ id: 2, icon: <SVGProfile color={hoverColor} />, name: 'Профиль', route: PROFILE_ROUTE },
+		{ id: 1, icon: <SVGBasket color={'#454545'} />, name: 'Корзина', route: BASKET_ROUTE },
+		{ id: 2, icon: <SVGProfile color={'#454545'} />, name: 'Профиль', route: PROFILE_ROUTE },
 	])
 
 
@@ -29,21 +30,19 @@ const NavBarMenu = observer(() => {
 		localStorage.removeItem('token')
 	}
 
+
+
 	return (
 		<div className='d-flex'>
-			<div className='d-flex' style={{ margin: '0 10px 0 0', background: 'gray' }}>
+			<div className='d-flex' style={{ margin: '0 10px 0 0' }}>
 
 				{publicMenuItems.map(i =>
 					<NavBarMenuItem
-						onMouseEnter={() => console.log('mosueenter')}
-						onMouseLeave={() => console.log('mouseleave')}
-						textcolor={hoverColor} key={i.id} name={i.name} route={i.route} icon={i.icon} />
+						textcolor={'#454545'} id={i.id} key={i.id} name={i.name} route={i.route} icon={i.icon} />
 				)}
 				{user.isAuth && privateMenuItems.map(i =>
 					<NavBarMenuItem
-						onMouseEnter={() => console.log('mosueenter')}
-						onMouseLeave={() => console.log('mouseleave')}
-						textcolor={hoverColor} key={i.id} name={i.name} route={i.route} icon={i.icon} />
+						textcolor={'#454545'} id={i.id} key={i.id} name={i.name} route={i.route} icon={i.icon} />
 				)}
 			</div>
 			{user.isAuth ?
