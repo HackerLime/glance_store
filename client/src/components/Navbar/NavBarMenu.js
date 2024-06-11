@@ -11,7 +11,11 @@ import SVGProfile from '../UI/icons/SVGProfile'
 import SVGBasket from '../UI/icons/SVGBasket'
 const NavBarMenu = observer(() => {
 
-
+	/* для смартфонов — 320 px, 480 px и выше;
+	для планшетов — 768 px и выше;
+	для нетбуков — 1024 px и выше;
+	для мониторов — 1280 px, 1600 px, 1920 px и выше.
+	 */
 
 	const navigate = useNavigate()
 	const [publicMenuItems, setPublicMenuItems] = useState([
