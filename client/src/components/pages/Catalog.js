@@ -11,21 +11,29 @@ import SVGList from '../UI/icons/catalog/catalogpage/SVGList'
 import BlueLine from '../UI/lines/BlueLine'
 import DeviceAsList from '../UI/device/deviceaslist/DeviceAsList'
 import { observer } from 'mobx-react-lite'
-import { fetchBrands, fetchDevices, fetchTypes } from '../../http/deviceAPI'
+import { fetchBrands, fetchDevices, fetchOneDevice, fetchTypes } from '../../http/deviceAPI'
 
 
 const Catalog = observer(() => {
 	const { device } = useContext(Context)
+	const [checked, setChecked] = useState([])
 	useEffect(() => {
 		fetchBrands().then(data => device.setBrands(data)).catch(e => console.log(`Ошибка fetchBrands ${e.message}`))
 		fetchTypes().then(data => device.setTypes(data)).catch(e => console.log(`Ошибка fetchTypes ${e.message}`))
 		fetchDevices().then(data => device.setDevices(data.rows)).catch(e => console.log(`Ошибка fetchDevices ${e.message}`))
 	}, [])
-	const filterOptions = [
-		{ id: 1, name: '512 ГБ' },
-		{ id: 2, name: '128 ГБ' },
-		{ id: 3, name: '256 ГБ' },
-	]
+
+	const getPrice = () => {
+		let priceArr = []
+		device.devices.map(i => priceArr.push(i.price))
+		let minPrice = Math.min.apply(null, priceArr)
+		let maxPrice = Math.max.apply(null, priceArr)
+		if (minPrice !== Infinity && maxPrice !== Infinity) {
+			return { max: maxPrice, min: minPrice }
+		} else
+			return { max: 1, min: 0 }
+	}
+	const devicePrice = getPrice()
 
 	const [tileColor, setTileColor] = useState('#0C0C0C')
 	const [listColor, setListColor] = useState('#ABABAB')
@@ -45,13 +53,14 @@ const Catalog = observer(() => {
 
 	return (
 		<Container>
-			<div><DevicePageHeader breadCrumbs='Хлебные/крошки' backText='Смартфоны' /></div>
+			<div><DevicePageHeader breadCrumb='Смартфоны' backText='Смартфоны' /></div>
 			<div className='d-flex'>
 				<div style={{ margin: '0 75px 0 0', minWidth: '289px' }}>
 					<FilterVariant />
 					<div style={{ backgroundColor: 'white', padding: 16, borderRadius: '8px', boxShadow: '1px 1px 20px 0px rgba(0, 0, 0, 0.1)' }}>
-						<FilterWithPrice from={123} to={456} />
-						<FilterWithCheck style={{ margin: '0 0 20px 0' }} lable='Встроенная память' filterParams={filterOptions} />
+						<FilterWithPrice from={devicePrice.min} to={devicePrice.max} />
+						<FilterWithCheck setChecked={setChecked} style={{ margin: '0 0 20px 0' }} lable='Тип устройства' filterParams={device.types} />
+						<FilterWithCheck setChecked={setChecked} style={{ margin: '0 0 20px 0' }} lable='Брэнд' filterParams={device.brands} />
 					</div>
 				</div>
 
@@ -66,8 +75,7 @@ const Catalog = observer(() => {
 						<div>
 							<BlueLine />
 							<DevicesSlider style={{ margin: '0 0 24px 0' }} device={device} slidesPerView={4} spaceBetween={16} />
-							<BlueLine />
-							<DevicesSlider device={device} slidesPerView={4} spaceBetween={16} />
+
 						</div>
 						:
 						<div className='d-flex flex-column'>
