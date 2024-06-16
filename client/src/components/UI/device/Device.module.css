@@ -1,8 +1,6 @@
 .deviceWrapper{
 	max-width: 169px;
-}
-.deviceCarousel{
-	margin: 0 0 20px 0;
+	min-height: 483px;
 }
 
 

@@ -10,13 +10,17 @@ import { observer } from 'mobx-react-lite'
 const Device = observer(({ device }) => {
 
 	return (
-		<div className={`d-flex flex-column ${classes.deviceWrapper}`} >
-			<DeviceImages className='d-flex align-items-center' style={{ border: '1px solid red', height: "216px" }} device={device} />
-			<DeviceName device={device} />
-			<DevicePrice device={device} />
-			<div className='d-flex justify-content-between align-items-center' style={{ margin: '0 0 20px 0' }}>
-				<DeviceInStock device={device} />
-				<DeviceFavoriteIcon />
+		<div className={`d-flex flex-column justify-content-between ${classes.deviceWrapper}`} >
+			<div>
+				<DeviceImages style={{}} device={device} />
+			</div>
+			<div className='d-flex flex-column  ' style={{ margin: '0 0 20px 0' }}>
+				<DeviceName device={device} />
+				<DevicePrice device={device} />
+				<div className='d-flex justify-content-between align-items-center' >
+					<DeviceInStock device={device} />
+					<DeviceFavoriteIcon />
+				</div>
 			</div>
 			<div >
 				<MyButton>В корзину</MyButton>

@@ -4,29 +4,18 @@ import ShopLogo from '../UI/logo/ShopLogo'
 import NavBarSearch from './NavBarSearch'
 import NavBarMenu from './NavBarMenu'
 import Container from 'react-bootstrap/Container'
+import classes from './NavBar.module.css'
 const NavBar = () => {
 	return (
-		<Navbar
-			fixed='top'
-			style={{
-				background: 'rgb(246,246,246)',
-				borderBottom: '1px solid rgb(193, 193, 193)',
-			}}>
-			<Container
-				className='d-flex justify-content-between align-items-center'>
-				<div
-					style={{
-						marginRight: 88
-					}}
-				><ShopLogo /></div>
-				<div
-					style={{
-						marginRight: 88
-					}}
-					className='flex-grow-1'><NavBarSearch /></div>
-				<div className='flex-grow-1'><NavBarMenu /></div>
-			</Container>
-		</Navbar>
+		<nav className={classes.navbar}>
+			<div className={classes.navbarContainer}>
+				<div className={classes.navbarWrapper}>
+					<div><ShopLogo /></div>
+					<div><NavBarSearch /></div>
+					<div><NavBarMenu /></div>
+				</div>
+			</div>
+		</nav>
 
 
 	)

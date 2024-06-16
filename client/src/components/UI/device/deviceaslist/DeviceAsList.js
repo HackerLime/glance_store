@@ -12,7 +12,7 @@ const DeviceAsList = observer(({ device }) => {
 		<div>
 			<BlueLine />
 			<div className='d-flex' >
-				<div style={{ margin: '0 24px 0 0' }}><DeviceImages device={device} /></div>
+				<div style={{ margin: '0 24px 0 0', maxWidth: '169px' }}><DeviceImages device={device} /></div>
 				<div className='d-flex flex-grow-1' >
 					<div className='flex-grow-1' >
 						<div style={{ margin: '0 0 12px 0' }}><DeviceName device={device} /></div>
