@@ -6,10 +6,8 @@ import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 import Device from '../device/Device';
 import { observer } from 'mobx-react-lite';
-import { Context } from '../../../index';
+
 const DevicesSlider = observer((props) => {
-
-
 	return (
 		<Swiper
 			slidesPerView={props.slidesPerView || 5.5}
@@ -19,7 +17,7 @@ const DevicesSlider = observer((props) => {
 			className="mySwiper"
 			{...props}
 		>
-			{props.device.devices.map(i =>
+			{props.device.map(i =>
 				<SwiperSlide key={i.id}><Device device={i} /></SwiperSlide>
 			)}
 		</Swiper>

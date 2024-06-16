@@ -13,20 +13,23 @@ export const publicRoutes = [
 		component: <Shop />
 	},
 	{
-		path: LOGIN_ROUTE,
-		component: <Auth />
-	},
-	{
-		path: REGISTRATION_ROUTE,
-		component: <Auth />
-	},
-	{
 		path: CATALOG_ROUTE,
 		component: <Catalog />
 	},
 	{
 		path: DEVICEPAGE_ROUTE + '/:id',
 		component: <DevicePage />
+	},
+]
+
+export const authRoutes = [
+	{
+		path: LOGIN_ROUTE,
+		component: <Auth />
+	},
+	{
+		path: REGISTRATION_ROUTE,
+		component: <Auth />
 	},
 ]
 
