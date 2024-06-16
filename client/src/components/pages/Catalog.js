@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 import DevicePageHeader from '../DevicePage/DevicePageHeader'
 import Container from 'react-bootstrap/Container'
 import FilterVariant from '../Catalog/FilterVariant'
@@ -18,39 +18,48 @@ const Catalog = observer(() => {
 	const { device } = useContext(Context)
 	const [typeChecked, setTypeChecked] = useState([])
 	const [brandChecked, setBrandChecked] = useState([])
-	const [selectedSortDevices, setSelectedSortDevices] = useState([])
+	const [priceRange, setPriceRange] = useState({ from: 0, to: 1 })
+
 
 	const variants = [
-		{ id: 1, name: 'Дороже' },
-		{ id: 2, name: 'Дешевле' },
+		{ id: 1, name: 'сначала Дешевле' },
+		{ id: 2, name: 'сначала Дороже' },
 	]
 	const sortDevices = (id) => {
-		let priceArr = []
 		switch (id) {
-			case '1':
-				priceArr = []
-				for (let i = 0; i < device.devices.length; i++) {
-					priceArr.push(device.devices[i].price)
-				};
-				priceArr = priceArr.sort((a, b) => a - b).reverse()
-				console.log(priceArr)
-
+			case 1:
+				device.setDevices([...device.devices].sort((a, b) => a.price - b.price))
 				break
-			case '2':
-				console.log('2')
+			case 2:
+				device.setDevices([...device.devices].sort((a, b) => a.price - b.price).reverse())
 				break
 			default:
-				//!Не забуть прставить 1
-				console.log('defaultCase')
+				console.log('Ошибка упорядочения')
 		}
 	}
+
+	const searchByPrice = useMemo(() => {
+		if (priceRange.from) {
+			return ([...device.devices].filter(i => i.price >= priceRange.from && i.price <= priceRange.to))
+		}
+		return device.devices
+	}, [priceRange, device.devices])
+
+	const getPriceRange = (prices) => {
+		/* ([...device.devices].filter(i => i.price >= prices.from && i.price <= prices.to)) */
+		console.log(priceRange)
+		setPriceRange(prices)
+		console.log(priceRange)
+
+	}
+
+	let checkedBrands = []
+	let checkedTypes = []
 
 	const nullArrays = () => {
 		checkedBrands = []
 		checkedTypes = []
 	}
-	let checkedBrands = []
-	let checkedTypes = []
 
 
 	useEffect(() => {
@@ -62,12 +71,12 @@ const Catalog = observer(() => {
 		fetchDevices(checkedBrands, checkedTypes).then(data => device.setDevices(data.rows)).catch(e => console.log(`Ошибка fetchDevices ${e.message}`))
 	}, [typeChecked, brandChecked])
 
-	const getPrice = () => {
+	function getPrice() {
 		let priceArr = []
 		device.devices.map(i => priceArr.push(i.price))
 		let minPrice = Math.min.apply(null, priceArr)
 		let maxPrice = Math.max.apply(null, priceArr)
-		if (minPrice !== Infinity && maxPrice !== Infinity) {
+		if (Number.isFinite(minPrice) && Number.isFinite(maxPrice)) {
 			return { max: maxPrice, min: minPrice }
 		} else
 			return { max: 1, min: 0 }
@@ -92,17 +101,16 @@ const Catalog = observer(() => {
 
 	return (
 		<Container>
-			<div><DevicePageHeader breadCrumb='Смартфоны' backText='Смартфоны' /></div>
+			<div><DevicePageHeader breadCrumb='Каталог' backText='Каталог' /></div>
 			<div className='d-flex'>
 				<div style={{ margin: '0 75px 0 0', minWidth: '289px' }}>
 					<FilterVariant sortDevices={sortDevices} filterVariants={variants} />
 					<div style={{ backgroundColor: 'white', padding: 16, borderRadius: '8px', boxShadow: '1px 1px 20px 0px rgba(0, 0, 0, 0.1)' }}>
-						<FilterWithPrice from={devicePrice.min} to={devicePrice.max} />
+						<FilterWithPrice getPriceRange={getPriceRange} from={devicePrice.min} to={devicePrice.max} />
 						<FilterWithCheck checked={typeChecked} setChecked={setTypeChecked} style={{ margin: '0 0 20px 0' }} lable='Тип устройства' filterParams={device.types} />
 						<FilterWithCheck checked={brandChecked} setChecked={setBrandChecked} style={{ margin: '0 0 20px 0' }} lable='Брэнд устройства' filterParams={device.brands} />
 					</div>
 				</div>
-
 				<div className='d-flex flex-column' style={{ maxWidth: '860px' }} >
 					<div className='d-flex justify-content-end' style={{ margin: '0 0 24px 0' }}>
 						<div style={{ width: '66px' }} >
@@ -113,11 +121,11 @@ const Catalog = observer(() => {
 					{catalogViewStatus === 'tiles' ?
 						<div>
 							<BlueLine />
-							<DevicesSlider style={{ margin: '0 0 24px 0' }} device={device} slidesPerView={4} spaceBetween={16} />
+							<DevicesSlider style={{ margin: '0 0 24px 0' }} device={searchByPrice} slidesPerView={4} spaceBetween={16} />
 						</div>
 						:
 						<div className='d-flex flex-column'>
-							{device.devices.map(i =>
+							{searchByPrice.map(i =>
 								<DeviceAsList key={i.id} device={i} />
 							)}
 						</div>
