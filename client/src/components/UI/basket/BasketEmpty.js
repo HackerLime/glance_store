@@ -20,7 +20,7 @@ const BasketEmpty = () => {
 				<h2 style={{ margin: '0 0 24px 0' }}>Вам может понравится</h2>
 				<div style={{ maxWidth: '1200px', margin: '0px auto' }}>
 					<BlueLine />
-					<DevicesSlider style={{ margin: '0 0 24px 0' }} device={device} slidesPerView={5.5} spaceBetween={16} />
+					<DevicesSlider style={{ margin: '0 0 24px 0' }} device={device.devices} slidesPerView={5.5} spaceBetween={16} />
 				</div>
 			</div>
 
