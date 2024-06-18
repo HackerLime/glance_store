@@ -8,6 +8,7 @@ import Device from '../device/Device';
 import { observer } from 'mobx-react-lite';
 
 const DevicesSlider = observer((props) => {
+
 	return (
 		<Swiper
 			slidesPerView={props.slidesPerView || 5.5}
