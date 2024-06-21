@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import DevicePageHeader from '../DevicePage/DevicePageHeader'
 import Container from 'react-bootstrap/Container'
 import FilterVariant from '../Catalog/FilterVariant'
@@ -16,11 +16,18 @@ import { fetchBrands, fetchDevices, fetchTypes } from '../../http/deviceAPI'
 
 const Catalog = observer(() => {
 	const { device } = useContext(Context)
+	const [catalogDevices, setCatalogDevices] = useState([...device.devices])
 	const [typeChecked, setTypeChecked] = useState([])
 	const [brandChecked, setBrandChecked] = useState([])
-	const [priceRange, setPriceRange] = useState({})
-	const [catalogDevices, setCatalogDevices] = useState([...device.devices])
+	const [cancelVisible, setCancelVisible] = useState(false)
 
+
+	useEffect(() => {
+		if (!catalogDevices.length) {
+			console.log('Не подгрузилось')
+
+		}
+	}, [])
 
 	useEffect(() => {
 		let checkedTypeIds = []
@@ -40,9 +47,6 @@ const Catalog = observer(() => {
 		}
 	}, [brandChecked])
 
-	useEffect(() => {
-		console.log(priceRange)
-	}, [])
 
 
 	const variants = [
@@ -65,12 +69,14 @@ const Catalog = observer(() => {
 	const devicePrice = getPrice()
 	const sortByPrice = (prices) => {
 		if (!prices.defaultFrom && !prices.defaultTo) {
+			setCancelVisible(false)
 			return setCatalogDevices([...device.devices])
 		} else {
 			let pricesArr = []
 			device.devices.map(i => pricesArr.push(i.price))
 			pricesArr = pricesArr.filter(i => i >= prices.defaultFrom && i <= prices.defaultTo)
 			setCatalogDevices([...catalogDevices].filter(i => pricesArr.includes(i.price)))
+			setCancelVisible(true)
 		}
 
 	}
@@ -117,7 +123,7 @@ const Catalog = observer(() => {
 				<div style={{ margin: '0 75px 0 0', minWidth: '289px' }}>
 					<FilterVariant sortDevices={sortDevices} filterVariants={variants} />
 					<div style={{ backgroundColor: 'white', padding: 16, borderRadius: '8px', boxShadow: '1px 1px 20px 0px rgba(0, 0, 0, 0.1)' }}>
-						<FilterWithPrice sortByPrice={sortByPrice} from={devicePrice.min} to={devicePrice.max} />
+						<FilterWithPrice visible={cancelVisible} sortByPrice={sortByPrice} from={devicePrice.min} to={devicePrice.max} />
 						<FilterWithCheck checked={typeChecked} setChecked={setTypeChecked} style={{ margin: '0 0 20px 0' }} lable='Тип устройства' filterParams={device.types} />
 						<FilterWithCheck checked={brandChecked} setChecked={setBrandChecked} style={{ margin: '0 0 20px 0' }} lable='Брэнд устройства' filterParams={device.brands} />
 					</div>
