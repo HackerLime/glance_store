@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import DevicePageHeader from '../DevicePage/DevicePageHeader'
 import Container from 'react-bootstrap/Container'
 import FilterVariant from '../Catalog/FilterVariant'
@@ -16,64 +16,80 @@ import { fetchBrands, fetchDevices, fetchTypes } from '../../http/deviceAPI'
 
 const Catalog = observer(() => {
 	const { device } = useContext(Context)
+	const [catalogDevices, setCatalogDevices] = useState([...device.devices])
 	const [typeChecked, setTypeChecked] = useState([])
 	const [brandChecked, setBrandChecked] = useState([])
-	const [priceRange, setPriceRange] = useState({ from: 0, to: 1 })
+	const [cancelVisible, setCancelVisible] = useState(false)
+
+
+	useEffect(() => {
+		if (!catalogDevices.length) {
+			console.log('Не подгрузилось')
+		}
+	}, [])
+
+	useEffect(() => {
+		let checkedTypeIds = []
+		typeChecked.map(i => checkedTypeIds.push(i.id))
+		setCatalogDevices([...catalogDevices].filter(i => checkedTypeIds.includes(i.typeId)))
+		if (!checkedTypeIds.length) {
+			setCatalogDevices([...device.devices])
+		}
+	}, [typeChecked])
+
+	useEffect(() => {
+		let checkedBrandIds = []
+		brandChecked.map(i => checkedBrandIds.push(i.id))
+		setCatalogDevices([...catalogDevices].filter(i => checkedBrandIds.includes(i.typeId)))
+		if (!checkedBrandIds.length) {
+			setCatalogDevices([...device.devices])
+		}
+	}, [brandChecked])
+
 
 
 	const variants = [
 		{ id: 1, name: 'сначала Дешевле' },
 		{ id: 2, name: 'сначала Дороже' },
 	]
+
 	const sortDevices = (id) => {
 		switch (id) {
 			case 1:
-				device.setDevices([...device.devices].sort((a, b) => a.price - b.price))
+				setCatalogDevices([...catalogDevices].sort((a, b) => a.price - b.price))
 				break
 			case 2:
-				device.setDevices([...device.devices].sort((a, b) => a.price - b.price).reverse())
+				setCatalogDevices([...catalogDevices].sort((a, b) => a.price - b.price).reverse())
 				break
 			default:
-				console.log('Ошибка упорядочения')
+				return catalogDevices
 		}
 	}
-
-	const searchByPrice = useMemo(() => {
-		if (priceRange.from) {
-			return ([...device.devices].filter(i => i.price >= priceRange.from && i.price <= priceRange.to))
+	const devicePrice = getPrice()
+	const sortByPrice = (prices) => {
+		if (!prices.defaultFrom && !prices.defaultTo) {
+			setCancelVisible(false)
+			return setCatalogDevices([...device.devices])
+		} else {
+			let pricesArr = []
+			device.devices.map(i => pricesArr.push(i.price))
+			pricesArr = pricesArr.filter(i => i >= prices.defaultFrom && i <= prices.defaultTo)
+			setCatalogDevices([...catalogDevices].filter(i => pricesArr.includes(i.price)))
+			setCancelVisible(true)
 		}
-		return device.devices
-	}, [priceRange, device.devices])
 
-	const getPriceRange = (prices) => {
-		/* ([...device.devices].filter(i => i.price >= prices.from && i.price <= prices.to)) */
-		console.log(priceRange)
-		setPriceRange(prices)
-		console.log(priceRange)
-
-	}
-
-	let checkedBrands = []
-	let checkedTypes = []
-
-	const nullArrays = () => {
-		checkedBrands = []
-		checkedTypes = []
 	}
 
 
 	useEffect(() => {
-		nullArrays()
-		typeChecked.map(i => checkedTypes.push(i.id))
-		brandChecked.map(i => checkedBrands.push(i.id))
 		fetchBrands().then(data => device.setBrands(data)).catch(e => console.log(`Ошибка fetchBrands ${e.message}`))
 		fetchTypes().then(data => device.setTypes(data)).catch(e => console.log(`Ошибка fetchTypes ${e.message}`))
-		fetchDevices(checkedBrands, checkedTypes).then(data => device.setDevices(data.rows)).catch(e => console.log(`Ошибка fetchDevices ${e.message}`))
-	}, [typeChecked, brandChecked])
+		fetchDevices().then(data => device.setDevices(data.rows)).catch(e => console.log(`Ошибка fetchDevices ${e.message}`))
+	}, [])
 
 	function getPrice() {
 		let priceArr = []
-		device.devices.map(i => priceArr.push(i.price))
+		catalogDevices.map(i => priceArr.push(i.price))
 		let minPrice = Math.min.apply(null, priceArr)
 		let maxPrice = Math.max.apply(null, priceArr)
 		if (Number.isFinite(minPrice) && Number.isFinite(maxPrice)) {
@@ -81,7 +97,7 @@ const Catalog = observer(() => {
 		} else
 			return { max: 1, min: 0 }
 	}
-	const devicePrice = getPrice()
+
 
 	const [tileColor, setTileColor] = useState('#ABABAB')
 	const [listColor, setListColor] = useState('#0C0C0C')
@@ -106,7 +122,7 @@ const Catalog = observer(() => {
 				<div style={{ margin: '0 75px 0 0', minWidth: '289px' }}>
 					<FilterVariant sortDevices={sortDevices} filterVariants={variants} />
 					<div style={{ backgroundColor: 'white', padding: 16, borderRadius: '8px', boxShadow: '1px 1px 20px 0px rgba(0, 0, 0, 0.1)' }}>
-						<FilterWithPrice getPriceRange={getPriceRange} from={devicePrice.min} to={devicePrice.max} />
+						<FilterWithPrice visible={cancelVisible} sortByPrice={sortByPrice} from={devicePrice.min} to={devicePrice.max} />
 						<FilterWithCheck checked={typeChecked} setChecked={setTypeChecked} style={{ margin: '0 0 20px 0' }} lable='Тип устройства' filterParams={device.types} />
 						<FilterWithCheck checked={brandChecked} setChecked={setBrandChecked} style={{ margin: '0 0 20px 0' }} lable='Брэнд устройства' filterParams={device.brands} />
 					</div>
@@ -121,11 +137,11 @@ const Catalog = observer(() => {
 					{catalogViewStatus === 'tiles' ?
 						<div>
 							<BlueLine />
-							<DevicesSlider style={{ margin: '0 0 24px 0' }} device={searchByPrice} slidesPerView={4} spaceBetween={16} />
+							<DevicesSlider style={{ margin: '0 0 24px 0' }} device={catalogDevices} slidesPerView={4} spaceBetween={16} />
 						</div>
 						:
 						<div className='d-flex flex-column'>
-							{searchByPrice.map(i =>
+							{catalogDevices.map(i =>
 								<DeviceAsList key={i.id} device={i} />
 							)}
 						</div>

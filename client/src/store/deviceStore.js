@@ -4,6 +4,7 @@ export default class DeviceStore {
 		this._types = []
 		this._brands = []
 		this._devices = []
+		this._basketDevices = []
 		this._selectedBrand = {}
 		this._selectedType = {}
 		makeAutoObservable(this)
@@ -17,6 +18,10 @@ export default class DeviceStore {
 	}
 	get devices() {
 		return this._devices
+	}
+
+	get basketDevices() {
+		return this._basketDevices
 	}
 
 	get selectedType() {
@@ -35,6 +40,10 @@ export default class DeviceStore {
 	}
 	setDevices(device) {
 		this._devices = device
+	}
+
+	setBasketDevices(device) {
+		this._basketDevices = device
 	}
 
 	setSelectedBrand(selectedBrand) {

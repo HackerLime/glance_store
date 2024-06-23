@@ -6,6 +6,7 @@ import { Context } from './index';
 import { observer } from 'mobx-react-lite';
 import { check } from './http/userAPI';
 import LoadingAnimation from './components/UI/loadingAnimation/LoadingAnimation';
+import ScrollToTop from './ScrollToTop';
 
 const App = observer(() => {
 	const { user } = useContext(Context)
@@ -31,6 +32,7 @@ const App = observer(() => {
 		<div className="App" style={{ paddingTop: 91, paddingBottom: 200 }}>
 			<BrowserRouter>
 				<NavBar />
+				<ScrollToTop />
 				<AppRouter />
 			</BrowserRouter>
 		</div>
