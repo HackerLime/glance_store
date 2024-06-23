@@ -17,11 +17,17 @@ const BasketEmpty = () => {
 				<SVGBasketEmpty style={{ margin: '0 0 28px 0' }} />
 				<div style={{ margin: '0 0 28px 0', fontSize: '16px', lineHeight: '19px', color: '#454545' }} to={CATALOG_ROUTE} >Добавьте товары из каталога</div>
 				<MyButton style={{ margin: '0 0 40px 0' }} onClick={() => navigate(CATALOG_ROUTE)}>Перейти в каталог</MyButton>
-				<h2 style={{ margin: '0 0 24px 0' }}>Вам может понравится</h2>
-				<div style={{ maxWidth: '1200px', margin: '0px auto' }}>
-					<BlueLine />
-					<DevicesSlider style={{ margin: '0 0 24px 0' }} device={device.devices} slidesPerView={5.5} spaceBetween={16} />
-				</div>
+				{device.devices.length ?
+					<div>
+						<h2 style={{ margin: '0 0 24px 0', textAlign: 'center' }}>Вам может понравится</h2>
+						<div style={{ maxWidth: '1200px', margin: '0px auto' }}>
+							<BlueLine />
+							<DevicesSlider style={{ margin: '0 0 24px 0' }} device={device.devices} slidesPerView={5.5} spaceBetween={16} />
+						</div>
+					</div>
+					:
+					''
+				}
 			</div>
 
 		</Container>

@@ -25,7 +25,6 @@ const Catalog = observer(() => {
 	useEffect(() => {
 		if (!catalogDevices.length) {
 			console.log('Не подгрузилось')
-
 		}
 	}, [])
 

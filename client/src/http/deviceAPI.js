@@ -1,4 +1,6 @@
 import { $host, $authHost } from "./index";
+import { jwtDecode } from 'jwt-decode'
+
 
 
 export const fetchBrands = async () => {
@@ -35,4 +37,27 @@ export const fetchOneDevice = async (id) => {
 export const createDevice = async (device) => {
 	const { data } = await $host.post('/api/device', device)
 	return data
-} 
+}
+
+//*Не тестировано-------------
+export const addBasketDevice = async (deviceId, basketId) => {
+
+
+	const { data } = await $authHost.post('/api/basket/create', { deviceId, basketId })
+	return data
+}
+
+
+export const fetchBasketDevices = async () => {
+	const { id } = jwtDecode(localStorage.getItem('token'))
+	const { data } = await $authHost.post('/api/basket/get', { basketId: id })
+	return data
+
+}
+
+export const deleteBasketDevice = async (id) => {
+	const { data } = await $authHost.post('/api/basket/destroy', { id })
+	return data
+}
+
+//*------------------------
