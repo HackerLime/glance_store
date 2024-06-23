@@ -17,7 +17,7 @@ const DevicePage = observer(() => {
 	return (
 		<Container>
 			<div style={{ padding: '17px 0 80px 0' }}>
-				<DevicePageHeader breadCrumbs='Хлебные/крошки' backText='Карточка Товара' />
+				<DevicePageHeader breadCrumbs='Карточка товара' backText='Карточка Товара' />
 				<DevicePageMain device={device} />
 				<DevicePageFooter />
 			</div>
