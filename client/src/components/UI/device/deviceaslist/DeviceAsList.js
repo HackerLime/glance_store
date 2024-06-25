@@ -1,5 +1,5 @@
 import React from 'react'
-import MyButton from '../../buttons/MyButton'
+import MyButton from '../../buttons/DeviceButton'
 import DevicePrice from '../DevicePrice'
 import DeviceInStock from '../DeviceInStock'
 import DeviceFavoriteIcon from '../DeviceFavoriteIcon'
