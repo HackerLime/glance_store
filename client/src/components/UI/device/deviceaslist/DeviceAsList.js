@@ -1,13 +1,18 @@
-import React from 'react'
-import MyButton from '../../buttons/DeviceButton'
+import React, { useState } from 'react'
+import DeviceButton from '../../buttons/DeviceButton'
 import DevicePrice from '../DevicePrice'
 import DeviceInStock from '../DeviceInStock'
-import DeviceFavoriteIcon from '../DeviceFavoriteIcon'
 import DeviceName from '../DeviceName'
 import DeviceImages from '../DeviceImages'
 import BlueLine from '../../lines/BlueLine'
 import { observer } from 'mobx-react-lite'
-const DeviceAsList = observer(({ device }) => {
+import { useLocation } from 'react-router-dom'
+import BasketCounter from '../basket/BasketCounter'
+import SVGDelete from '../../icons/remove/SVGDelete'
+const DeviceAsList = observer(({ device, destroyAction }) => {
+
+	const { pathname } = useLocation()
+
 	return (
 		<div>
 			<BlueLine />
@@ -21,9 +26,15 @@ const DeviceAsList = observer(({ device }) => {
 					<div className='d-flex flex-column align-items-end'>
 						<div style={{ margin: '0 0 24px 0' }}><DevicePrice device={device} /></div>
 						<div className='d-flex'>
-							<DeviceFavoriteIcon style={{ margin: "0 16px 0 0" }} />
 							<div >
-								<MyButton>В корзину</MyButton>
+								{pathname === '/basket' ?
+									<div className='d-flex'>
+										<SVGDelete style={{ cursor: 'pointer' }} onClick={() => destroyAction(device.id)} />
+										<BasketCounter />
+									</div>
+									:
+									<DeviceButton />
+								}
 							</div>
 						</div>
 					</div>

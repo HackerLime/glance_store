@@ -1,12 +1,16 @@
-.myBtn{
+.defaultBtn{
 	border: none;
 	background-color: rgb(9, 29, 158);
 	border-radius: 8px;
 	padding: 14px 51.5px;
+	display: flex;
+	align-items: center;
+
 }
-.myBtnText{
+.defaultBtnText{
 	color: rgb(246, 246, 246);
 	font-size: 14px;
 	line-height: 16px;
 	font-weight: 500;
+	white-space: nowrap
 }
