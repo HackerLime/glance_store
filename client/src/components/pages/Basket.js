@@ -30,10 +30,7 @@ const Basket = () => {
 		<div className='d-flex justify-content-center' style={{ maxWidth: '1200px', margin: '0px auto' }}>
 			<div style={{ maxWidth: '892px' }} className='d-flex flex-column'>
 				{basketState.map((i, idx) =>
-					<div key={idx}>
-						<p onClick={() => destroyBasketDevice(i.id)} style={{ textAlign: 'end', color: 'red', cursor: 'pointer' }}>Убрать с корзины</p>
-						<DeviceAsList device={i} />
-					</div>
+					<DeviceAsList destroyAction={destroyBasketDevice} key={idx} device={i} />
 				)
 				}
 			</div>
