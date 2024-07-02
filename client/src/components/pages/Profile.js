@@ -1,7 +1,7 @@
 import React from 'react'
 import { observer } from 'mobx-react-lite'
 import SVGSmile from '../UI/icons/SVGSmile'
-import MyButton from '../UI/buttons/MyButton'
+import MyButton from '../UI/buttons/DeviceButton'
 import { useNavigate } from 'react-router-dom'
 import { SHOP_ROUTE } from '../../router/paths'
 const Profile = observer(() => {

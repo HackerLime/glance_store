@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { ADMIN_ROUTE, BASKET_ROUTE, CATALOG_ROUTE, LOGIN_ROUTE, PROFILE_ROUTE } from '../../router/paths'
 import { Context } from '../../index'
 import { observer } from 'mobx-react-lite'
@@ -16,14 +16,16 @@ const NavBarMenu = observer(() => {
 	для нетбуков — 1024 px и выше;
 	для мониторов — 1280 px, 1600 px, 1920 px и выше.
 	 */
-
+	//*active - #091D9E Цвета иконок
+	//*default - #454545 Цвета иконок
+	const { pathname } = useLocation()
 	const navigate = useNavigate()
 	const [publicMenuItems, setPublicMenuItems] = useState([
-		{ id: 1, icon: <SVGCatalog color={'#454545'} />, name: 'Каталог', route: CATALOG_ROUTE },
+		{ id: 1, icon: <SVGCatalog color={pathname === '/catalog' ? '#091D9E' : '#454545'} />, name: 'Каталог', route: CATALOG_ROUTE },
 	])
 	const [privateMenuItems, setPrivateMenuItems] = useState([
-		{ id: 1, icon: <SVGBasket color={'#454545'} />, name: 'Корзина', route: BASKET_ROUTE },
-		{ id: 2, icon: <SVGProfile color={'#454545'} />, name: 'Профиль', route: PROFILE_ROUTE },
+		{ id: 1, icon: <SVGBasket color={pathname === '/basket' ? '#091D9E' : '#454545'} />, name: 'Корзина', route: BASKET_ROUTE },
+		{ id: 2, icon: <SVGProfile color={pathname === '/profile' ? '#091D9E' : '#454545'} />, name: 'Профиль', route: PROFILE_ROUTE },
 	])
 
 

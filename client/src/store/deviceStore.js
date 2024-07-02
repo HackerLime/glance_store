@@ -4,6 +4,7 @@ export default class DeviceStore {
 		this._types = []
 		this._brands = []
 		this._devices = []
+		this._basketDevicesData = []
 		this._basketDevices = []
 		this._selectedBrand = {}
 		this._selectedType = {}
@@ -18,6 +19,10 @@ export default class DeviceStore {
 	}
 	get devices() {
 		return this._devices
+	}
+
+	get basketDevicesData() {
+		return this._basketDevicesData
 	}
 
 	get basketDevices() {
@@ -42,6 +47,10 @@ export default class DeviceStore {
 		this._devices = device
 	}
 
+	setBasketDevicesData(deviceData) {
+		this._basketDevicesData = deviceData
+	}
+
 	setBasketDevices(device) {
 		this._basketDevices = device
 	}
@@ -52,6 +61,15 @@ export default class DeviceStore {
 
 	setSelectedType(selectedType) {
 		this._selectedType = selectedType
+	}
+
+
+	setBasketDevicesIsChecked(id, value) {
+		for (let i = 0; i < this.basketDevices.length; i++) {
+			if (this.basketDevices[i].id === id) {
+				this.basketDevices[i].isChecked = value
+			}
+		}
 	}
 
 
