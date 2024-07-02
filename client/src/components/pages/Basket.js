@@ -1,55 +1,59 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import BasketEmpty from '../UI/basket/BasketEmpty'
 import { Context } from '../../index'
 import DeviceAsList from '../UI/device/deviceaslist/DeviceAsList'
-import Container from 'react-bootstrap/esm/Container'
 import { SHOP_ROUTE } from '../../router/paths'
 import { Link } from 'react-router-dom'
 import Image from 'react-bootstrap/esm/Image'
-import Form from 'react-bootstrap/Form'
-
 import lessThanImg from '../UI/icons/device/lessThan.svg'
 import SVGDelete from '../UI/icons/remove/SVGDelete'
 import Button from 'react-bootstrap/esm/Button'
+import { observer } from 'mobx-react-lite'
 
 
-
-
-const Basket = () => {
+const Basket = observer(() => {
 	const { device } = useContext(Context)
-	const [basketState, setBasketState] = useState([...device.devices])
 	const [basketPrice, setBasketPrice] = useState(0)
-	/* 	const [checkedItems, setCheckedItems] = useState([{}])
-	 */
-
-	const getChecked = (gettedItem) => {
-		console.log(gettedItem)
-	}
-
+	const [allChecked, setAllChecked] = useState(false)
 	useEffect(() => {
-		setBasketPrice(getBasketPrice(basketState))
-	}, [basketState])
-
-	function getBasketPrice(items) {
-		let counter = 0
-		basketState.map(i => counter = counter + i.price)
-		return counter
-	}
-
-	console.log(basketState)
-	console.log(getBasketPrice(basketState))
+		device.setBasketDevices([...device.devices])
+	}, [])
 
 	useEffect(() => {
 		let arr = []
-		device.basketDevices.map(i => arr.push(i.deviceId))
-		setBasketState(basketState.filter(i => arr.includes(i.id)))
+		device.basketDevicesData.map(i => arr.push(i.deviceId))
+		device.setBasketDevices(device.basketDevices.filter(i => arr.includes(i.id)))
+		device.basketDevices.forEach(i => i.isChecked = false)
 	}, [])
+
+
+
+
+	function getBasketPrice() {
+		let counter = 0
+		device.basketDevices.map(i => counter = counter + i.price)
+		return counter
+	}
+
+	useEffect(() => {
+		setBasketPrice(getBasketPrice(device.basketDevices))
+	}, [device.basketDevices])
+
+
+	const checkAll = (bool) => {
+		setAllChecked(bool)
+	}
+
 	const destroyBasketDevice = (id) => {
 		//!Надо прописать после fn AddBasketDevice
 		console.log(`destroyBasketDevice,id=${id}`)
 	}
 
-	if (!basketState.length) {
+
+
+
+
+	if (!device.basketDevices.length) {
 		return <div><BasketEmpty /></div>
 	}
 
@@ -72,18 +76,24 @@ const Basket = () => {
 						<div><SVGDelete /></div>
 						<div>Удалить</div>
 					</div>
+					<div>
+						<button onClick={() => device.basketDevices[0].isChecked = true} >Click</button>
+					</div>
 					<div className='d-flex'>
 						<div>Выбрать всё</div>
-						<div style={{ marginLeft: '10px' }}><Form.Check /></div>
+						<div style={{ marginLeft: '10px' }}>
+							<input checked={allChecked} onChange={e => checkAll(e.target.checked)}
+								type='checkbox' style={{ height: '1.2rem', width: '1.2rem' }} />
+						</div>
 					</div>
 				</div>
 				<div style={{ marginBottom: '25px' }}>
-					{basketState.map((i, idx) =>
-						<DeviceAsList destroyAction={destroyBasketDevice} key={idx} device={i} getChecked={getChecked} />
+					{device.basketDevices.map((i, idx) =>
+						<DeviceAsList destroyAction={destroyBasketDevice} key={idx} device={i} isChecked={i.isChecked} basketDevices={device.basketDevices} />
 					)
 					}
 				</div>
-				<div className='d-flex flex-column align-items-center'>
+				<div style={{ borderTop: '1px solid rgb(193, 193, 193)', borderBottom: '1px solid rgb(193, 193, 193)', padding: '25px 0' }} className='d-flex flex-column align-items-center'>
 					<div><span style={{ fontSize: '18px', color: 'rgb(69,69,69)' }}>Итого:</span></div>
 					<div style={{ marginBottom: '20px' }} ><span style={{ fontSize: '18px', fontWeight: '500', color: 'rgb(12,12,12)' }}>{basketPrice} ₽</span></div>
 					<Button>Оформить заказ</Button>
@@ -91,6 +101,6 @@ const Basket = () => {
 			</div>
 		</div>
 	)
-}
+})
 
 export default Basket
