@@ -14,7 +14,7 @@ const Shop = observer(() => {
 		fetchTypes().then(data => device.setTypes(data)).catch(e => console.log(`Ошибка fetchTypes ${e.message}`))
 		fetchDevices().then(data => device.setDevices(data.rows)).catch(e => console.log(`Ошибка fetchDevices ${e.message}`))
 		if (localStorage.getItem('token')) {
-			fetchBasketDevices().then(data => device.setBasketDevices(data)).catch(e => console.log(e))
+			fetchBasketDevices().then(data => device.setBasketDevicesData(data)).catch(e => console.log(e))
 		}
 	}, [])
 

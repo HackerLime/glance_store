@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import DeviceButton from '../../buttons/DeviceButton'
 import DevicePrice from '../DevicePrice'
 import DeviceInStock from '../DeviceInStock'
@@ -10,15 +10,21 @@ import { useLocation } from 'react-router-dom'
 import BasketCounter from '../basket/BasketCounter'
 import SVGDelete from '../../icons/remove/SVGDelete'
 import Form from 'react-bootstrap/Form'
-const DeviceAsList = observer(({ device, destroyAction, getChecked }) => {
-
+import { Context } from '../../../../index'
+const DeviceAsList = observer(({ device, destroyAction, isChecked }) => {
+	const store = useContext(Context)
 	const { pathname } = useLocation()
 
 	return (
 		<div>
 			<BlueLine />
 			{pathname === '/basket' ?
-				<div style={{ marginBottom: '15px' }} className='d-flex justify-content-end'><Form.Check onChange={e => getChecked(device)} /></div>
+				<div style={{ marginBottom: '15px' }} className='d-flex justify-content-end'>
+					<Form.Check
+						checked={isChecked}
+						onChange={e => store.device.setBasketDevicesIsChecked(device.id, e.target.checked)}
+					/>
+				</div>
 				:
 				''
 			}
