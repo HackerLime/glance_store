@@ -23,12 +23,10 @@ const Basket = observer(() => {
 		let arr = []
 		device.basketDevicesData.map(i => arr.push(i.deviceId))
 		device.setBasketDevices(device.basketDevices.filter(i => arr.includes(i.id)))
-		device.basketDevices.forEach(i => i.isChecked = false)
+		device.setBasketDevicesIsCheckedFalse()
 	}, [])
 
-
-
-
+	console.log(device.basketDevices)
 	function getBasketPrice() {
 		let counter = 0
 		device.basketDevices.map(i => counter = counter + i.price)
@@ -36,13 +34,22 @@ const Basket = observer(() => {
 	}
 
 	useEffect(() => {
-		setBasketPrice(getBasketPrice(device.basketDevices))
+		setBasketPrice(getBasketPrice())
 	}, [device.basketDevices])
 
+	useEffect(() => {
+		device.isAllBasketDevicesChecked ? setAllChecked(true) : setAllChecked(false)
+	}, [device.isAllBasketDevicesChecked])
 
 	const checkAll = (bool) => {
 		setAllChecked(bool)
+		if (bool) {
+			device.setBasketDevicesIsCheckedTrue()
+		} else {
+			device.setBasketDevicesIsCheckedFalse()
+		}
 	}
+
 
 	const destroyBasketDevice = (id) => {
 		//!Надо прописать после fn AddBasketDevice
@@ -77,7 +84,7 @@ const Basket = observer(() => {
 						<div>Удалить</div>
 					</div>
 					<div>
-						<button onClick={() => device.basketDevices[0].isChecked = true} >Click</button>
+						<button onClick={() => console.log(device.isAllBasketDevicesChecked)} >Click</button>
 					</div>
 					<div className='d-flex'>
 						<div>Выбрать всё</div>
@@ -89,7 +96,7 @@ const Basket = observer(() => {
 				</div>
 				<div style={{ marginBottom: '25px' }}>
 					{device.basketDevices.map((i, idx) =>
-						<DeviceAsList destroyAction={destroyBasketDevice} key={idx} device={i} isChecked={i.isChecked} basketDevices={device.basketDevices} />
+						<DeviceAsList destroyAction={destroyBasketDevice} key={idx} device={i} isChecked={i.isChecked} />
 					)
 					}
 				</div>
