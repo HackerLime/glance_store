@@ -15,31 +15,22 @@ const Basket = observer(() => {
 	const { device } = useContext(Context)
 	const [basketPrice, setBasketPrice] = useState(0)
 	const [allChecked, setAllChecked] = useState(false)
-	useEffect(() => {
-		device.setBasketDevices([...device.devices])
-	}, [])
 
 	useEffect(() => {
+		device.setBasketDevices([...device.devices])
 		let arr = []
 		device.basketDevicesData.map(i => arr.push(i.deviceId))
 		device.setBasketDevices(device.basketDevices.filter(i => arr.includes(i.id)))
 		device.setBasketDevicesIsCheckedFalse()
 	}, [])
 
-	console.log(device.basketDevices)
-	function getBasketPrice() {
-		let counter = 0
-		device.basketDevices.map(i => counter = counter + i.price)
-		return counter
-	}
-
-	useEffect(() => {
-		setBasketPrice(getBasketPrice())
-	}, [device.basketDevices])
-
 	useEffect(() => {
 		device.isAllBasketDevicesChecked ? setAllChecked(true) : setAllChecked(false)
 	}, [device.isAllBasketDevicesChecked])
+
+	useEffect(() => {
+		setBasketPrice(device.isCheckedBasketDevicesPrice)
+	}, [device.isCheckedBasketDevicesPrice])
 
 	const checkAll = (bool) => {
 		setAllChecked(bool)
@@ -100,11 +91,16 @@ const Basket = observer(() => {
 					)
 					}
 				</div>
-				<div style={{ borderTop: '1px solid rgb(193, 193, 193)', borderBottom: '1px solid rgb(193, 193, 193)', padding: '25px 0' }} className='d-flex flex-column align-items-center'>
-					<div><span style={{ fontSize: '18px', color: 'rgb(69,69,69)' }}>Итого:</span></div>
-					<div style={{ marginBottom: '20px' }} ><span style={{ fontSize: '18px', fontWeight: '500', color: 'rgb(12,12,12)' }}>{basketPrice} ₽</span></div>
-					<Button>Оформить заказ</Button>
-				</div>
+				{
+					basketPrice ?
+						<div style={{ borderTop: '1px solid rgb(193, 193, 193)', borderBottom: '1px solid rgb(193, 193, 193)', padding: '25px 0' }} className='d-flex flex-column align-items-center'>
+							<div><span style={{ fontSize: '18px', color: 'rgb(69,69,69)' }}>Итого:</span></div>
+							<div style={{ marginBottom: '20px' }} ><span style={{ fontSize: '18px', fontWeight: '500', color: 'rgb(12,12,12)' }}>{basketPrice} ₽</span></div>
+							<Button>Оформить заказ</Button>
+						</div>
+						:
+						''
+				}
 			</div>
 		</div>
 	)

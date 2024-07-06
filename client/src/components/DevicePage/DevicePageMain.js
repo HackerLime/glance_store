@@ -7,8 +7,6 @@ import DeviceAddBasket from './palette/addBasket/DeviceAddBasket'
 
 const DevicePageMain = ({ device }) => {
 
-
-
 	const [palette, setPallete] = useState([
 		{ id: 1, name: 'Красный', color: 'rgb(255, 0, 0)' },
 		{ id: 2, name: 'Черный', color: 'rgb(12, 12, 12)' },

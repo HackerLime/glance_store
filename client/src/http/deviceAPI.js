@@ -42,7 +42,6 @@ export const createDevice = async (device) => {
 //*Не тестировано-------------
 export const addBasketDevice = async (deviceId, basketId) => {
 
-
 	const { data } = await $authHost.post('/api/basket/create', { deviceId, basketId })
 	return data
 }

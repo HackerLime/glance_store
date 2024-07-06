@@ -51,6 +51,22 @@ export default class DeviceStore {
 		}
 	}
 
+	get isCheckedBasketDevicesPrice() {
+		let counter = 0
+		this._basketDevices.map(i => i.isChecked === true ? counter = counter + i.price : counter = counter + 0)
+		return counter
+	}
+
+	get inBasketDevicesId() {
+		let arr = []
+		for (let i = 0; i < this._basketDevicesData.length; i++) {
+			arr.push(this._basketDevicesData[i].deviceId)
+		}
+		return arr
+	}
+
+
+
 	setBrands(brand) {
 		this._brands = brand
 	}
@@ -93,6 +109,8 @@ export default class DeviceStore {
 		this._basketDevices.forEach(i => i.isChecked = true)
 
 	}
+
+
 
 
 }
