@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import DeviceButton from '../../buttons/DeviceButton'
 import DevicePrice from '../DevicePrice'
 import DeviceInStock from '../DeviceInStock'
@@ -12,8 +12,17 @@ import SVGDelete from '../../icons/remove/SVGDelete'
 import Form from 'react-bootstrap/Form'
 import { Context } from '../../../../index'
 const DeviceAsList = observer(({ device, destroyAction, isChecked }) => {
+	const [isDeviceInBasket, setIsDeviceInBasket] = useState(false)
 	const store = useContext(Context)
 	const { pathname } = useLocation()
+
+	useEffect(() => {
+		if (store.device.inBasketDevicesId.includes(device.id)) {
+			setIsDeviceInBasket(true)
+		}
+	}, [])
+
+
 
 	return (
 		<div>
@@ -51,7 +60,7 @@ const DeviceAsList = observer(({ device, destroyAction, isChecked }) => {
 										<BasketCounter />
 									</div>
 									:
-									<DeviceButton />
+									<DeviceButton deviceId={device.id} isDeviceInBasket={isDeviceInBasket} />
 								}
 							</div>
 						</div>

@@ -37,6 +37,36 @@ export default class DeviceStore {
 		return this._selectedBrand
 	}
 
+	get isAllBasketDevicesChecked() {
+		let counter = 0
+		for (let i = 0; i < this._basketDevices.length; i++) {
+			if (this._basketDevices[i].isChecked === true) {
+				counter++
+			}
+		}
+		if (counter > 0 && counter === this._basketDevices.length) {
+			return true
+		} else {
+			return false
+		}
+	}
+
+	get isCheckedBasketDevicesPrice() {
+		let counter = 0
+		this._basketDevices.map(i => i.isChecked === true ? counter = counter + i.price : counter = counter + 0)
+		return counter
+	}
+
+	get inBasketDevicesId() {
+		let arr = []
+		for (let i = 0; i < this._basketDevicesData.length; i++) {
+			arr.push(this._basketDevicesData[i].deviceId)
+		}
+		return arr
+	}
+
+
+
 	setBrands(brand) {
 		this._brands = brand
 	}
@@ -65,12 +95,22 @@ export default class DeviceStore {
 
 
 	setBasketDevicesIsChecked(id, value) {
-		for (let i = 0; i < this.basketDevices.length; i++) {
-			if (this.basketDevices[i].id === id) {
-				this.basketDevices[i].isChecked = value
+		for (let i = 0; i < this._basketDevices.length; i++) {
+			if (this._basketDevices[i].id === id) {
+				this._basketDevices[i].isChecked = value
 			}
 		}
 	}
+	setBasketDevicesIsCheckedFalse() {
+		this._basketDevices.forEach(i => i.isChecked = false)
+
+	}
+	setBasketDevicesIsCheckedTrue() {
+		this._basketDevices.forEach(i => i.isChecked = true)
+
+	}
+
+
 
 
 }

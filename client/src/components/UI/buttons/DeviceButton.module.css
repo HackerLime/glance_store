@@ -14,3 +14,19 @@
 	font-weight: 500;
 	white-space: nowrap
 }
+
+.inBasketBtn{
+	border: 1px solid rgb(9, 29, 158);
+	border-radius: 8px;
+	padding: 14px 51.5px;
+	display: flex;
+	align-items: center;
+
+}
+.inBasketBtnText{
+	color: rgb(9, 29, 158);
+	font-size: 14px;
+	line-height: 16px;
+	font-weight: 500;
+	white-space: nowrap
+}
