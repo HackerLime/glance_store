@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import classes from './Device.module.css'
 import DevicePrice from './DevicePrice'
 import DeviceInStock from './DeviceInStock'
@@ -6,8 +6,15 @@ import DeviceName from './DeviceName'
 import DeviceImages from './DeviceImages'
 import { observer } from 'mobx-react-lite'
 import DeviceButton from '../buttons/DeviceButton'
+import { Context } from '../../../index'
 const Device = observer(({ device }) => {
-
+	const store = useContext(Context)
+	const [isDeviceInBasket, setIsDeviceInBasket] = useState(false)
+	useEffect(() => {
+		if (store.device.inBasketDevicesId.includes(device.id)) {
+			setIsDeviceInBasket(true)
+		}
+	}, [])
 	return (
 		<div className={`d-flex flex-column justify-content-between ${classes.deviceWrapper}`} >
 			<div>
@@ -21,7 +28,7 @@ const Device = observer(({ device }) => {
 				</div>
 			</div>
 			<div >
-				<DeviceButton />
+				<DeviceButton deviceId={device.id} isDeviceInBasket={isDeviceInBasket} />
 			</div>
 		</div>
 	)

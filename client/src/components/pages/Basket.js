@@ -15,34 +15,32 @@ const Basket = observer(() => {
 	const { device } = useContext(Context)
 	const [basketPrice, setBasketPrice] = useState(0)
 	const [allChecked, setAllChecked] = useState(false)
-	useEffect(() => {
-		device.setBasketDevices([...device.devices])
-	}, [])
 
 	useEffect(() => {
+		device.setBasketDevices([...device.devices])
 		let arr = []
 		device.basketDevicesData.map(i => arr.push(i.deviceId))
 		device.setBasketDevices(device.basketDevices.filter(i => arr.includes(i.id)))
-		device.basketDevices.forEach(i => i.isChecked = false)
+		device.setBasketDevicesIsCheckedFalse()
 	}, [])
 
-
-
-
-	function getBasketPrice() {
-		let counter = 0
-		device.basketDevices.map(i => counter = counter + i.price)
-		return counter
-	}
+	useEffect(() => {
+		device.isAllBasketDevicesChecked ? setAllChecked(true) : setAllChecked(false)
+	}, [device.isAllBasketDevicesChecked])
 
 	useEffect(() => {
-		setBasketPrice(getBasketPrice(device.basketDevices))
-	}, [device.basketDevices])
-
+		setBasketPrice(device.isCheckedBasketDevicesPrice)
+	}, [device.isCheckedBasketDevicesPrice])
 
 	const checkAll = (bool) => {
 		setAllChecked(bool)
+		if (bool) {
+			device.setBasketDevicesIsCheckedTrue()
+		} else {
+			device.setBasketDevicesIsCheckedFalse()
+		}
 	}
+
 
 	const destroyBasketDevice = (id) => {
 		//!Надо прописать после fn AddBasketDevice
@@ -77,7 +75,7 @@ const Basket = observer(() => {
 						<div>Удалить</div>
 					</div>
 					<div>
-						<button onClick={() => device.basketDevices[0].isChecked = true} >Click</button>
+						<button onClick={() => console.log(device.isAllBasketDevicesChecked)} >Click</button>
 					</div>
 					<div className='d-flex'>
 						<div>Выбрать всё</div>
@@ -89,15 +87,20 @@ const Basket = observer(() => {
 				</div>
 				<div style={{ marginBottom: '25px' }}>
 					{device.basketDevices.map((i, idx) =>
-						<DeviceAsList destroyAction={destroyBasketDevice} key={idx} device={i} isChecked={i.isChecked} basketDevices={device.basketDevices} />
+						<DeviceAsList destroyAction={destroyBasketDevice} key={idx} device={i} isChecked={i.isChecked} />
 					)
 					}
 				</div>
-				<div style={{ borderTop: '1px solid rgb(193, 193, 193)', borderBottom: '1px solid rgb(193, 193, 193)', padding: '25px 0' }} className='d-flex flex-column align-items-center'>
-					<div><span style={{ fontSize: '18px', color: 'rgb(69,69,69)' }}>Итого:</span></div>
-					<div style={{ marginBottom: '20px' }} ><span style={{ fontSize: '18px', fontWeight: '500', color: 'rgb(12,12,12)' }}>{basketPrice} ₽</span></div>
-					<Button>Оформить заказ</Button>
-				</div>
+				{
+					basketPrice ?
+						<div style={{ borderTop: '1px solid rgb(193, 193, 193)', borderBottom: '1px solid rgb(193, 193, 193)', padding: '25px 0' }} className='d-flex flex-column align-items-center'>
+							<div><span style={{ fontSize: '18px', color: 'rgb(69,69,69)' }}>Итого:</span></div>
+							<div style={{ marginBottom: '20px' }} ><span style={{ fontSize: '18px', fontWeight: '500', color: 'rgb(12,12,12)' }}>{basketPrice} ₽</span></div>
+							<Button>Оформить заказ</Button>
+						</div>
+						:
+						''
+				}
 			</div>
 		</div>
 	)
