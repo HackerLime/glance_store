@@ -14,7 +14,7 @@ const Device = observer(({ device }) => {
 		if (store.device.inBasketDevicesId.includes(device.id)) {
 			setIsDeviceInBasket(true)
 		}
-	}, [])
+	}, [device.id, store.device.inBasketDevicesId])
 	return (
 		<div className={`d-flex flex-column justify-content-between ${classes.deviceWrapper}`} >
 			<div>
