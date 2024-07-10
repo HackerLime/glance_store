@@ -16,7 +16,7 @@ const Shop = observer(() => {
 		if (localStorage.getItem('token')) {
 			fetchBasketDevices().then(data => device.setBasketDevicesData(data)).catch(e => console.log(e))
 		}
-	}, [])
+	}, [device])
 
 	return (
 		<Container >

@@ -51,6 +51,16 @@ export default class DeviceStore {
 		}
 	}
 
+	get checkedBasketDevicesIds() {
+		let arr = []
+		for (let i = 0; i < this._basketDevices.length; i++) {
+			if (this._basketDevices[i].isChecked === true) {
+				arr.push(this._basketDevices[i].id)
+			}
+		}
+		return arr
+	}
+
 	get isCheckedBasketDevicesPrice() {
 		let counter = 0
 		this._basketDevices.map(i => i.isChecked === true ? counter = counter + i.price : counter = counter + 0)

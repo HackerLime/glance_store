@@ -9,8 +9,6 @@ const DeviceButton = ({ deviceId, isDeviceInBasket }) => {
 	const navigate = useNavigate()
 	const addBasketDeviceAction = () => {
 		addBasketDevice(deviceId, store.user.user.id).then(data => console.log(data)).catch(e => console.log(e))
-		console.log(deviceId)
-
 	}
 	if (isDeviceInBasket) {
 		return (

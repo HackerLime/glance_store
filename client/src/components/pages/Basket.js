@@ -9,12 +9,15 @@ import lessThanImg from '../UI/icons/device/lessThan.svg'
 import SVGDelete from '../UI/icons/remove/SVGDelete'
 import Button from 'react-bootstrap/esm/Button'
 import { observer } from 'mobx-react-lite'
+import { deleteBasketDevice } from '../../http/deviceAPI'
 
 
 const Basket = observer(() => {
-	const { device } = useContext(Context)
+	const { device, user } = useContext(Context)
 	const [basketPrice, setBasketPrice] = useState(0)
 	const [allChecked, setAllChecked] = useState(false)
+
+
 
 	useEffect(() => {
 		device.setBasketDevices([...device.devices])
@@ -32,6 +35,7 @@ const Basket = observer(() => {
 		setBasketPrice(device.isCheckedBasketDevicesPrice)
 	}, [device.isCheckedBasketDevicesPrice])
 
+
 	const checkAll = (bool) => {
 		setAllChecked(bool)
 		if (bool) {
@@ -42,9 +46,8 @@ const Basket = observer(() => {
 	}
 
 
-	const destroyBasketDevice = (id) => {
-		//!Надо прописать после fn AddBasketDevice
-		console.log(`destroyBasketDevice,id=${id}`)
+	const destroyBasketDevice = (deviceId) => {
+		deleteBasketDevice(user.user.id, deviceId).then(data => console.log(data)).catch(e => console.log(e))
 	}
 
 
@@ -69,15 +72,16 @@ const Basket = observer(() => {
 				</div>
 				{/* 	//!----------------*/}
 
-				<div className='d-flex justify-content-between' style={{ marginBottom: '20px', userSelect: 'none' }}>
-					<div className='d-flex align-items-center' style={{ cursor: 'pointer' }} onClick={() => console.log('Удаляю все')}>
-						<div><SVGDelete /></div>
-						<div>Удалить</div>
-					</div>
-					<div>
-						<button onClick={() => console.log(device.isAllBasketDevicesChecked)} >Click</button>
-					</div>
-					<div className='d-flex'>
+				<div className='d-flex align-items-center justify-content-between' style={{ marginBottom: '20px', userSelect: 'none' }}>
+					{device.checkedBasketDevicesIds.length ?
+						<div className='d-flex align-items-center' style={{ cursor: 'pointer' }} onClick={() => destroyBasketDevice(device.checkedBasketDevicesIds)}>
+							<div><SVGDelete /></div>
+							<div>Удалить</div>
+						</div> :
+						''
+					}
+					<div></div>
+					<div className='d-flex' style={{ justifySelf: 'end' }}>
 						<div>Выбрать всё</div>
 						<div style={{ marginLeft: '10px' }}>
 							<input checked={allChecked} onChange={e => checkAll(e.target.checked)}
