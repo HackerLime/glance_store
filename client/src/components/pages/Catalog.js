@@ -11,22 +11,27 @@ import SVGList from '../UI/icons/catalog/catalogpage/SVGList'
 import BlueLine from '../UI/lines/BlueLine'
 import DeviceAsList from '../UI/device/deviceaslist/DeviceAsList'
 import { observer } from 'mobx-react-lite'
-import { fetchBrands, fetchDevices, fetchTypes } from '../../http/deviceAPI'
+import { fetchBasketDevices, fetchBrands, fetchDevices, fetchTypes } from '../../http/deviceAPI'
 
 
 const Catalog = observer(() => {
 	const { device } = useContext(Context)
-	const [catalogDevices, setCatalogDevices] = useState([...device.devices])
+	const [catalogDevices, setCatalogDevices] = useState([])
 	const [typeChecked, setTypeChecked] = useState([])
 	const [brandChecked, setBrandChecked] = useState([])
 	const [cancelVisible, setCancelVisible] = useState(false)
+	useEffect(() => {
+		if (localStorage.getItem('token')) {
+			fetchBasketDevices().then(data => device.setBasketDevicesData(data)).catch(e => console.log(e))
+		}
+	}, [])
+
+
 
 
 	useEffect(() => {
-		if (!catalogDevices.length) {
-			console.log('Не подгрузилось')
-		}
-	}, [])
+		setCatalogDevices([...device.devices])
+	}, [device.devices])
 
 	useEffect(() => {
 		let checkedTypeIds = []
@@ -128,7 +133,7 @@ const Catalog = observer(() => {
 					</div>
 				</div>
 				<div className='d-flex flex-column' style={{ maxWidth: '860px' }} >
-					<div className='d-flex justify-content-end' style={{ margin: '0 0 24px 0' }}>
+					<div className='d-flex justify-content-start' style={{ margin: '0 0 24px 0' }}>
 						<div style={{ width: '66px' }} >
 							<SVGTile onClick={() => tileClick()} color={tileColor} style={{ margin: '0 16px 0 0', cursor: 'pointer' }} />
 							<SVGList onClick={() => listClick()} color={listColor} style={{ cursor: 'pointer' }} />
