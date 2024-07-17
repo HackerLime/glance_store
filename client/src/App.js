@@ -8,9 +8,12 @@ import { check } from './http/userAPI';
 import LoadingAnimation from './components/UI/loadingAnimation/LoadingAnimation';
 import ScrollToTop from './ScrollToTop';
 
+
 const App = observer(() => {
 	const { user } = useContext(Context)
 	const [isLoading, setIsLoading] = useState(false)
+
+
 
 
 	useEffect(() => {

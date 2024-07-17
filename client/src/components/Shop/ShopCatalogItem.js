@@ -1,9 +1,11 @@
 import React from 'react'
 import Image from 'react-bootstrap/Image'
 
-const ShopCatalogItem = ({ img, name }) => {
+const ShopCatalogItem = ({ img, name, ...props }) => {
 	return (
 		<div
+
+			{...props}
 			style={{ cursor: 'pointer' }}
 			className='d-flex flex-column justify-content-center align-items-center'>
 			<div

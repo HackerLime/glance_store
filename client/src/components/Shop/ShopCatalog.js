@@ -7,8 +7,11 @@ import tabletimg from '../UI/icons/catalog/tablet.svg'
 import soundbarimg from '../UI/icons/catalog/soundbar.svg'
 import { observer } from 'mobx-react-lite'
 import ShopCatalogItem from './ShopCatalogItem'
+import { useNavigate } from 'react-router-dom'
+import { CATALOG_ROUTE } from '../../router/paths'
 
 const ShopCatalog = observer(() => {
+	const navigate = useNavigate()
 	const [devices, setDevices] = useState([
 		{ id: 1, name: 'Смартфоны', img: smartphoneimg },
 		{ id: 2, name: 'Ноутбуки', img: notebookimg },
@@ -25,7 +28,7 @@ const ShopCatalog = observer(() => {
 			<div className='d-flex justify-content-between'>
 
 				{devices.map(i =>
-					<ShopCatalogItem key={i.id} img={i.img} name={i.name} />
+					<ShopCatalogItem onClick={() => navigate(CATALOG_ROUTE)} key={i.id} img={i.img} name={i.name} />
 				)}
 			</div>
 		</div>

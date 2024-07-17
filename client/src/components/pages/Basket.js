@@ -9,7 +9,7 @@ import lessThanImg from '../UI/icons/device/lessThan.svg'
 import SVGDelete from '../UI/icons/remove/SVGDelete'
 import Button from 'react-bootstrap/esm/Button'
 import { observer } from 'mobx-react-lite'
-import { deleteBasketDevice } from '../../http/deviceAPI'
+import { deleteBasketDevice, fetchBasketDevices } from '../../http/deviceAPI'
 
 
 const Basket = observer(() => {
@@ -18,14 +18,25 @@ const Basket = observer(() => {
 	const [allChecked, setAllChecked] = useState(false)
 
 
-
 	useEffect(() => {
-		device.setBasketDevices([...device.devices])
-		let arr = []
-		device.basketDevicesData.map(i => arr.push(i.deviceId))
-		device.setBasketDevices(device.basketDevices.filter(i => arr.includes(i.id)))
-		device.setBasketDevicesIsCheckedFalse()
-	}, [])
+		if (localStorage.getItem('token')) {
+			fetchBasketDevices()
+				.then(data => device.setBasketDevicesData(data))
+				.catch(e => console.log(e))
+				.finally(e => {
+					device.setBasketDevices([...device.devices])
+					let arr = []
+					device.basketDevicesData.map(i => arr.push(i.deviceId))
+					device.setBasketDevices(device.basketDevices.filter(i => arr.includes(i.id)))
+					device.setBasketDevicesIsCheckedFalse()
+				}
+				)
+		}
+	}, [device])
+
+
+
+
 
 	useEffect(() => {
 		device.isAllBasketDevicesChecked ? setAllChecked(true) : setAllChecked(false)
@@ -46,13 +57,17 @@ const Basket = observer(() => {
 	}
 
 
-	const destroyBasketDevice = (deviceId) => {
-		deleteBasketDevice(user.user.id, deviceId).then(data => console.log(data)).catch(e => console.log(e))
+	const destroyBasketDevice = (gettedDeviceId) => {
+		deleteBasketDevice(user.user.id, gettedDeviceId)
+			.then(data => console.log(gettedDeviceId))
+			.catch(e => console.log(e))
+		console.log(device.basketDevices)
+		if (Array.isArray(gettedDeviceId)) {
+			device.setBasketDevices([...device.basketDevices].filter(i => !gettedDeviceId.includes(i.id)))
+			device.setBasketDevicesData([...device.basketDevicesData].filter(i => !gettedDeviceId.includes(i.deviceId)))
+		}
+
 	}
-
-
-
-
 
 	if (!device.basketDevices.length) {
 		return <div><BasketEmpty /></div>
