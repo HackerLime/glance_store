@@ -9,6 +9,11 @@ import { observer } from 'mobx-react-lite'
 import ShopCatalogItem from './ShopCatalogItem'
 import { useNavigate } from 'react-router-dom'
 import { CATALOG_ROUTE } from '../../router/paths'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { FreeMode, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/pagination';
 
 const ShopCatalog = observer(() => {
 	const navigate = useNavigate()
@@ -26,10 +31,20 @@ const ShopCatalog = observer(() => {
 		>
 			<h6 style={{ fontSize: 32, margin: '0 0 28px 0' }}>Каталог</h6>
 			<div className='d-flex justify-content-between'>
+				<Swiper
+					slidesPerView={5.9}
+					spaceBetween={1.5}
+					freeMode={true}
+					modules={[FreeMode, Pagination]}
+					className="mySwiper"
+				>
+					{devices.map(i =>
+						<SwiperSlide key={i.id}>
+							<ShopCatalogItem onClick={() => navigate(CATALOG_ROUTE)} key={i.id} img={i.img} name={i.name} />
+						</SwiperSlide>
+					)}
+				</Swiper>
 
-				{devices.map(i =>
-					<ShopCatalogItem onClick={() => navigate(CATALOG_ROUTE)} key={i.id} img={i.img} name={i.name} />
-				)}
 			</div>
 		</div>
 	)

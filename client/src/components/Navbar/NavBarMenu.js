@@ -52,11 +52,7 @@ const NavBarMenu = observer(() => {
 				)}
 			</div>
 			{user.isAuth ?
-				<div className='d-flex'>
-					<Button className='me-2' onClick={() => logout()} >Выйти</Button>
-					<Button onClick={() => navigate(ADMIN_ROUTE)} >Админка</Button>
-				</div>
-
+				""
 				:
 				<Button onClick={() => navigate(LOGIN_ROUTE)}>Авторизация</Button>
 			}
