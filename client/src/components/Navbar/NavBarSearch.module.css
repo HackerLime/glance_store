@@ -9,6 +9,13 @@
 	
 
 }
+@media (max-width: 580px) {
+	.mySearch{
+		display: none;
+	}
+ }
+
+
 .mySearch_active{
 	background:rgb(222, 222, 222);
 	max-width: 754px;
