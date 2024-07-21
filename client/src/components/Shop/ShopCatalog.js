@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSliderParams } from '../../hooks/useSliderParams'
 import smartphoneimg from '../UI/icons/catalog/smartphone.svg'
 import notebookimg from '../UI/icons/catalog/notebook.svg'
 import pcimg from '../UI/icons/catalog/pc.svg'
@@ -11,11 +12,16 @@ import { useNavigate } from 'react-router-dom'
 import { CATALOG_ROUTE } from '../../router/paths'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode, Pagination } from 'swiper/modules';
+
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 
 const ShopCatalog = observer(() => {
+	const { mySlidesPerView, mySlidesSpaceBetween } = useSliderParams()
+
+
+
 	const navigate = useNavigate()
 	const [devices, setDevices] = useState([
 		{ id: 1, name: 'Смартфоны', img: smartphoneimg },
@@ -30,10 +36,11 @@ const ShopCatalog = observer(() => {
 			style={{ margin: '0 0 40px 0' }}
 		>
 			<h6 style={{ fontSize: 32, margin: '0 0 28px 0' }}>Каталог</h6>
+
 			<div className='d-flex justify-content-between'>
 				<Swiper
-					slidesPerView={5.9}
-					spaceBetween={1.5}
+					slidesPerView={mySlidesPerView}
+					spaceBetween={mySlidesSpaceBetween}
 					freeMode={true}
 					modules={[FreeMode, Pagination]}
 					className="mySwiper"
