@@ -9,20 +9,34 @@ import lessThanImg from '../UI/icons/device/lessThan.svg'
 import SVGDelete from '../UI/icons/remove/SVGDelete'
 import Button from 'react-bootstrap/esm/Button'
 import { observer } from 'mobx-react-lite'
+import { deleteBasketDevice, fetchBasketDevices } from '../../http/deviceAPI'
 
 
 const Basket = observer(() => {
-	const { device } = useContext(Context)
+	const { device, user } = useContext(Context)
 	const [basketPrice, setBasketPrice] = useState(0)
 	const [allChecked, setAllChecked] = useState(false)
 
+
 	useEffect(() => {
-		device.setBasketDevices([...device.devices])
-		let arr = []
-		device.basketDevicesData.map(i => arr.push(i.deviceId))
-		device.setBasketDevices(device.basketDevices.filter(i => arr.includes(i.id)))
-		device.setBasketDevicesIsCheckedFalse()
-	}, [])
+		if (localStorage.getItem('token')) {
+			fetchBasketDevices()
+				.then(data => device.setBasketDevicesData(data))
+				.catch(e => console.log(e))
+				.finally(e => {
+					device.setBasketDevices([...device.devices])
+					let arr = []
+					device.basketDevicesData.map(i => arr.push(i.deviceId))
+					device.setBasketDevices(device.basketDevices.filter(i => arr.includes(i.id)))
+					device.setBasketDevicesIsCheckedFalse()
+				}
+				)
+		}
+	}, [device])
+
+
+
+
 
 	useEffect(() => {
 		device.isAllBasketDevicesChecked ? setAllChecked(true) : setAllChecked(false)
@@ -31,6 +45,7 @@ const Basket = observer(() => {
 	useEffect(() => {
 		setBasketPrice(device.isCheckedBasketDevicesPrice)
 	}, [device.isCheckedBasketDevicesPrice])
+
 
 	const checkAll = (bool) => {
 		setAllChecked(bool)
@@ -42,14 +57,17 @@ const Basket = observer(() => {
 	}
 
 
-	const destroyBasketDevice = (id) => {
-		//!Надо прописать после fn AddBasketDevice
-		console.log(`destroyBasketDevice,id=${id}`)
+	const destroyBasketDevice = (gettedDeviceId) => {
+		deleteBasketDevice(user.user.id, gettedDeviceId)
+			.then(data => console.log(gettedDeviceId))
+			.catch(e => console.log(e))
+		console.log(device.basketDevices)
+		if (Array.isArray(gettedDeviceId)) {
+			device.setBasketDevices([...device.basketDevices].filter(i => !gettedDeviceId.includes(i.id)))
+			device.setBasketDevicesData([...device.basketDevicesData].filter(i => !gettedDeviceId.includes(i.deviceId)))
+		}
+
 	}
-
-
-
-
 
 	if (!device.basketDevices.length) {
 		return <div><BasketEmpty /></div>
@@ -69,15 +87,16 @@ const Basket = observer(() => {
 				</div>
 				{/* 	//!----------------*/}
 
-				<div className='d-flex justify-content-between' style={{ marginBottom: '20px', userSelect: 'none' }}>
-					<div className='d-flex align-items-center' style={{ cursor: 'pointer' }} onClick={() => console.log('Удаляю все')}>
-						<div><SVGDelete /></div>
-						<div>Удалить</div>
-					</div>
-					<div>
-						<button onClick={() => console.log(device.isAllBasketDevicesChecked)} >Click</button>
-					</div>
-					<div className='d-flex'>
+				<div className='d-flex align-items-center justify-content-between' style={{ marginBottom: '20px', userSelect: 'none' }}>
+					{device.checkedBasketDevicesIds.length ?
+						<div className='d-flex align-items-center' style={{ cursor: 'pointer' }} onClick={() => destroyBasketDevice(device.checkedBasketDevicesIds)}>
+							<div><SVGDelete /></div>
+							<div>Удалить</div>
+						</div> :
+						''
+					}
+					<div></div>
+					<div className='d-flex' style={{ justifySelf: 'end' }}>
 						<div>Выбрать всё</div>
 						<div style={{ marginLeft: '10px' }}>
 							<input checked={allChecked} onChange={e => checkAll(e.target.checked)}

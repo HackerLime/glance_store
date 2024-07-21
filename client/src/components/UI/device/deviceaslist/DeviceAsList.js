@@ -20,7 +20,8 @@ const DeviceAsList = observer(({ device, destroyAction, isChecked }) => {
 		if (store.device.inBasketDevicesId.includes(device.id)) {
 			setIsDeviceInBasket(true)
 		}
-	}, [])
+	}, [device.id, store.device.inBasketDevicesId])
+
 
 
 

@@ -1,23 +1,15 @@
 import React, { useContext, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { ADMIN_ROUTE, BASKET_ROUTE, CATALOG_ROUTE, LOGIN_ROUTE, PROFILE_ROUTE } from '../../router/paths'
+import { BASKET_ROUTE, CATALOG_ROUTE, LOGIN_ROUTE, PROFILE_ROUTE } from '../../router/paths'
 import { Context } from '../../index'
 import { observer } from 'mobx-react-lite'
 import Button from 'react-bootstrap/Button'
 import NavBarMenuItem from './NavBarMenuItem'
-import SVGFBStarF from '../UI/icons/SVGFBStarF'
 import SVGCatalog from '../UI/icons/SVGCatalog'
 import SVGProfile from '../UI/icons/SVGProfile'
 import SVGBasket from '../UI/icons/SVGBasket'
 const NavBarMenu = observer(() => {
 
-	/* для смартфонов — 320 px, 480 px и выше;
-	для планшетов — 768 px и выше;
-	для нетбуков — 1024 px и выше;
-	для мониторов — 1280 px, 1600 px, 1920 px и выше.
-	 */
-	//*active - #091D9E Цвета иконок
-	//*default - #454545 Цвета иконок
 	const { pathname } = useLocation()
 	const navigate = useNavigate()
 	const [publicMenuItems, setPublicMenuItems] = useState([
@@ -27,16 +19,7 @@ const NavBarMenu = observer(() => {
 		{ id: 1, icon: <SVGBasket color={pathname === '/basket' ? '#091D9E' : '#454545'} />, name: 'Корзина', route: BASKET_ROUTE },
 		{ id: 2, icon: <SVGProfile color={pathname === '/profile' ? '#091D9E' : '#454545'} />, name: 'Профиль', route: PROFILE_ROUTE },
 	])
-
-
 	const { user } = useContext(Context)
-
-	const logout = () => {
-		user.setIsAuth(false)
-		localStorage.removeItem('token')
-	}
-
-
 
 	return (
 		<div className='d-flex'>
@@ -52,11 +35,7 @@ const NavBarMenu = observer(() => {
 				)}
 			</div>
 			{user.isAuth ?
-				<div className='d-flex'>
-					<Button className='me-2' onClick={() => logout()} >Выйти</Button>
-					<Button onClick={() => navigate(ADMIN_ROUTE)} >Админка</Button>
-				</div>
-
+				""
 				:
 				<Button onClick={() => navigate(LOGIN_ROUTE)}>Авторизация</Button>
 			}

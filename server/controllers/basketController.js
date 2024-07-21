@@ -31,9 +31,11 @@ class BasketController {
 
 	async destroyBasketDeviceById(req, res, next) {
 		try {
-			const { id } = req.body
+			const { basketId, deviceId } = req.body
 			const targetDevice = await BasketDevice.destroy({
-				where: { id }
+				where: {
+					basketId, deviceId
+				}
 			})
 			return res.json(targetDevice)
 		} catch (e) {

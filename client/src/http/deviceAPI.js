@@ -39,7 +39,7 @@ export const createDevice = async (device) => {
 	return data
 }
 
-//*Не тестировано-------------
+
 export const addBasketDevice = async (deviceId, basketId) => {
 
 	const { data } = await $authHost.post('/api/basket/create', { deviceId, basketId })
@@ -54,9 +54,8 @@ export const fetchBasketDevices = async () => {
 
 }
 
-export const deleteBasketDevice = async (id) => {
-	const { data } = await $authHost.post('/api/basket/destroy', { id })
+export const deleteBasketDevice = async (basketId, deviceId) => {
+	const { data } = await $authHost.post('/api/basket/destroy', { basketId, deviceId })
 	return data
 }
 
-//*------------------------

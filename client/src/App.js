@@ -8,10 +8,10 @@ import { check } from './http/userAPI';
 import LoadingAnimation from './components/UI/loadingAnimation/LoadingAnimation';
 import ScrollToTop from './ScrollToTop';
 
+
 const App = observer(() => {
 	const { user } = useContext(Context)
 	const [isLoading, setIsLoading] = useState(false)
-
 
 	useEffect(() => {
 		setIsLoading(true)
@@ -29,7 +29,7 @@ const App = observer(() => {
 		return <LoadingAnimation />
 	}
 	return (
-		<div className="App" style={{ paddingTop: 91, paddingBottom: 200 }}>
+		<div className="App" >
 			<BrowserRouter>
 				<NavBar />
 				<ScrollToTop />

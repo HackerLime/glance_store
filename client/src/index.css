@@ -78,3 +78,16 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
+
+/* style={{ paddingTop: 91, paddingBottom: 200 }} */
+
+.App{
+	padding-top: 91px;
+	padding-bottom: 200px;
+}
+@media (max-width: 768px) {
+	.App {
+	padding-top: 20px;
+	padding-bottom: 100px;
+	}
+} 

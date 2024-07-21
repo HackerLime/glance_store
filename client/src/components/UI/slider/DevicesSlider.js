@@ -6,13 +6,15 @@ import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 import Device from '../device/Device';
 import { observer } from 'mobx-react-lite';
+import { useSliderParams } from '../../../hooks/useSliderParams';
 
 const DevicesSlider = observer((props) => {
+	const { mySlidesPerView, mySlidesSpaceBetween } = useSliderParams()
 
 	return (
 		<Swiper
-			slidesPerView={props.slidesPerView || 5.5}
-			spaceBetween={props.spaceBetween || 30}
+			slidesPerView={mySlidesPerView || 5.5}
+			spaceBetween={mySlidesSpaceBetween || 30}
 			freeMode={true}
 			modules={[FreeMode, Pagination]}
 			className="mySwiper"
