@@ -16,7 +16,7 @@ const ShopPromotions = observer(() => {
 				<h6 style={{ fontSize: 32 }}>Акции</h6>
 			</div>
 			<div className={classes.promotionMain}>
-				<DevicesSlider device={device.devices} spaceBetween={20} />
+				<DevicesSlider device={device.devices} />
 
 			</div>
 		</div >

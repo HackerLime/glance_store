@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 import DevicePageHeader from '../DevicePage/DevicePageHeader'
-import Container from 'react-bootstrap/Container'
 import FilterVariant from '../Catalog/FilterVariant'
 import FilterWithCheck from '../Catalog/FilterWithCheck'
 import FilterWithPrice from '../Catalog/FilterWithPrice'
@@ -11,22 +10,24 @@ import SVGList from '../UI/icons/catalog/catalogpage/SVGList'
 import BlueLine from '../UI/lines/BlueLine'
 import DeviceAsList from '../UI/device/deviceaslist/DeviceAsList'
 import { observer } from 'mobx-react-lite'
-import { fetchBrands, fetchDevices, fetchTypes } from '../../http/deviceAPI'
+import { fetchBasketDevices, fetchBrands, fetchDevices, fetchTypes } from '../../http/deviceAPI'
 
 
 const Catalog = observer(() => {
 	const { device } = useContext(Context)
-	const [catalogDevices, setCatalogDevices] = useState([...device.devices])
+	const [catalogDevices, setCatalogDevices] = useState([])
 	const [typeChecked, setTypeChecked] = useState([])
 	const [brandChecked, setBrandChecked] = useState([])
 	const [cancelVisible, setCancelVisible] = useState(false)
-
-
 	useEffect(() => {
-		if (!catalogDevices.length) {
-			console.log('Не подгрузилось')
+		if (localStorage.getItem('token')) {
+			fetchBasketDevices().then(data => device.setBasketDevicesData(data)).catch(e => console.log(e))
 		}
 	}, [])
+
+	useEffect(() => {
+		setCatalogDevices([...device.devices])
+	}, [device.devices])
 
 	useEffect(() => {
 		let checkedTypeIds = []
@@ -45,8 +46,6 @@ const Catalog = observer(() => {
 			setCatalogDevices([...device.devices])
 		}
 	}, [brandChecked])
-
-
 
 	const variants = [
 		{ id: 1, name: 'сначала Дешевле' },
@@ -77,7 +76,6 @@ const Catalog = observer(() => {
 			setCatalogDevices([...catalogDevices].filter(i => pricesArr.includes(i.price)))
 			setCancelVisible(true)
 		}
-
 	}
 
 
@@ -115,8 +113,10 @@ const Catalog = observer(() => {
 	}
 
 
+
 	return (
-		<Container>
+
+		<div style={{ maxWidth: '1200px', margin: '0px auto', padding: '0 15px' }}>
 			<div><DevicePageHeader breadCrumb='Каталог' backText='Каталог' /></div>
 			<div className='d-flex'>
 				<div style={{ margin: '0 75px 0 0', minWidth: '289px' }}>
@@ -128,7 +128,7 @@ const Catalog = observer(() => {
 					</div>
 				</div>
 				<div className='d-flex flex-column' style={{ maxWidth: '860px' }} >
-					<div className='d-flex justify-content-end' style={{ margin: '0 0 24px 0' }}>
+					<div className='d-flex justify-content-start' style={{ margin: '0 0 24px 0' }}>
 						<div style={{ width: '66px' }} >
 							<SVGTile onClick={() => tileClick()} color={tileColor} style={{ margin: '0 16px 0 0', cursor: 'pointer' }} />
 							<SVGList onClick={() => listClick()} color={listColor} style={{ cursor: 'pointer' }} />
@@ -148,7 +148,8 @@ const Catalog = observer(() => {
 					}
 				</div>
 			</div>
-		</Container >
+		</div>
+
 	)
 })
 
