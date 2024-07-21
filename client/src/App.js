@@ -13,9 +13,6 @@ const App = observer(() => {
 	const { user } = useContext(Context)
 	const [isLoading, setIsLoading] = useState(false)
 
-
-
-
 	useEffect(() => {
 		setIsLoading(true)
 		check().then(data => {
@@ -32,7 +29,7 @@ const App = observer(() => {
 		return <LoadingAnimation />
 	}
 	return (
-		<div className="App" style={{ paddingTop: 91, paddingBottom: 200 }}>
+		<div className="App" >
 			<BrowserRouter>
 				<NavBar />
 				<ScrollToTop />

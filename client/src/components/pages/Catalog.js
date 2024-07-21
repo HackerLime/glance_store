@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 import DevicePageHeader from '../DevicePage/DevicePageHeader'
-import Container from 'react-bootstrap/Container'
 import FilterVariant from '../Catalog/FilterVariant'
 import FilterWithCheck from '../Catalog/FilterWithCheck'
 import FilterWithPrice from '../Catalog/FilterWithPrice'
@@ -26,9 +25,6 @@ const Catalog = observer(() => {
 		}
 	}, [])
 
-
-
-
 	useEffect(() => {
 		setCatalogDevices([...device.devices])
 	}, [device.devices])
@@ -50,8 +46,6 @@ const Catalog = observer(() => {
 			setCatalogDevices([...device.devices])
 		}
 	}, [brandChecked])
-
-
 
 	const variants = [
 		{ id: 1, name: 'сначала Дешевле' },
@@ -82,7 +76,6 @@ const Catalog = observer(() => {
 			setCatalogDevices([...catalogDevices].filter(i => pricesArr.includes(i.price)))
 			setCancelVisible(true)
 		}
-
 	}
 
 
@@ -120,8 +113,10 @@ const Catalog = observer(() => {
 	}
 
 
+
 	return (
-		<Container>
+
+		<div style={{ maxWidth: '1200px', margin: '0px auto', padding: '0 15px' }}>
 			<div><DevicePageHeader breadCrumb='Каталог' backText='Каталог' /></div>
 			<div className='d-flex'>
 				<div style={{ margin: '0 75px 0 0', minWidth: '289px' }}>
@@ -153,7 +148,8 @@ const Catalog = observer(() => {
 					}
 				</div>
 			</div>
-		</Container >
+		</div>
+
 	)
 })
 

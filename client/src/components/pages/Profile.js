@@ -1,9 +1,7 @@
 import React, { useContext } from 'react'
 import { observer } from 'mobx-react-lite'
-import SVGSmile from '../UI/icons/SVGSmile'
-import MyButton from '../UI/buttons/DeviceButton'
 import { useNavigate } from 'react-router-dom'
-import { ADMIN_ROUTE, SHOP_ROUTE } from '../../router/paths'
+import { ADMIN_ROUTE } from '../../router/paths'
 import Button from 'react-bootstrap/esm/Button'
 import { Context } from '../../index'
 
@@ -14,7 +12,6 @@ const Profile = observer(() => {
 		user.setIsAuth(false)
 		localStorage.removeItem('token')
 	}
-	console.log(user.user)
 
 	return (
 		<div className='d-flex align-items-center justify-content-center'>

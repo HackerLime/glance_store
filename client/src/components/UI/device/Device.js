@@ -17,15 +17,11 @@ const Device = observer(({ device }) => {
 	}, [device.id, store.device.inBasketDevicesId])
 	return (
 		<div className={`d-flex flex-column justify-content-between ${classes.deviceWrapper}`} >
-			<div>
-				<DeviceImages device={device} />
-			</div>
-			<div className='d-flex flex-column  ' style={{ margin: '0 0 20px 0' }}>
+			<DeviceImages device={device} />
+			<div className={`d-flex flex-column align-items-center ${classes.deviceNamePriceInStock}`}>
 				<DeviceName device={device} />
 				<DevicePrice device={device} />
-				<div className='d-flex justify-content-between align-items-center' >
-					<DeviceInStock device={device} />
-				</div>
+				<DeviceInStock device={device} />
 			</div>
 			<div >
 				<DeviceButton deviceId={device.id} isDeviceInBasket={isDeviceInBasket} />

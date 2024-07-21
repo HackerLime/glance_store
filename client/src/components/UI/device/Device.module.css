@@ -1,7 +1,10 @@
 .deviceWrapper{
 	max-width: 169px;
-	min-height: 483px;
-}
 
+}
+.deviceNamePriceInStock{
+	margin: 0 0 20px 0;
+	text-align: center;
+}
 
 
