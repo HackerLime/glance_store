@@ -4,3 +4,26 @@
 	text-decoration: none;
 	color: rgb(12,12,12);
 }
+.typeName{
+	font-weight: 600;
+	font-size: 20px;
+}
+.brandName{
+	font-weight: 500;
+	font-size: 18px;
+}
+.deviceName{}
+
+@media (max-width:500px){
+	.typeName{
+		font-weight: 600;
+		font-size: 16px;
+	}
+	.brandName{
+		font-weight: 500;
+		font-size: 15px;
+	}
+	.deviceName{
+		font-size: 14px;
+	}
+}

@@ -11,7 +11,8 @@ import BlueLine from '../UI/lines/BlueLine'
 import DeviceAsList from '../UI/device/deviceaslist/DeviceAsList'
 import { observer } from 'mobx-react-lite'
 import { fetchBasketDevices, fetchBrands, fetchDevices, fetchTypes } from '../../http/deviceAPI'
-
+import { useScreenWidth } from '../../hooks/useScreenWidth'
+import Offcanvas from 'react-bootstrap/Offcanvas';
 
 const Catalog = observer(() => {
 	const { device } = useContext(Context)
@@ -95,7 +96,7 @@ const Catalog = observer(() => {
 		} else
 			return { max: 1, min: 0 }
 	}
-
+	const screenWidth = useScreenWidth()
 
 	const [tileColor, setTileColor] = useState('#ABABAB')
 	const [listColor, setListColor] = useState('#0C0C0C')
@@ -112,7 +113,36 @@ const Catalog = observer(() => {
 		setCatalogViewStatus('list')
 	}
 
-
+	const [showOffCanvas, setShowOffCanvas] = useState(false)
+	const closeOffCanvas = () => setShowOffCanvas(false)
+	const openOffCanvas = () => setShowOffCanvas(true)
+	if (screenWidth <= 768) {
+		return (
+			<>
+				<button onClick={() => openOffCanvas()}>BLABLA</button>
+				<Offcanvas show={showOffCanvas} onHide={closeOffCanvas} responsive="lg">
+					<Offcanvas.Header closeButton>
+						<Offcanvas.Title>Offcanvas</Offcanvas.Title>
+					</Offcanvas.Header>
+					<Offcanvas.Body>
+						<div style={{ margin: '0 75px 0 0', minWidth: '289px' }}>
+							<FilterVariant sortDevices={sortDevices} filterVariants={variants} />
+							<div style={{ backgroundColor: 'white', padding: 16, borderRadius: '8px', boxShadow: '1px 1px 20px 0px rgba(0, 0, 0, 0.1)' }}>
+								<FilterWithPrice cancelVisible={cancelVisible} sortByPrice={sortByPrice} from={devicePrice.min} to={devicePrice.max} />
+								<FilterWithCheck checked={typeChecked} setChecked={setTypeChecked} style={{ margin: '0 0 20px 0' }} lable='Тип устройства' filterParams={device.types} />
+								<FilterWithCheck checked={brandChecked} setChecked={setBrandChecked} style={{ margin: '0 0 20px 0' }} lable='Брэнд устройства' filterParams={device.brands} />
+							</div>
+						</div>
+					</Offcanvas.Body>
+				</Offcanvas>
+				<div className='d-flex flex-column' style={{ padding: '0 15px' }}>
+					{catalogDevices.map(i =>
+						<DeviceAsList key={i.id} device={i} />
+					)}
+				</div>
+			</>
+		)
+	}
 
 	return (
 
@@ -122,7 +152,7 @@ const Catalog = observer(() => {
 				<div style={{ margin: '0 75px 0 0', minWidth: '289px' }}>
 					<FilterVariant sortDevices={sortDevices} filterVariants={variants} />
 					<div style={{ backgroundColor: 'white', padding: 16, borderRadius: '8px', boxShadow: '1px 1px 20px 0px rgba(0, 0, 0, 0.1)' }}>
-						<FilterWithPrice visible={cancelVisible} sortByPrice={sortByPrice} from={devicePrice.min} to={devicePrice.max} />
+						<FilterWithPrice cancelVisible={cancelVisible} sortByPrice={sortByPrice} from={devicePrice.min} to={devicePrice.max} />
 						<FilterWithCheck checked={typeChecked} setChecked={setTypeChecked} style={{ margin: '0 0 20px 0' }} lable='Тип устройства' filterParams={device.types} />
 						<FilterWithCheck checked={brandChecked} setChecked={setBrandChecked} style={{ margin: '0 0 20px 0' }} lable='Брэнд устройства' filterParams={device.brands} />
 					</div>
