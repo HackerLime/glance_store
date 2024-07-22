@@ -11,6 +11,7 @@ import BasketCounter from '../basket/BasketCounter'
 import SVGDelete from '../../icons/remove/SVGDelete'
 import Form from 'react-bootstrap/Form'
 import { Context } from '../../../../index'
+import styles from './DeviceAsList.module.css'
 const DeviceAsList = observer(({ device, destroyAction, isChecked }) => {
 	const [isDeviceInBasket, setIsDeviceInBasket] = useState(false)
 	const store = useContext(Context)
@@ -26,7 +27,7 @@ const DeviceAsList = observer(({ device, destroyAction, isChecked }) => {
 
 
 	return (
-		<div>
+		<div style={{ margin: '0 0 10px 0' }}>
 			<BlueLine />
 			{pathname === '/basket' ?
 				<div style={{ marginBottom: '15px' }} className='d-flex justify-content-end'>
@@ -38,23 +39,23 @@ const DeviceAsList = observer(({ device, destroyAction, isChecked }) => {
 				:
 				''
 			}
-			<div className='d-flex' >
-				<div style={{ margin: '0 24px 0 0', maxWidth: '169px' }}>
+			<div className={`d-flex  ${styles.deviceWrapper}`}  >
+				<div className={styles.imageBlock}>
 					<DeviceImages device={device} />
 				</div>
-				<div className='d-flex flex-grow-1' >
-					<div className='flex-grow-1' >
+				<div className={`d-flex flex-grow-1 ${styles.secondSide}`} >
+					<div className={`flex-grow-1 ${styles.nameAndInStock}`} >
 						<div style={{ margin: '0 0 12px 0' }}>
 							<DeviceName device={device} />
 						</div>
 						<DeviceInStock device={device} />
 					</div>
-					<div className='d-flex flex-column align-items-end'>
+					<div className={styles.priceAndButton}>
 						<div style={{ margin: '0 0 24px 0' }}>
 							<DevicePrice device={device} />
 						</div>
 						<div className='d-flex'>
-							<div >
+							<div className={styles.buttonBlock} >
 								{pathname === '/basket' ?
 									<div className='d-flex'>
 										<SVGDelete style={{ cursor: 'pointer' }} onClick={() => destroyAction(device.id)} />
