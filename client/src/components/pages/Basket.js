@@ -34,10 +34,6 @@ const Basket = observer(() => {
 		}
 	}, [device])
 
-
-
-
-
 	useEffect(() => {
 		device.isAllBasketDevicesChecked ? setAllChecked(true) : setAllChecked(false)
 	}, [device.isAllBasketDevicesChecked])
@@ -45,7 +41,6 @@ const Basket = observer(() => {
 	useEffect(() => {
 		setBasketPrice(device.isCheckedBasketDevicesPrice)
 	}, [device.isCheckedBasketDevicesPrice])
-
 
 	const checkAll = (bool) => {
 		setAllChecked(bool)
@@ -56,17 +51,16 @@ const Basket = observer(() => {
 		}
 	}
 
-
 	const destroyBasketDevice = (gettedDeviceId) => {
-		deleteBasketDevice(user.user.id, gettedDeviceId)
-			.then(data => console.log(gettedDeviceId))
-			.catch(e => console.log(e))
-		console.log(device.basketDevices)
+		try {
+			deleteBasketDevice(user.user.id, gettedDeviceId)
+		} catch (e) {
+			console.log(e)
+		}
 		if (Array.isArray(gettedDeviceId)) {
 			device.setBasketDevices([...device.basketDevices].filter(i => !gettedDeviceId.includes(i.id)))
 			device.setBasketDevicesData([...device.basketDevicesData].filter(i => !gettedDeviceId.includes(i.deviceId)))
 		}
-
 	}
 
 	if (!device.basketDevices.length) {
@@ -74,7 +68,6 @@ const Basket = observer(() => {
 	}
 
 	return (
-
 		<div className='d-flex justify-content-center' style={{ maxWidth: '1200px', margin: '0px auto' }}>
 			<div style={{ maxWidth: '892px', padding: '0 15px' }} className='d-flex flex-column'>
 				{/* 	//!Надо Убрать в отдельный компонент */}

@@ -9,6 +9,9 @@ import { Context } from '../../index'
 
 const Shop = observer(() => {
 	const { device } = useContext(Context)
+	/* 
+	//* Можно добавить новый хук
+	 */
 	useEffect(() => {
 		fetchBrands().then(data => device.setBrands(data)).catch(e => console.log(`Ошибка fetchBrands ${e.message}`))
 		fetchTypes().then(data => device.setTypes(data)).catch(e => console.log(`Ошибка fetchTypes ${e.message}`))
@@ -17,6 +20,10 @@ const Shop = observer(() => {
 			fetchBasketDevices().then(data => device.setBasketDevicesData(data)).catch(e => console.log(e))
 		}
 	}, [])
+	/* 
+//* =================================
+ */
+
 
 	return (
 		<Container >

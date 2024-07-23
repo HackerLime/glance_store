@@ -1,6 +1,7 @@
 import React from 'react'
 
-const DeviceTypeBrandName = ({ device }) => {
+const DeviceTypeBrandName = ({ device, typeName, brandName }) => {
+
 	return (
 		<h6 style={{
 			margin: '0 0 24px 0',
@@ -8,7 +9,9 @@ const DeviceTypeBrandName = ({ device }) => {
 			fontSize: 32,
 			color: 'rgb(12, 12, 12)'
 		}}>
-			{device.type} {device.brand} {device.name}
+			<p>{typeName}</p>
+			<p> {brandName} </p>
+			<p>{device.name}</p>
 		</h6>
 	)
 }
