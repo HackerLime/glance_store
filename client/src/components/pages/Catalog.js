@@ -13,6 +13,7 @@ import { observer } from 'mobx-react-lite'
 import { fetchBasketDevices, fetchBrands, fetchDevices, fetchTypes } from '../../http/deviceAPI'
 import { useScreenWidth } from '../../hooks/useScreenWidth'
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import SVGFilterIcon from '../UI/icons/SVGFilterIcon'
 
 const Catalog = observer(() => {
 	const { device } = useContext(Context)
@@ -119,10 +120,15 @@ const Catalog = observer(() => {
 	if (screenWidth <= 768) {
 		return (
 			<>
-				<button onClick={() => openOffCanvas()}>BLABLA</button>
+				<div onClick={() => openOffCanvas()} style={{ padding: '0 15px' }}>
+					<div className='d-flex align-items-center justify-content-center' style={{ border: '1px dashed black', maxWidth: '120px', margin: '0 0 15px 0' }}>
+						<div className='me-2' style={{ fontSize: '18px', fontWeight: '500' }}>Фильтр</div>
+						<SVGFilterIcon />
+					</div>
+				</div>
 				<Offcanvas show={showOffCanvas} onHide={closeOffCanvas} responsive="lg">
 					<Offcanvas.Header closeButton>
-						<Offcanvas.Title>Offcanvas</Offcanvas.Title>
+						<Offcanvas.Title>Фильтр</Offcanvas.Title>
 					</Offcanvas.Header>
 					<Offcanvas.Body>
 						<div style={{ margin: '0 75px 0 0', minWidth: '289px' }}>
@@ -147,7 +153,7 @@ const Catalog = observer(() => {
 	return (
 
 		<div style={{ maxWidth: '1200px', margin: '0px auto', padding: '0 15px' }}>
-			<div><DevicePageHeader breadCrumb='Каталог' backText='Каталог' /></div>
+			<div><DevicePageHeader breadCrumbs='Каталог' backText='Каталог' /></div>
 			<div className='d-flex'>
 				<div style={{ margin: '0 75px 0 0', minWidth: '289px' }}>
 					<FilterVariant sortDevices={sortDevices} filterVariants={variants} />
