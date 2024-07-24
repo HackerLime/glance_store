@@ -7,6 +7,7 @@ import { observer } from 'mobx-react-lite'
 import { useParams } from 'react-router-dom'
 import { fetchBrands, fetchOneDevice, fetchTypes } from '../../http/deviceAPI'
 import { Context } from '../../index'
+import LoadingAnimation from '../UI/loadingAnimation/LoadingAnimation'
 const DevicePage = observer(() => {
 	const store = useContext(Context)
 	const deviceStore = store.device
@@ -14,24 +15,43 @@ const DevicePage = observer(() => {
 	const [brandName, setBrandName] = useState('')
 	const [typeName, setTypeName] = useState('')
 	const { id } = useParams()
+	const [isLoading, setIsLoading] = useState(true)
 	/* 
 		const brandName = deviceStore.brands.find(brand => brand.id === device.brandId).name
 		const typeName = deviceStore.types.find(type => type.id === device.typeId).name
 	*/
+
 	useEffect(() => {
 		fetchOneDevice(id).then(data => {
 			setDevice(data)
 		}).catch(e => `Ошибка fetchOneDevice ${e}`)
-		fetchBrands().then(data => {
-			console.log(1)
-			deviceStore.setBrands(data)
-			console.log(2)
-			setBrandName(deviceStore.brands.find(brand => brand.id === device.brandId).name)
-			console.log(3)
-		}).catch(e => console.log(`Ошибка fetchBrands ${e.message}`))
-		fetchTypes().then(data => deviceStore.setTypes(data)).catch(e => console.log(`Ошибка fetchTypes ${e.message}`))
+		fetchBrands()
+			.then(data => {
+				deviceStore.setBrands(data)
+			})
+			.catch(e => console.log(`Ошибка fetchBrands ${e.message}`))
+		fetchTypes()
+			.then(data => deviceStore.setTypes(data))
+			.catch(e => console.log(`Ошибка fetchTypes ${e.message}`))
 
 	}, [])
+
+
+	useEffect(() => {
+		if (deviceStore.brands.length && device.name) {
+			setBrandName(deviceStore.brands.find(i => i.id === device.brandId).name)
+		}
+		if (deviceStore.types.length && device.name) {
+			setTypeName(deviceStore.types.find(i => i.id === device.typeId).name)
+			if (isLoading) {
+				setIsLoading(false)
+			}
+		}
+	}, [device])
+
+	if (isLoading) {
+		return <LoadingAnimation />
+	}
 
 	return (
 		<Container>

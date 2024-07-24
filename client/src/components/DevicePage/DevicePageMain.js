@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import Image from 'react-bootstrap/Image'
 import ColorPalette from './palette/ColorPalette'
 import DeviceInfo from './info/DeviceInfo'
 import DeviceTypeBrandName from './DeviceTypeNameBrand.js/DeviceTypeBrandName'
 import DeviceAddBasket from './palette/addBasket/DeviceAddBasket'
-import { Context } from '../../index'
 import { observer } from 'mobx-react-lite'
+import styles from './DevicePageMain.module.css'
 
 const DevicePageMain = observer(({ device, brandName, typeName }) => {
 
@@ -17,11 +17,11 @@ const DevicePageMain = observer(({ device, brandName, typeName }) => {
 	)
 
 	return (
-		<div className='d-flex justify-content-between' style={{ margin: '0 0 40px 0' }}>
-			<div style={{ backgroundColor: 'rgb(248, 252, 255)', borderRadius: '8px' }}>
+		<div className={styles.devicePageMainWrapper} >
+			<div className={styles.devicePageImage}>
 				<Image src={process.env.REACT_APP_API_URL + '/' + device.img} />
 			</div>
-			<div style={{ maxWidth: 354 }}>
+			<div className={styles.deviceCharacteristics}>
 				<DeviceTypeBrandName brandName={brandName} typeName={typeName} device={device} />
 				<ColorPalette palette={palette} />
 				{device.info.length ?
@@ -35,7 +35,7 @@ const DevicePageMain = observer(({ device, brandName, typeName }) => {
 					''
 				}
 			</div>
-			<div>
+			<div style={{ padding: '0 10px' }}>
 				<DeviceAddBasket device={device} />
 			</div>
 		</div>
