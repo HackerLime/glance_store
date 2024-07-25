@@ -13,7 +13,8 @@ const images = [
 const ReviewImages = () => {
 	return (
 		<div className='d-flex'>
-			{images.map((i, idx) =>
+
+			{images.map(i =>
 				<div key={i.id} style={{ margin: '0 16px 0 0' }}>
 					<Image src={i.img} />
 				</div>

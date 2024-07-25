@@ -54,13 +54,13 @@ const DevicePage = observer(() => {
 	}
 
 	return (
-		<Container>
-			<div style={{ padding: '17px 0 80px 0' }}>
+		<div style={{ maxWidth: '1200px', margin: '0px auto', padding: '0 15px' }}>
+			<div style={{ padding: '17px 0 20px 0' }}>
 				<DevicePageHeader breadCrumbs='Карточка товара' backText='Карточка Товара' />
 				<DevicePageMain brandName={brandName} typeName={typeName} device={device} />
 				<DevicePageFooter />
 			</div>
-		</Container>
+		</div>
 	)
 })
 

@@ -21,7 +21,7 @@ const DevicePageMain = observer(({ device, brandName, typeName }) => {
 			<div className={styles.devicePageImage}>
 				<Image src={process.env.REACT_APP_API_URL + '/' + device.img} />
 			</div>
-			<div className={styles.deviceCharacteristics}>
+			<div className={styles.deviceCharacteristicsWrapper}>
 				<DeviceTypeBrandName brandName={brandName} typeName={typeName} device={device} />
 				<ColorPalette palette={palette} />
 				{device.info.length ?
