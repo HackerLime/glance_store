@@ -1,32 +1,14 @@
 import React from 'react'
 import SVGStarS from '../../UI/icons/SVGFBStarsmall'
-
+import styles from './FeedbackItem.module.css'
 const FeedbackItem = ({ user, userRate }) => {
 
 	return (
-		<div
-			style={
-				{
-					margin: '0 16px 0 0',
-					backgroundColor: 'rgb(246, 246, 246)',
-					maxWidth: 268,
-					borderRadius: '8px',
-					padding: '23px 38px 25px 18px',
-				}
-			}>
+		<div className={styles.feedBackItemWrapper}>
 			<div className='d-flex' style={{ maxWidth: 212, margin: '0 0 16px 0' }}>
-				<div
-					style={
-						{
-							margin: '0 12px 0 0 ',
-							background: `url(${user.img}) 50% no-repeat`,
-							backgroundSize: '48px 48px',
-							height: '48px',
-							width: '48px',
-							borderRadius: '50%'
-						}
-					}
-				></div>
+				<div className={styles.feedBackItemImage} style={{ background: `url(${user.img}) 50% no-repeat`, height: '48px', width: '48px', backgroundSize: '48px 48px' }}
+				>
+				</div>
 				<div style={{ margin: '0 16px 0 0' }}>
 					<div style={{ color: 'rgb(69,69,69)', fontWeight: 300, margin: '0 0 4px 0' }}>{user.name}</div>
 					<div className='d-flex'>

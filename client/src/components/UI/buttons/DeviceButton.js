@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import styles from './DeviceButton.module.css'
 import { useNavigate } from 'react-router-dom'
-import { BASKET_ROUTE } from '../../../router/paths'
+import { BASKET_ROUTE, REGISTRATION_ROUTE } from '../../../router/paths'
 import { addBasketDevice } from '../../../http/deviceAPI'
 import { Context } from '../../../index'
 const DeviceButton = ({ deviceId, isDeviceInBasket }) => {
@@ -9,9 +9,13 @@ const DeviceButton = ({ deviceId, isDeviceInBasket }) => {
 	const store = useContext(Context)
 	const navigate = useNavigate()
 	const addBasketDeviceAction = () => {
+		if (!localStorage.getItem('token')) {
+			return navigate(REGISTRATION_ROUTE)
+		}
 		addBasketDevice(deviceId, store.user.user.id).then(data => console.log(data)).catch(e => console.log(e))
 		setIsClicked(true)
 	}
+
 
 	if (isDeviceInBasket) {
 		return (
