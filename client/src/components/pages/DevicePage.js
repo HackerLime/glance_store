@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Container from 'react-bootstrap/Container'
 import DevicePageHeader from '../DevicePage/DevicePageHeader'
 import DevicePageMain from '../DevicePage/DevicePageMain'
 import DevicePageFooter from '../DevicePage/DevicePageFooter'
 import { observer } from 'mobx-react-lite'
 import { useParams } from 'react-router-dom'
-import { fetchBrands, fetchOneDevice, fetchTypes } from '../../http/deviceAPI'
+import { fetchBasketDevices, fetchBrands, fetchOneDevice, fetchTypes } from '../../http/deviceAPI'
 import { Context } from '../../index'
 import LoadingAnimation from '../UI/loadingAnimation/LoadingAnimation'
 const DevicePage = observer(() => {
@@ -16,10 +15,10 @@ const DevicePage = observer(() => {
 	const [typeName, setTypeName] = useState('')
 	const { id } = useParams()
 	const [isLoading, setIsLoading] = useState(true)
-	/* 
-		const brandName = deviceStore.brands.find(brand => brand.id === device.brandId).name
-		const typeName = deviceStore.types.find(type => type.id === device.typeId).name
-	*/
+
+
+
+
 
 	useEffect(() => {
 		fetchOneDevice(id).then(data => {
@@ -33,7 +32,9 @@ const DevicePage = observer(() => {
 		fetchTypes()
 			.then(data => deviceStore.setTypes(data))
 			.catch(e => console.log(`Ошибка fetchTypes ${e.message}`))
-
+		if (localStorage.getItem('token')) {
+			fetchBasketDevices().then(data => deviceStore.setBasketDevicesData(data)).catch(e => console.log(e))
+		}
 	}, [])
 
 
@@ -48,6 +49,7 @@ const DevicePage = observer(() => {
 			}
 		}
 	}, [device])
+
 
 	if (isLoading) {
 		return <LoadingAnimation />

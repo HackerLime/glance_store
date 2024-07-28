@@ -1,10 +1,11 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './DeviceButton.module.css'
 import { useNavigate } from 'react-router-dom'
 import { BASKET_ROUTE, REGISTRATION_ROUTE } from '../../../router/paths'
 import { addBasketDevice } from '../../../http/deviceAPI'
 import { Context } from '../../../index'
-const DeviceButton = ({ deviceId, isDeviceInBasket }) => {
+import { observer } from 'mobx-react-lite'
+const DeviceButton = observer(({ deviceId, isDeviceInBasket }) => {
 	const [isClicked, setIsClicked] = useState(false)
 	const store = useContext(Context)
 	const navigate = useNavigate()
@@ -46,6 +47,6 @@ const DeviceButton = ({ deviceId, isDeviceInBasket }) => {
 	}
 
 
-}
+})
 
 export default DeviceButton
