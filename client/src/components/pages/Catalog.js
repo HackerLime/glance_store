@@ -14,6 +14,7 @@ import { fetchBasketDevices, fetchBrands, fetchDevices, fetchTypes } from '../..
 import { useScreenWidth } from '../../hooks/useScreenWidth'
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import SVGFilterIcon from '../UI/icons/SVGFilterIcon'
+import LoadingAnimation from '../UI/loadingAnimation/LoadingAnimation'
 
 const Catalog = observer(() => {
 	const { device } = useContext(Context)
@@ -21,6 +22,15 @@ const Catalog = observer(() => {
 	const [typeChecked, setTypeChecked] = useState([])
 	const [brandChecked, setBrandChecked] = useState([])
 	const [cancelVisible, setCancelVisible] = useState(false)
+	const [isLoading, setIsLoading] = useState(false)
+
+	useEffect(() => {
+		fetchBrands().then(data => device.setBrands(data)).catch(e => console.log(`Ошибка fetchBrands ${e.message}`))
+		fetchTypes().then(data => device.setTypes(data)).catch(e => console.log(`Ошибка fetchTypes ${e.message}`))
+		fetchDevices().then(data => device.setDevices(data.rows)).catch(e => console.log(`Ошибка fetchDevices ${e.message}`))
+
+	}, [])
+
 	useEffect(() => {
 		if (localStorage.getItem('token')) {
 			fetchBasketDevices().then(data => device.setBasketDevicesData(data)).catch(e => console.log(e))
@@ -81,11 +91,7 @@ const Catalog = observer(() => {
 	}
 
 
-	useEffect(() => {
-		fetchBrands().then(data => device.setBrands(data)).catch(e => console.log(`Ошибка fetchBrands ${e.message}`))
-		fetchTypes().then(data => device.setTypes(data)).catch(e => console.log(`Ошибка fetchTypes ${e.message}`))
-		fetchDevices().then(data => device.setDevices(data.rows)).catch(e => console.log(`Ошибка fetchDevices ${e.message}`))
-	}, [])
+
 
 	function getPrice() {
 		let priceArr = []
@@ -117,6 +123,9 @@ const Catalog = observer(() => {
 	const [showOffCanvas, setShowOffCanvas] = useState(false)
 	const closeOffCanvas = () => setShowOffCanvas(false)
 	const openOffCanvas = () => setShowOffCanvas(true)
+	if (isLoading) {
+		return <LoadingAnimation />
+	}
 	if (screenWidth <= 768) {
 		return (
 			<>

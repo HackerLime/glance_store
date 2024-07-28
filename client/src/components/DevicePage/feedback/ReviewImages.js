@@ -1,6 +1,7 @@
 import React from 'react'
-import Image from 'react-bootstrap/Image'
 import { otziv1, otziv2, otziv3, otziv4, otziv5, otziv6 } from '../utils/consts'
+import Fancybox from '../../UI/fancybox/Fancybox'
+import FancyboxItem from '../../UI/fancybox/FancyboxItem'
 
 const images = [
 	{ id: 1, img: otziv1 },
@@ -13,12 +14,21 @@ const images = [
 const ReviewImages = () => {
 	return (
 		<div className='d-flex'>
-
-			{images.map(i =>
-				<div key={i.id} style={{ margin: '0 16px 0 0' }}>
-					<Image src={i.img} />
-				</div>
-			)}
+			<div>
+				<Fancybox
+					options={{
+						Carousel: {
+							infinite: false,
+						},
+					}}
+				>
+					<div className='d-flex' >
+						{images.map(i =>
+							<FancyboxItem key={i.id} href={i.img} src={i.img} />
+						)}
+					</div>
+				</Fancybox>
+			</div>
 		</div>
 	)
 }

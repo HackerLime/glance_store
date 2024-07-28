@@ -10,15 +10,17 @@ import SVGDelete from '../UI/icons/remove/SVGDelete'
 import Button from 'react-bootstrap/esm/Button'
 import { observer } from 'mobx-react-lite'
 import { deleteBasketDevice, fetchBasketDevices } from '../../http/deviceAPI'
+import LoadingAnimation from '../UI/loadingAnimation/LoadingAnimation'
 
 
 const Basket = observer(() => {
 	const { device, user } = useContext(Context)
 	const [basketPrice, setBasketPrice] = useState(0)
 	const [allChecked, setAllChecked] = useState(false)
-
+	const [isLoading, setIsLoading] = useState(false)
 
 	useEffect(() => {
+		setIsLoading(true)
 		if (localStorage.getItem('token')) {
 			fetchBasketDevices()
 				.then(data => device.setBasketDevicesData(data))
@@ -29,6 +31,7 @@ const Basket = observer(() => {
 					device.basketDevicesData.map(i => arr.push(i.deviceId))
 					device.setBasketDevices(device.basketDevices.filter(i => arr.includes(i.id)))
 					device.setBasketDevicesIsCheckedFalse()
+					setIsLoading(false)
 				}
 				)
 		}
@@ -52,6 +55,7 @@ const Basket = observer(() => {
 	}
 
 	const destroyBasketDevice = (gettedDeviceId) => {
+		console.log(Number.isInteger(gettedDeviceId))
 		try {
 			deleteBasketDevice(user.user.id, gettedDeviceId)
 		} catch (e) {
@@ -60,9 +64,16 @@ const Basket = observer(() => {
 		if (Array.isArray(gettedDeviceId)) {
 			device.setBasketDevices([...device.basketDevices].filter(i => !gettedDeviceId.includes(i.id)))
 			device.setBasketDevicesData([...device.basketDevicesData].filter(i => !gettedDeviceId.includes(i.deviceId)))
+			return
+		}
+		if (Number.isInteger(gettedDeviceId)) {
+			device.setBasketDevices([...device.basketDevices].filter(i => i.id !== gettedDeviceId))
+			device.setBasketDevicesData([...device.basketDevicesData].filter(i => i.deviceId !== gettedDeviceId))
 		}
 	}
-
+	if (isLoading) {
+		return <LoadingAnimation />
+	}
 	if (!device.basketDevices.length) {
 		return <div><BasketEmpty /></div>
 	}

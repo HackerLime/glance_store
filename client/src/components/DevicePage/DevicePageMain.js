@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'react-bootstrap/Image'
 import ColorPalette from './palette/ColorPalette'
 import DeviceInfo from './info/DeviceInfo'
@@ -8,7 +8,9 @@ import { observer } from 'mobx-react-lite'
 import styles from './DevicePageMain.module.css'
 
 const DevicePageMain = observer(({ device, brandName, typeName }) => {
-
+	useEffect(() => {
+		console.log(device)
+	}, [])
 	const [palette, setPallete] = useState([
 		{ id: 1, name: 'Красный', color: 'rgb(255, 0, 0)' },
 		{ id: 2, name: 'Черный', color: 'rgb(12, 12, 12)' },
