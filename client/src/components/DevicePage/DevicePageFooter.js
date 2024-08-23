@@ -20,7 +20,7 @@ const DevicePageFooter = () => {
 				<ReviewImages />
 			</div>
 			<div>
-				<div style={{ background: "rgb(188, 197, 255)", padding: '20px 0 20px 16px' }}>
+				<div style={{ background: "rgb(188, 197, 255)", padding: '20px 16px', overflow: 'hidden' }}>
 					<div className='d-flex' style={{ margin: '0 0 17px 0' }}>
 						<div style={{ fontSize: 20, lineHeight: '28px', color: "rgb(12,12,12)", margin: '0 16px 0 0 ' }}>{feedBack.middleRating}</div>
 						<div><SVGFBStarF /> <SVGFBStar /></div>

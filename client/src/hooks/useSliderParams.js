@@ -14,9 +14,11 @@ export const useSliderParams = () => {
 	if (screenWidth < 768 && screenWidth >= 450) {
 		return { mySlidesPerView: 2, mySlidesSpaceBetween: 1.5 }
 	}
-	if (screenWidth < 450) {
+	if (screenWidth < 450 && screenWidth >= 325) {
+		return { mySlidesPerView: 1.5, mySlidesSpaceBetween: 5 }
+	}
+	if (screenWidth < 325) {
 		return { mySlidesPerView: 1.2, mySlidesSpaceBetween: 5 }
 	}
-
 	return { mySlidesPerView: 5.9, mySlidesSpaceBetween: 1.5 }
 }

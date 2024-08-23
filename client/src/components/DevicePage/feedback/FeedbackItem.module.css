@@ -1,0 +1,11 @@
+.feedBackItemWrapper{
+	margin-right: 16px;
+	background-color:rgb(246, 246, 246) ;
+	max-width: 268px;
+	border-radius: 8px;
+	padding: 23px 38px 25px 18px;
+}
+.feedBackItemImage{
+margin: 0 12px 0 0 ;
+border-radius: 50%;
+}

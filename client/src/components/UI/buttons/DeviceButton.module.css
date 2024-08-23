@@ -5,8 +5,14 @@
 	padding: 14px 51.5px;
 	display: flex;
 	align-items: center;
-
 }
+
+@media (max-width:500px){
+	.defaultBtn{
+		padding: 14px 25px;
+	}
+}
+
 .defaultBtnText{
 	color: rgb(246, 246, 246);
 	font-size: 14px;
@@ -22,6 +28,12 @@
 	display: flex;
 	align-items: center;
 
+}
+
+@media (max-width:500px){
+	.inBasketBtn{
+		padding: 14px 25px;
+	}
 }
 .inBasketBtnText{
 	color: rgb(9, 29, 158);

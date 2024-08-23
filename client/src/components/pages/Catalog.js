@@ -11,7 +11,10 @@ import BlueLine from '../UI/lines/BlueLine'
 import DeviceAsList from '../UI/device/deviceaslist/DeviceAsList'
 import { observer } from 'mobx-react-lite'
 import { fetchBasketDevices, fetchBrands, fetchDevices, fetchTypes } from '../../http/deviceAPI'
-
+import { useScreenWidth } from '../../hooks/useScreenWidth'
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import SVGFilterIcon from '../UI/icons/SVGFilterIcon'
+import LoadingAnimation from '../UI/loadingAnimation/LoadingAnimation'
 
 const Catalog = observer(() => {
 	const { device } = useContext(Context)
@@ -19,6 +22,15 @@ const Catalog = observer(() => {
 	const [typeChecked, setTypeChecked] = useState([])
 	const [brandChecked, setBrandChecked] = useState([])
 	const [cancelVisible, setCancelVisible] = useState(false)
+	const [isLoading, setIsLoading] = useState(false)
+
+	useEffect(() => {
+		fetchBrands().then(data => device.setBrands(data)).catch(e => console.log(`Ошибка fetchBrands ${e.message}`))
+		fetchTypes().then(data => device.setTypes(data)).catch(e => console.log(`Ошибка fetchTypes ${e.message}`))
+		fetchDevices().then(data => device.setDevices(data.rows)).catch(e => console.log(`Ошибка fetchDevices ${e.message}`))
+
+	}, [])
+
 	useEffect(() => {
 		if (localStorage.getItem('token')) {
 			fetchBasketDevices().then(data => device.setBasketDevicesData(data)).catch(e => console.log(e))
@@ -79,11 +91,7 @@ const Catalog = observer(() => {
 	}
 
 
-	useEffect(() => {
-		fetchBrands().then(data => device.setBrands(data)).catch(e => console.log(`Ошибка fetchBrands ${e.message}`))
-		fetchTypes().then(data => device.setTypes(data)).catch(e => console.log(`Ошибка fetchTypes ${e.message}`))
-		fetchDevices().then(data => device.setDevices(data.rows)).catch(e => console.log(`Ошибка fetchDevices ${e.message}`))
-	}, [])
+
 
 	function getPrice() {
 		let priceArr = []
@@ -95,7 +103,7 @@ const Catalog = observer(() => {
 		} else
 			return { max: 1, min: 0 }
 	}
-
+	const screenWidth = useScreenWidth()
 
 	const [tileColor, setTileColor] = useState('#ABABAB')
 	const [listColor, setListColor] = useState('#0C0C0C')
@@ -112,17 +120,54 @@ const Catalog = observer(() => {
 		setCatalogViewStatus('list')
 	}
 
-
+	const [showOffCanvas, setShowOffCanvas] = useState(false)
+	const closeOffCanvas = () => setShowOffCanvas(false)
+	const openOffCanvas = () => setShowOffCanvas(true)
+	if (isLoading) {
+		return <LoadingAnimation />
+	}
+	if (screenWidth <= 768) {
+		return (
+			<>
+				<div onClick={() => openOffCanvas()} style={{ padding: '0 15px' }}>
+					<div className='d-flex align-items-center justify-content-center' style={{ border: '1px dashed black', maxWidth: '120px', margin: '0 0 15px 0' }}>
+						<div className='me-2' style={{ fontSize: '18px', fontWeight: '500' }}>Фильтр</div>
+						<SVGFilterIcon />
+					</div>
+				</div>
+				<Offcanvas show={showOffCanvas} onHide={closeOffCanvas} responsive="lg">
+					<Offcanvas.Header closeButton>
+						<Offcanvas.Title>Фильтр</Offcanvas.Title>
+					</Offcanvas.Header>
+					<Offcanvas.Body>
+						<div style={{ margin: '0 75px 0 0', minWidth: '289px' }}>
+							<FilterVariant sortDevices={sortDevices} filterVariants={variants} />
+							<div style={{ backgroundColor: 'white', padding: 16, borderRadius: '8px', boxShadow: '1px 1px 20px 0px rgba(0, 0, 0, 0.1)' }}>
+								<FilterWithPrice cancelVisible={cancelVisible} sortByPrice={sortByPrice} from={devicePrice.min} to={devicePrice.max} />
+								<FilterWithCheck checked={typeChecked} setChecked={setTypeChecked} style={{ margin: '0 0 20px 0' }} lable='Тип устройства' filterParams={device.types} />
+								<FilterWithCheck checked={brandChecked} setChecked={setBrandChecked} style={{ margin: '0 0 20px 0' }} lable='Брэнд устройства' filterParams={device.brands} />
+							</div>
+						</div>
+					</Offcanvas.Body>
+				</Offcanvas>
+				<div className='d-flex flex-column' style={{ padding: '0 15px' }}>
+					{catalogDevices.map(i =>
+						<DeviceAsList key={i.id} device={i} />
+					)}
+				</div>
+			</>
+		)
+	}
 
 	return (
 
 		<div style={{ maxWidth: '1200px', margin: '0px auto', padding: '0 15px' }}>
-			<div><DevicePageHeader breadCrumb='Каталог' backText='Каталог' /></div>
+			<div><DevicePageHeader breadCrumbs='Каталог' backText='Каталог' /></div>
 			<div className='d-flex'>
 				<div style={{ margin: '0 75px 0 0', minWidth: '289px' }}>
 					<FilterVariant sortDevices={sortDevices} filterVariants={variants} />
 					<div style={{ backgroundColor: 'white', padding: 16, borderRadius: '8px', boxShadow: '1px 1px 20px 0px rgba(0, 0, 0, 0.1)' }}>
-						<FilterWithPrice visible={cancelVisible} sortByPrice={sortByPrice} from={devicePrice.min} to={devicePrice.max} />
+						<FilterWithPrice cancelVisible={cancelVisible} sortByPrice={sortByPrice} from={devicePrice.min} to={devicePrice.max} />
 						<FilterWithCheck checked={typeChecked} setChecked={setTypeChecked} style={{ margin: '0 0 20px 0' }} lable='Тип устройства' filterParams={device.types} />
 						<FilterWithCheck checked={brandChecked} setChecked={setBrandChecked} style={{ margin: '0 0 20px 0' }} lable='Брэнд устройства' filterParams={device.brands} />
 					</div>

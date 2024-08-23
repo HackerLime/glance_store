@@ -23,7 +23,7 @@ const Device = observer(({ device }) => {
 				<DevicePrice device={device} />
 				<DeviceInStock device={device} />
 			</div>
-			<div >
+			<div className='d-flex justify-content-center' >
 				<DeviceButton deviceId={device.id} isDeviceInBasket={isDeviceInBasket} />
 			</div>
 		</div>

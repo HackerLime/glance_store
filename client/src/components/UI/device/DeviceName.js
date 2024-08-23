@@ -16,9 +16,9 @@ const DeviceName = observer(({ device, props }) => {
 			to={DEVICEPAGE_ROUTE + '/' + device.id}
 			className={classes.deviceCarouselText}
 		>
-			<p style={{ fontWeight: 600, fontSize: '20px' }}>{typeName}</p>
-			<p style={{ fontWeight: 500, fontSize: '18px' }}> {brandName}</p>
-			<p>{device.name}</p>
+			<p className={classes.typeName} >{typeName}</p>
+			<p className={classes.brandName} > {brandName}</p>
+			<p className={classes.deviceName}>{device.name}</p>
 		</Link >)
 })
 
