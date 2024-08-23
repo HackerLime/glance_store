@@ -81,7 +81,6 @@ const Basket = observer(() => {
 	return (
 		<div className='d-flex justify-content-center' style={{ maxWidth: '1200px', margin: '0px auto' }}>
 			<div style={{ maxWidth: '892px', padding: '0 15px' }} className='d-flex flex-column'>
-				{/* 	//!Надо Убрать в отдельный компонент */}
 				<div style={{ marginBottom: '30px' }}>
 					<div className='d-flex align-items-center' style={{ margin: '0 0 32px 0' }}><Link style={{ textDecoration: 'none', color: '#ABABAB', fontSize: '16' }} to={SHOP_ROUTE}>Главная /</Link><h2 style={{ fontSize: 14, lineHeight: '19px', color: '#838383' }}>Корзина</h2></div>
 					<div className='d-flex align-items-center' style={{ maxWidth: 285 }}>
@@ -89,8 +88,6 @@ const Basket = observer(() => {
 						<h6 style={{ color: 'rgb(12,12,12)', fontSize: 32, lineHeight: "38px", whiteSpace: 'nowrap' }} >Корзина</h6>
 					</div>
 				</div>
-				{/* 	//!----------------*/}
-
 				<div className='d-flex align-items-center justify-content-between' style={{ marginBottom: '20px', userSelect: 'none' }}>
 					{device.checkedBasketDevicesIds.length ?
 						<div className='d-flex align-items-center' style={{ cursor: 'pointer' }} onClick={() => destroyBasketDevice(device.checkedBasketDevicesIds)}>

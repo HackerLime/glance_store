@@ -3,9 +3,6 @@ import DeviceButton from '../../../UI/buttons/DeviceButton'
 import { Context } from '../../../../index'
 
 const DeviceAddBasket = ({ device }) => {
-	useEffect(() => {
-		console.log(store.device.inBasketDevicesId)
-	}, [])
 	const store = useContext(Context)
 	const [isDeviceInBasket, setIsDeviceInBasket] = useState(false)
 	useEffect(() => {

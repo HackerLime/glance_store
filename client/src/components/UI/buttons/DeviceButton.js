@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
-import styles from './DeviceButton.module.css'
+import { observer } from 'mobx-react-lite'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { BASKET_ROUTE, REGISTRATION_ROUTE } from '../../../router/paths'
 import { addBasketDevice } from '../../../http/deviceAPI'
 import { Context } from '../../../index'
-import { observer } from 'mobx-react-lite'
+import { BASKET_ROUTE, REGISTRATION_ROUTE } from '../../../router/paths'
+import styles from './DeviceButton.module.css'
 const DeviceButton = observer(({ deviceId, isDeviceInBasket }) => {
 	const [isClicked, setIsClicked] = useState(false)
 	const store = useContext(Context)
@@ -12,9 +12,11 @@ const DeviceButton = observer(({ deviceId, isDeviceInBasket }) => {
 	const addBasketDeviceAction = () => {
 		if (!localStorage.getItem('token')) {
 			return navigate(REGISTRATION_ROUTE)
+		} else {
+			addBasketDevice(deviceId, store.user.user.id).then(data => console.log(data)).catch(e => console.log(e))
+			setIsClicked(true)
 		}
-		addBasketDevice(deviceId, store.user.user.id).then(data => console.log(data)).catch(e => console.log(e))
-		setIsClicked(true)
+
 	}
 
 
