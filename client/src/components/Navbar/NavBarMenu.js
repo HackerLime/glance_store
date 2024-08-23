@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { BASKET_ROUTE, CATALOG_ROUTE, LOGIN_ROUTE, PROFILE_ROUTE } from '../../router/paths'
 import { Context } from '../../index'
 import { observer } from 'mobx-react-lite'
+
 import Button from 'react-bootstrap/Button'
 import NavBarMenuItem from './NavBarMenuItem'
 import SVGCatalog from '../UI/icons/SVGCatalog'
@@ -22,9 +23,8 @@ const NavBarMenu = observer(() => {
 	const { user } = useContext(Context)
 
 	return (
-		<div className='d-flex'>
-			<div className='d-flex' style={{ margin: '0 10px 0 0' }}>
-
+		<div className='d-flex align-items-center'>
+			<div className='d-flex'>
 				{publicMenuItems.map(i =>
 					<NavBarMenuItem
 						textcolor={'#454545'} id={i.id} key={i.id} name={i.name} route={i.route} icon={i.icon} />
@@ -34,11 +34,13 @@ const NavBarMenu = observer(() => {
 						textcolor={'#454545'} id={i.id} key={i.id} name={i.name} route={i.route} icon={i.icon} />
 				)}
 			</div>
-			{user.isAuth ?
-				""
-				:
-				<Button onClick={() => navigate(LOGIN_ROUTE)}>Авторизация</Button>
-			}
+			<div>
+				{user.isAuth ?
+					""
+					:
+					<Button onClick={() => navigate(LOGIN_ROUTE)}>Авторизация</Button>
+				}
+			</div>
 		</div>
 	)
 })

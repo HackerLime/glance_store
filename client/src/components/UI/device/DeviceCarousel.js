@@ -4,7 +4,7 @@ import Carousel from 'react-bootstrap/Carousel';
 const DeviceCarousel = ({ device }) => {
 	return (
 		<Carousel variant='dark' slide={false}>
-			<Carousel.Item style={{ height: '216px' }}>
+			<Carousel.Item style={{ height: '216px', minWidth: '95px' }}>
 				<div
 					style={{ backgroundColor: 'rgb(248, 252, 255)', position: 'relative' }}
 				>

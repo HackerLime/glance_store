@@ -10,15 +10,17 @@ import SVGDelete from '../UI/icons/remove/SVGDelete'
 import Button from 'react-bootstrap/esm/Button'
 import { observer } from 'mobx-react-lite'
 import { deleteBasketDevice, fetchBasketDevices } from '../../http/deviceAPI'
+import LoadingAnimation from '../UI/loadingAnimation/LoadingAnimation'
 
 
 const Basket = observer(() => {
 	const { device, user } = useContext(Context)
 	const [basketPrice, setBasketPrice] = useState(0)
 	const [allChecked, setAllChecked] = useState(false)
-
+	const [isLoading, setIsLoading] = useState(false)
 
 	useEffect(() => {
+		setIsLoading(true)
 		if (localStorage.getItem('token')) {
 			fetchBasketDevices()
 				.then(data => device.setBasketDevicesData(data))
@@ -29,14 +31,11 @@ const Basket = observer(() => {
 					device.basketDevicesData.map(i => arr.push(i.deviceId))
 					device.setBasketDevices(device.basketDevices.filter(i => arr.includes(i.id)))
 					device.setBasketDevicesIsCheckedFalse()
+					setIsLoading(false)
 				}
 				)
 		}
 	}, [device])
-
-
-
-
 
 	useEffect(() => {
 		device.isAllBasketDevicesChecked ? setAllChecked(true) : setAllChecked(false)
@@ -45,7 +44,6 @@ const Basket = observer(() => {
 	useEffect(() => {
 		setBasketPrice(device.isCheckedBasketDevicesPrice)
 	}, [device.isCheckedBasketDevicesPrice])
-
 
 	const checkAll = (bool) => {
 		setAllChecked(bool)
@@ -56,28 +54,33 @@ const Basket = observer(() => {
 		}
 	}
 
-
 	const destroyBasketDevice = (gettedDeviceId) => {
-		deleteBasketDevice(user.user.id, gettedDeviceId)
-			.then(data => console.log(gettedDeviceId))
-			.catch(e => console.log(e))
-		console.log(device.basketDevices)
+		console.log(Number.isInteger(gettedDeviceId))
+		try {
+			deleteBasketDevice(user.user.id, gettedDeviceId)
+		} catch (e) {
+			console.log(e)
+		}
 		if (Array.isArray(gettedDeviceId)) {
 			device.setBasketDevices([...device.basketDevices].filter(i => !gettedDeviceId.includes(i.id)))
 			device.setBasketDevicesData([...device.basketDevicesData].filter(i => !gettedDeviceId.includes(i.deviceId)))
+			return
 		}
-
+		if (Number.isInteger(gettedDeviceId)) {
+			device.setBasketDevices([...device.basketDevices].filter(i => i.id !== gettedDeviceId))
+			device.setBasketDevicesData([...device.basketDevicesData].filter(i => i.deviceId !== gettedDeviceId))
+		}
 	}
-
+	if (isLoading) {
+		return <LoadingAnimation />
+	}
 	if (!device.basketDevices.length) {
 		return <div><BasketEmpty /></div>
 	}
 
 	return (
-
 		<div className='d-flex justify-content-center' style={{ maxWidth: '1200px', margin: '0px auto' }}>
 			<div style={{ maxWidth: '892px', padding: '0 15px' }} className='d-flex flex-column'>
-				{/* 	//!Надо Убрать в отдельный компонент */}
 				<div style={{ marginBottom: '30px' }}>
 					<div className='d-flex align-items-center' style={{ margin: '0 0 32px 0' }}><Link style={{ textDecoration: 'none', color: '#ABABAB', fontSize: '16' }} to={SHOP_ROUTE}>Главная /</Link><h2 style={{ fontSize: 14, lineHeight: '19px', color: '#838383' }}>Корзина</h2></div>
 					<div className='d-flex align-items-center' style={{ maxWidth: 285 }}>
@@ -85,8 +88,6 @@ const Basket = observer(() => {
 						<h6 style={{ color: 'rgb(12,12,12)', fontSize: 32, lineHeight: "38px", whiteSpace: 'nowrap' }} >Корзина</h6>
 					</div>
 				</div>
-				{/* 	//!----------------*/}
-
 				<div className='d-flex align-items-center justify-content-between' style={{ marginBottom: '20px', userSelect: 'none' }}>
 					{device.checkedBasketDevicesIds.length ?
 						<div className='d-flex align-items-center' style={{ cursor: 'pointer' }} onClick={() => destroyBasketDevice(device.checkedBasketDevicesIds)}>

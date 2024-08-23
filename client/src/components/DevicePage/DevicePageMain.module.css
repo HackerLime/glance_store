@@ -1,0 +1,37 @@
+.devicePageMainWrapper{
+	display: flex;
+	justify-content: space-between;
+	margin: 0 -10px 40px -10px;
+}
+@media(max-width:768px){
+	.devicePageMainWrapper{
+		flex-direction: column;
+	}
+}
+
+.devicePageImage{
+	background-color: rgb(248, 252, 255);
+border-radius: 8px;
+padding: 0 10px;
+}
+
+@media(max-width:768px){
+	.devicePageImage{
+		margin: 0 0 10px 0;
+	}
+}
+
+.deviceCharacteristicsWrapper{
+	max-width: 354px;
+	padding: 0 10px;
+}
+
+@media(max-width:768px){
+	.deviceCharacteristicsWrapper{
+		margin: 0 0 10px 0;
+	}
+}
+
+.deviceInfo{
+	
+}
