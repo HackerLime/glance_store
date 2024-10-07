@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { SHOP_ROUTE } from '../../../router/paths'
+import { SHOP_ROUTE } from '../../app/routers/paths'
 import classes from './ShopLogo.module.css'
 const ShopLogo = () => {
 	return (

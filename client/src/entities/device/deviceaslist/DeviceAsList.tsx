@@ -1,4 +1,3 @@
-import { observer } from 'mobx-react-lite'
 import { useContext, useEffect, useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import { useLocation } from 'react-router-dom'
@@ -12,7 +11,7 @@ import DeviceInStock from '../DeviceInStock'
 import DeviceName from '../DeviceName'
 import DevicePrice from '../DevicePrice'
 import styles from './DeviceAsList.module.css'
-const DeviceAsList = observer(({ device, destroyAction, isChecked }) => {
+const DeviceAsList = ({ device, destroyAction, isChecked }) => {
 	const [isDeviceInBasket, setIsDeviceInBasket] = useState(false)
 	const store = useContext(Context)
 	const { pathname } = useLocation()
@@ -71,6 +70,6 @@ const DeviceAsList = observer(({ device, destroyAction, isChecked }) => {
 			</div>
 		</div>
 	)
-})
+}
 
 export default DeviceAsList

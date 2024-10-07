@@ -1,15 +1,13 @@
-import React, { useContext, useState } from 'react'
+import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { BASKET_ROUTE, CATALOG_ROUTE, LOGIN_ROUTE, PROFILE_ROUTE } from '../../router/paths'
-import { Context } from '../../index'
-import { observer } from 'mobx-react-lite'
+import { BASKET_ROUTE, CATALOG_ROUTE, LOGIN_ROUTE, PROFILE_ROUTE } from '../../../../app/routers/paths'
 
 import Button from 'react-bootstrap/Button'
-import NavBarMenuItem from './NavBarMenuItem'
-import SVGCatalog from '../UI/icons/SVGCatalog'
-import SVGProfile from '../UI/icons/SVGProfile'
-import SVGBasket from '../UI/icons/SVGBasket'
-const NavBarMenu = observer(() => {
+import SVGBasket from '../../../../shared/icons/SVGBasket'
+import SVGCatalog from '../../../../shared/icons/SVGCatalog'
+import SVGProfile from '../../../../shared/icons/SVGProfile'
+import { NavBarMenuItem } from '../NavBarMenuItem'
+export const NavBarMenu = () => {
 
 	const { pathname } = useLocation()
 	const navigate = useNavigate()
@@ -20,8 +18,7 @@ const NavBarMenu = observer(() => {
 		{ id: 1, icon: <SVGBasket color={pathname === '/basket' ? '#091D9E' : '#454545'} />, name: 'Корзина', route: BASKET_ROUTE },
 		{ id: 2, icon: <SVGProfile color={pathname === '/profile' ? '#091D9E' : '#454545'} />, name: 'Профиль', route: PROFILE_ROUTE },
 	])
-	const { user } = useContext(Context)
-
+	const user = { isAuth: true }
 	return (
 		<div className='d-flex align-items-center'>
 			<div className='d-flex'>
@@ -43,6 +40,5 @@ const NavBarMenu = observer(() => {
 			</div>
 		</div>
 	)
-})
+}
 
-export default NavBarMenu

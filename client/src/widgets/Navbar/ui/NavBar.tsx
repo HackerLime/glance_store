@@ -1,7 +1,7 @@
-import ShopLogo from '../UI/logo/ShopLogo'
+import ShopLogo from '../../../shared/logo/ShopLogo'
 import classes from './NavBar.module.css'
-import NavBarMenu from './NavBarMenu'
-import NavBarSearch from './NavBarSearch'
+import { NavBarMenu } from './NavBarMenu'
+import { NavBarSearch } from './NavBarSearch'
 
 export const NavBar = () => {
 	return (
