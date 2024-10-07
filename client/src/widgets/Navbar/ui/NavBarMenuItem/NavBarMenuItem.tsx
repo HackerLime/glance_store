@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import styles from './NavBarMenuItem.module.css'
-const NavBarMenuItem = (props) => {
+export const NavBarMenuItem = (props) => {
 
 	return (
 		<div
@@ -18,4 +18,3 @@ const NavBarMenuItem = (props) => {
 	)
 }
 
-export default NavBarMenuItem

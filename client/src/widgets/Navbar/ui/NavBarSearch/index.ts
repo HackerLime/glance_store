@@ -1,0 +1,2 @@
+export { NavBarSearch } from './NavBarSearch';
+

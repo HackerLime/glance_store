@@ -1,27 +1,25 @@
 import { BrowserRouter } from 'react-router-dom';
-import { LoadingAnimation } from '../shared/loadingAnimation/index';
 import { NavBar } from '../widgets/Navbar';
-import { AppRouter } from './routers';
-import ScrollToTop from './ScrollToTop';
 
 
 const App = () => {
-	const isLoading = false
+	/* 	const isLoading = false
+	 */
 
 
-
-	if (isLoading) {
-		return <LoadingAnimation />
-	}
+	/* 	if (isLoading) {
+			return <LoadingAnimation />
+		} */
 	return (
-
 		<BrowserRouter>
+			<NavBar />
+		</BrowserRouter>
+	)
+}
+{/* <BrowserRouter>
 			<NavBar />
 			<ScrollToTop />
 			<AppRouter />
-		</BrowserRouter>
-
-	)
-}
+		</BrowserRouter> */}
 
 export default App;

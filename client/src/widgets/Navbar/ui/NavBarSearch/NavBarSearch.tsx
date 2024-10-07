@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import SVGSearch from '../UI/icons/SVGSearch'
+import SVGSearch from '../../../../shared/icons/SVGSearch'
 import classes from './NavBarSearch.module.css'
-const NavBarSearch = () => {
+export const NavBarSearch = () => {
 	const [active, setActive] = useState(false)
 
 	return (
@@ -23,4 +23,3 @@ const NavBarSearch = () => {
 	)
 }
 
-export default NavBarSearch
