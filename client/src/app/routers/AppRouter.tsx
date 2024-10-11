@@ -1,6 +1,5 @@
-
+import { Shop } from 'pages'
 import { Route, Routes } from 'react-router-dom'
-import { Shop } from '../../pages'
 import { authRoutes, privateRoutes, publicRoutes } from './router'
 
 export const AppRouter = () => {
@@ -8,14 +7,14 @@ export const AppRouter = () => {
 		isAuth: true
 	}
 
-
 	return (
-		<Routes>			{user.isAuth && privateRoutes.map(
-			(route, idx) => <Route key={idx} path={route.path} element={route.component} />)}
+		<Routes>
+			{user.isAuth && privateRoutes.map(
+				(route, idx) => <Route key={idx} path={route.path} element={<route.component />} />)}
 			{!user.isAuth && authRoutes.map(
-				(route, idx) => <Route key={idx} path={route.path} element={route.component} />)}
+				(route, idx) => <Route key={idx} path={route.path} element={<route.component />} />)}
 			{publicRoutes.map(
-				(route, idx) => <Route key={idx} path={route.path} element={route.component} />)}
+				(route, idx) => <Route key={idx} path={route.path} element={<route.component />} />)}
 			<Route path='*' element={<Shop />} />
 		</Routes>
 	)

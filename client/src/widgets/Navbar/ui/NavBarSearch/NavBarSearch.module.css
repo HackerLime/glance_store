@@ -1,15 +1,14 @@
 .mySearch{
 	background:rgb(222, 222, 222);
-	max-width: 754px;
 	display: flex;
 	justify-content: start;
 	flex-direction: row-reverse;
 	border-radius: 8px;
 	padding: 13.5px 0 13.5px 16px;
-	
+	width:100%;
 
 }
-@media (max-width: 580px) {
+@media (max-width: 620px) {
 	.mySearch{
 		display: none;
 	}
@@ -18,13 +17,12 @@
 
 .mySearch_active{
 	background:rgb(222, 222, 222);
-	max-width: 754px;
-	display: flex;
+	width:100%;	display: flex;
 	justify-content: start;
 	flex-direction: row-reverse;
 	border-radius: 8px;
 	padding: 13.5px 0 13.5px 16px;
-	animation: glow 800ms ease-out 1 alternate;
+	animation: glow 800ms ease-out 0.2 alternate;
 	animation-fill-mode: both;
 }
 .myInput{

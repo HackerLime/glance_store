@@ -1,5 +1,5 @@
 
-const SVGFBStar = () => {
+export const SVGFBStar = () => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -16,4 +16,3 @@ const SVGFBStar = () => {
 		</svg>)
 }
 
-export default SVGFBStar

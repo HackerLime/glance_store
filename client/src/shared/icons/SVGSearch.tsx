@@ -1,11 +1,12 @@
 
-const SVGSearch = () => {
+export const SVGSearch = () => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			width={19}
 			height={19}
 			fill="none"
+
 		>
 			<path
 				stroke="#454545"
@@ -25,4 +26,3 @@ const SVGSearch = () => {
 
 }
 
-export default SVGSearch

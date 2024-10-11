@@ -1,7 +1,8 @@
 import Container from 'react-bootstrap/Container'
-import ShopCarousel from '../Carousel/ShopCarousel'
-import ShopPromotions from '../Promotion/ShopPromotions'
-import ShopCatalog from '../Shop/ShopCatalog'
+import { ShopCarousel } from 'widgets/shopCarousel'
+import { ShopCatalog } from 'widgets/shopCatalog'
+import { ShopPromotions } from 'widgets/shopPromotions'
+
 export const Shop = () => {
 
 	return (

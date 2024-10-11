@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import SVGSearch from '../../../../shared/icons/SVGSearch'
+import { SVGSearch } from 'shared/icons/SVGSearch'
 import classes from './NavBarSearch.module.css'
 export const NavBarSearch = () => {
 	const [active, setActive] = useState(false)
@@ -18,7 +18,7 @@ export const NavBarSearch = () => {
 				placeholder='Поиск'
 				className={classes.myInput}
 			/>
-			<SVGSearch className={classes.myIcon} />
+			<SVGSearch />
 		</div>
 	)
 }

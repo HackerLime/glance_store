@@ -14,19 +14,26 @@
 	border-top: 1px solid rgb(193, 193, 193);
 	}
 } 
-.navbarContainer{
+
+.navbarWrapper{
 	max-width: 1200px;
 	margin: 0px auto;
 	padding: 0 10px;
-}
-.navbarWrapper{
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
+	gap: 0 88px;
 }
+
+@media (max-width: 767px) {
+	.navbarWrapper{
+		gap: 0 44px;
+	}
+ }
 
 @media (max-width: 580px) {
 	.navbarWrapper{
 		justify-content: space-evenly;
+		gap: 0 22px;
 	}
  }

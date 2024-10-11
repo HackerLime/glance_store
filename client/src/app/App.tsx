@@ -1,8 +1,9 @@
+import { Shop } from 'pages/ShopPage';
 import { BrowserRouter } from 'react-router-dom';
 import { NavBar } from '../widgets/Navbar';
 
 
-const App = () => {
+export const App = () => {
 	/* 	const isLoading = false
 	 */
 
@@ -13,6 +14,7 @@ const App = () => {
 	return (
 		<BrowserRouter>
 			<NavBar />
+			<Shop />
 		</BrowserRouter>
 	)
 }
@@ -22,4 +24,4 @@ const App = () => {
 			<AppRouter />
 		</BrowserRouter> */}
 
-export default App;
+
