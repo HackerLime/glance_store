@@ -1,5 +1,5 @@
 
-const SVGCatalog = ({ color }) => {
+export const SVGCatalog = ({ color }) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -17,4 +17,4 @@ const SVGCatalog = ({ color }) => {
 	)
 }
 
-export default SVGCatalog
+

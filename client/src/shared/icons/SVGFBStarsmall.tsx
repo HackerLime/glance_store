@@ -1,5 +1,5 @@
 
-const SVGFBStarsmall = (props) => {
+export const SVGFBStarsmall = (props) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -17,4 +17,3 @@ const SVGFBStarsmall = (props) => {
 	)
 }
 
-export default SVGFBStarsmall

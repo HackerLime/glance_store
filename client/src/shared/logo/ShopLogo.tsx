@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom'
-import { SHOP_ROUTE } from '../../app/routers/paths'
+import { SHOP_ROUTE } from 'shared/routerPaths'
 import classes from './ShopLogo.module.css'
-const ShopLogo = () => {
+export const ShopLogo = () => {
 	return (
-		<div><Link className={classes.myLogo} to={SHOP_ROUTE}>GLANCE</Link></div>
+		<Link className={classes.myLogo} to={SHOP_ROUTE}>GLANCE</Link>
 	)
 }
 
-export default ShopLogo

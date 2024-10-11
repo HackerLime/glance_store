@@ -1,5 +1,5 @@
 
-const SVGProfile = ({ color }) => {
+export const SVGProfile = ({ color }) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -24,4 +24,3 @@ const SVGProfile = ({ color }) => {
 		</svg>)
 }
 
-export default SVGProfile

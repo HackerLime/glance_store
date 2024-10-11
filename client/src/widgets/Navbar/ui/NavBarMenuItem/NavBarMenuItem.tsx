@@ -1,20 +1,23 @@
-import { Link } from 'react-router-dom'
-import styles from './NavBarMenuItem.module.css'
-export const NavBarMenuItem = (props) => {
+import { FC } from 'react';
+import { Link } from 'react-router-dom';
+import styles from './NavBarMenuItem.module.css';
+
+type NavBarMenuItemPropsType = {
+	id: number
+	icon: JSX.Element;
+	name: string;
+	route: string;
+}
+
+export const NavBarMenuItem: FC<NavBarMenuItemPropsType> = ({ icon, name, route }) => {
 
 	return (
-		<div
-			{...props}
-			style={{ marginRight: props.id === 1 ? '10px' : '0' }}
-		>
-			<Link
-				to={props.route}
-				style={{ cursor: 'pointer', textDecoration: 'none', color: props.textcolor }}
-				className='d-flex flex-column  align-items-center'>
-				<div>{props.icon}</div>
-				<div className={styles.linkText} >{props.name}</div>
-			</Link>
-		</div>
+		<Link
+			to={route}
+			className={styles.wrapper}>
+			<div className={styles.icon} >{icon}</div>
+			<span className={styles.linkText} >{name}</span>
+		</Link>
 	)
 }
 

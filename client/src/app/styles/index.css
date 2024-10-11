@@ -4,11 +4,7 @@
   box-sizing: border-box;
   font-family: 'Roboto';
 }
-@font-face {
-  font-family: 'Disket-Mono-Regular'; /* Или 'ComicSans', если вы любите эксперименты */
-  src: url('../../shared/fonts/Disket-Mono-Regular.ttf') format('ttf');
-       
-}
+
 html {
   -moz-text-size-adjust: none;
   -webkit-text-size-adjust: none;
@@ -25,9 +21,22 @@ ol[role='list'] {
 body {
   min-height: 100vh;
   line-height: 1.5;
+  /*  */
  /*  background-color: #f6f6f6; */
+ /*  */
  background-color: #312828;
+ 
+ padding-top: 91px;
+ padding-bottom: 200px;
 }
+
+@media (max-width: 768px) {
+	body {
+	padding-top: 20px;
+	padding-bottom: 100px;
+	}
+} 
+
 
 h1, h2, h3, h4,
 button, input, label {
@@ -69,13 +78,3 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
-.App{
-	padding-top: 91px;
-	padding-bottom: 200px;
-}
-@media (max-width: 768px) {
-	.App {
-	padding-top: 20px;
-	padding-bottom: 100px;
-	}
-} 

@@ -1,5 +1,5 @@
 
-const SVGFilter = (props) => {
+export const SVGFilter = (props) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -17,4 +17,3 @@ const SVGFilter = (props) => {
 	)
 }
 
-export default SVGFilter

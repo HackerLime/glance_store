@@ -1,4 +1,26 @@
 
+.wrapper{
+	color:#454545;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	cursor: pointer;
+	text-decoration: none;
+	gap: 8px;
+	
+}
+
+@media (max-width: 580px) {
+	.wrapper {
+		gap: 4px;
+	}
+} 
+
+
+.icon{
+height: 1.5em;
+}
+
 @media (max-width: 350px) {
 	.linkText {
 	font-size: 14px;
