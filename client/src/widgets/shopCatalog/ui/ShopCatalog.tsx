@@ -26,7 +26,7 @@ export const ShopCatalog = () => {
 			>
 				{catalogSource.map(i =>
 					<SwiperSlide key={i.id}>
-						<ShopCatalogItem onClick={() => navigate(CATALOG_ROUTE)} key={i.id} img={i.img} name={i.name} />
+						<ShopCatalogItem onClick={() => navigate(CATALOG_ROUTE)} key={i.id} sourceImage={i.sourceImage} name={i.name} />
 					</SwiperSlide>
 				)}
 			</Swiper>

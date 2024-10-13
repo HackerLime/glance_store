@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { SVGSearch } from 'shared/icons/SVGSearch'
+import { SVGSearch } from 'shared/assets/icons'
 import classes from './NavBarSearch.module.css'
 export const NavBarSearch = () => {
 	const [active, setActive] = useState(false)

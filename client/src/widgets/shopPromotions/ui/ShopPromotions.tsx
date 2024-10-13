@@ -1,18 +1,31 @@
+import { useGetDevicesQuery } from 'shared/api/devices/devicesApi';
+import { DevicesSlider } from 'widgets/devicesSlider/DevicesSlider';
 import classes from './ShopPromotions.module.css';
-
 export const ShopPromotions = () => {
-	/* 	const { device } = useContext(Context)
-	 */
-	return (
-		<section >
-			<div style={{ height: 64 }}>
-				<h6 style={{ fontSize: 32 }}>Акции</h6>
-			</div>
-			<div className={classes.promotionMain}>
-				{/* 				<DevicesSlider device={device.devices} />
- */}
-			</div>
-		</section >
-	)
+
+	const { data, isError, isLoading } = useGetDevicesQuery(undefined)
+	if (isLoading) {
+		return <h1>Загрузка...ShopPromotions</h1>
+	}
+
+	if (isError) {
+		return <h1>Какая то Ошибка ShopPromotions</h1>
+	}
+
+	if (data) {
+		return (
+			<section >
+				<h6 className={classes.shopPromotions__text}>Акции</h6>
+				<div className={classes.shopPromotions__main}>
+
+					<DevicesSlider devices={data} />
+
+
+				</div>
+			</section >
+		)
+	}
+
+
 }
 
