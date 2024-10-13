@@ -1,4 +1,4 @@
-import { ShopLogo } from 'shared/logo'
+import { ShopLogo } from 'shared/ui/logo'
 import classes from './NavBar.module.css'
 import { NavBarMenu } from './NavBarMenu'
 import { NavBarSearch } from './NavBarSearch'

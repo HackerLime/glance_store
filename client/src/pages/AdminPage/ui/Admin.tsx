@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import { CreateBrand, CreateDevice, CreateType } from '../../../shared/modals';
+import { CreateBrand, CreateDevice, CreateType } from '../../../shared/ui/modals';
 
 
 export const Admin = () => {

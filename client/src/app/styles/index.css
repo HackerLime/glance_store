@@ -24,7 +24,8 @@ body {
   /*  */
  /*  background-color: #f6f6f6; */
  /*  */
- background-color: #312828;
+  background-color: #312828; 
+  color: inherit;
  
  padding-top: 91px;
  padding-bottom: 200px;

@@ -1,4 +1,10 @@
-.promotionMain{
+
+.shopPromotions__text{
+	font-size: 2em;
+	margin-bottom: 1.75em;
+}
+
+.shopPromotions__main{
 	padding: 24px 0 24px 24px;
 	border-top: 1px solid rgb(193, 193, 193);
 	border-bottom: 1px solid rgb(193, 193, 193);
