@@ -1,8 +1,6 @@
 export { SVGBasketEmpty } from './basket';
 
 export {
-  SVGCINootebook, SVGCIPc, SVGCISmartphone,
-  SVGCISoundbar, SVGCITablet, SVGCITv,
   SVGList, SVGTile
 } from './catalog';
 
@@ -15,4 +13,5 @@ export {
 export { SVGBigIphone, SVGLessThan } from './device';
 
 export { iconBasket, iconCatalog, iconProfile } from './NavbarMenu';
+export { SVGDelete } from './remove';
 

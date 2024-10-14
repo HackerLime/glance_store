@@ -1,3 +1,4 @@
+import { Device } from 'entities/device';
 import { TDevice } from 'entities/device/model';
 import { FC } from 'react';
 import { useSliderParams } from 'shared/hooks/useSliderParams';
@@ -5,13 +6,21 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 import { FreeMode, Pagination } from 'swiper/modules';
-import { Swiper } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-type TDevicesSlider = {
-	devices: TDevice[]
+type TBrandAndTypeResponse = {
+	id: number;
+	name: string;
 }
 
-export const DevicesSlider: FC<TDevicesSlider> = ({ devices }) => {
+type TDevicesSlider = {
+	devices: TDevice[];
+	brands: TBrandAndTypeResponse[];
+	types: TBrandAndTypeResponse[];
+}
+
+export const DevicesSlider: FC<TDevicesSlider> = ({ devices, brands, types }) => {
+
 	const { mySlidesPerView, mySlidesSpaceBetween } = useSliderParams()
 
 	return (
@@ -21,11 +30,22 @@ export const DevicesSlider: FC<TDevicesSlider> = ({ devices }) => {
 			freeMode={true}
 			modules={[FreeMode, Pagination]}
 			className="mySwiper"
-
 		>
-			{/* 	{devices.map(i =>
-				<SwiperSlide key={i.id}><Device asSliderItem={true} device={i} /></SwiperSlide>
-			)} */}
+			{devices.map(i => {
+				const brand = brands.find(brand => brand.id === i.brandId)
+				const type = types.find(type => type.id === i.typeId)
+				return (
+					<SwiperSlide key={i.id}>
+						<Device
+							asSliderItem={true}
+							device={i}
+							brandName={brand?.name || 'unknown brand'}
+							typeName={type?.name || 'unknown type'}
+						/>
+					</SwiperSlide>
+				)
+			}
+			)}
 		</Swiper>
 	)
 }

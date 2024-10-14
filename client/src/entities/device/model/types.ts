@@ -12,6 +12,8 @@ export type TDevice = {
 
 
 type AsSliderProps = {
+  brandName: string;
+  typeName: string
   device: TDevice;
   asSliderItem: boolean;
   asListItem?: undefined;
@@ -19,6 +21,8 @@ type AsSliderProps = {
 };
 
 type AsListProps = {
+  brandName: string;
+  typeName: string
   device: TDevice;
   asSliderItem?: undefined;
   asListItem: boolean;
@@ -26,10 +30,14 @@ type AsListProps = {
 };
 
 type AsBasketListProps = {
+  brandName: string;
+  typeName: string
   device: TDevice;
   asSliderItem?: undefined;
   asListItem?: undefined;
   asBasketListItem: boolean;
 };
+
+
 
 export type TDeviceProps = AsSliderProps | AsListProps | AsBasketListProps

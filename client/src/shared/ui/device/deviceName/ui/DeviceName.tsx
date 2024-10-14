@@ -1,15 +1,16 @@
 import { Link } from 'react-router-dom'
 import { DEVICEPAGE_ROUTE } from 'shared/routerPaths'
 import classes from './DeviceName.module.css'
-export const DeviceName = ({ device, props }) => {
+export const DeviceName = ({ device }) => {
 	/* 	const store = useContext(Context)
 		const deviceStore = store.device
 		const brandName = deviceStore.brands.find(brand => brand.id === device.brandId).name
-		const typeName = deviceStore.types.find(type => type.id === device.typeId).name */
+		const typeName = deviceStore.types.find(type => type.id === device.typeId).name 
+*/
 
 	return (
 		<Link
-			{...props}
+
 			to={DEVICEPAGE_ROUTE + '/' + device.id}
 			className={classes.deviceCarouselText}
 		>
