@@ -11,7 +11,7 @@ export type TDevice = {
 }
 
 
-type AsSliderProps = {
+export type AsSliderProps = {
   brandName: string;
   typeName: string
   device: TDevice;
@@ -20,7 +20,7 @@ type AsSliderProps = {
   asBasketListItem?: undefined;
 };
 
-type AsListProps = {
+export type AsListProps = {
   brandName: string;
   typeName: string
   device: TDevice;
@@ -29,7 +29,7 @@ type AsListProps = {
   asBasketListItem?: undefined;
 };
 
-type AsBasketListProps = {
+export type AsBasketListProps = {
   brandName: string;
   typeName: string
   device: TDevice;
@@ -37,6 +37,12 @@ type AsBasketListProps = {
   asListItem?: undefined;
   asBasketListItem: boolean;
 };
+
+export type TDeviceItemProps = {
+  device: TDevice;
+  brandName: string;
+  typeName: string
+}
 
 
 

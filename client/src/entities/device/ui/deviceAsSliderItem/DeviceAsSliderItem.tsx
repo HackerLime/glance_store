@@ -1,15 +1,11 @@
-import { TDevice } from 'entities/device'
 import { FC } from 'react'
 import { DeviceButton, DeviceInStock, DeviceName, DevicePrice } from 'shared/ui/device/'
 import { DeviceImages } from 'shared/ui/device/deviceImages'
+import type { TDeviceItemProps } from '../../model'
 import styles from './DeviceAsSliderItem.module.css'
 
-type TDeviceAsSliderItem = {
-	device: TDevice
-}
 
-
-export const DeviceAsSliderItem: FC<TDeviceAsSliderItem> = ({ device }) => {
+export const DeviceAsSliderItem: FC<TDeviceItemProps> = ({ device, brandName, typeName }) => {
 	//todo надо реализовать код ниже
 	/* 	const [isDeviceInBasket, setIsDeviceInBasket] = useState(false)
 		useEffect(() => {
@@ -20,10 +16,12 @@ export const DeviceAsSliderItem: FC<TDeviceAsSliderItem> = ({ device }) => {
 
 	return (
 		<div className={styles.deviceWrapper} >
-			<DeviceImages device={device} />
+			<div className={styles.imageWrapper}>
+				<DeviceImages deviceImages={device.img} />
+			</div>
 			<div className={styles.deviceNamePriceInStock}>
-				<DeviceName device={device} />
-				<DevicePrice device={device} />
+				<DeviceName deviceId={device.id} deviceName={device.name} brandName={brandName} typeName={typeName} />
+				<DevicePrice devicePrice={device.price} />
 				<DeviceInStock device={device} />
 			</div>
 			<div className={styles.deviceButton} >

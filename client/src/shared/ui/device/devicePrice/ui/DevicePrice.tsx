@@ -1,19 +1,27 @@
+import { FC } from 'react'
 import classes from './DevicePrice.module.css'
-export const DevicePrice = ({ device }) => {
-	const getStockPrice = (price, percent) => {
+
+type DevicePriceProps = {
+	devicePrice: number
+}
+
+export const DevicePrice: FC<DevicePriceProps> = ({ devicePrice }) => {
+	const getStockPrice = (price: number, percent: number): number => {
 		return Math.ceil(price - price / 100 * percent)
 	}
+
+	const percentProp = true
 	return (
 		<>
 			{
-				device.percent ?
-					<div className={`d-flex align-items-end ${classes.devicePrice}`}>
-						<h1 className={classes.deviceMainPrice}>{getStockPrice(device.price, device.percent)} ₽</h1>
-						<h3 className={classes.deviceStockPrice}> {device.price} ₽</h3>
+				percentProp ?
+					<div className={classes.devicePrice}>
+						<h2 className={classes.deviceMainPrice}>{getStockPrice(devicePrice, 15)} ₽</h2>
+						<h3 className={classes.deviceStockPrice}> {devicePrice} ₽</h3>
 					</div>
 					:
-					<div className={`d-flex align-items-end ${classes.devicePrice}`}>
-						<h1 className={classes.deviceMainPrice}>{device.price} ₽</h1>
+					<div className={classes.devicePrice}>
+						<h2 className={classes.deviceMainPrice}>{devicePrice} ₽</h2>
 					</div>
 			}
 		</>

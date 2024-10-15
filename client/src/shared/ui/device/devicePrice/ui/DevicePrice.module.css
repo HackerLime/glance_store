@@ -1,10 +1,12 @@
 .devicePrice{
-	margin: 0 0 16px 0;
+	display: flex;
+	align-items: end;
+	margin-bottom:1em;
 }
 
 @media (max-width:320px){
 	.devicePrice{
-		margin: 0 0 8px 0;
+		margin-bottom:0.5em;
 	}
 }
 

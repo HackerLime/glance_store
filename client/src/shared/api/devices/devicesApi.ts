@@ -7,19 +7,19 @@ export const devicesApi = createApi({
   endpoints: (builder) => ({
 
     getDevices: builder.query({
-      query: () => '/device',
+      query: () => '/api/device',
     }),
 
     getDeviceById: builder.query({
-      query: (payload) => `/device'/${payload}`,
+      query: (payload) => `/api/device'/${payload}`,
     }),
 
     getBrands: builder.query({
-      query: () => '/brand',
+      query: () => '/api/brand',
     }),
 
     getTypes: builder.query({
-      query: () => '/type',
+      query: () => '/api/type',
     }),
 
   }),
