@@ -1,4 +1,3 @@
-import type { TDevice } from 'entities/device'
 import { FC } from 'react'
 import { DeviceButton } from 'shared/ui/device/deviceButton'
 import { DeviceImages } from 'shared/ui/device/deviceImages'
@@ -6,13 +5,10 @@ import { DeviceInStock } from 'shared/ui/device/deviceInStock/ui/DeviceInStock'
 import { DeviceName } from 'shared/ui/device/deviceName'
 import { DevicePrice } from 'shared/ui/device/devicePrice'
 import { BlueLine } from 'shared/ui/lines/BlueLine'
+import type { TDeviceItemProps } from '../../model'
 import styles from './DeviceAsListItem.module.css'
 
-type TDeviceAsListItem = {
-	device: TDevice
-}
-
-export const DeviceAsListItem: FC<TDeviceAsListItem> = ({ device }) => {
+export const DeviceAsListItem: FC<TDeviceItemProps> = ({ device }) => {
 
 	return (
 		<div style={{ margin: '0 0 10px 0' }}>

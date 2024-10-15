@@ -17,18 +17,13 @@ export const ShopPromotions = () => {
 	}
 
 	if (devicesResponse.data && brandsResponse.data && typesResponse.data) {
-		console.log(brandsResponse.data)
-		console.log(devicesResponse.data)
 
 
 		return (
 			<section >
 				<h6 className={classes.shopPromotions__text}>Акции</h6>
 				<div className={classes.shopPromotions__main}>
-
 					<DevicesSlider devices={devicesResponse.data.rows} brands={brandsResponse.data} types={typesResponse.data} />
-
-
 				</div>
 			</section >
 		)

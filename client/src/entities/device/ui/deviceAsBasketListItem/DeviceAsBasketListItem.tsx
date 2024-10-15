@@ -1,4 +1,3 @@
-import { TDevice } from 'entities/device/model'
 import { FC } from 'react'
 import { SVGDelete } from 'shared/assets/icons/remove/SVGDelete'
 import { DeviceImages } from 'shared/ui/device/deviceImages'
@@ -7,11 +6,10 @@ import { DeviceName } from 'shared/ui/device/deviceName'
 import { DevicePrice } from 'shared/ui/device/devicePrice'
 import { BlueLine } from 'shared/ui/lines/BlueLine'
 import styles from './DeviceAsBasketListItem.module.css'
-type TDeviceAsBasketListItem = {
-  device: TDevice
-}
 
-export const DeviceAsBasketListItem: FC<TDeviceAsBasketListItem> = ({ device }) => {
+import type { TDeviceItemProps } from '../../model'
+
+export const DeviceAsBasketListItem: FC<TDeviceItemProps> = ({ device }) => {
   //?todo
   const destroyAction = (deviceId) => {
     console.log('destroyAction', deviceId)
