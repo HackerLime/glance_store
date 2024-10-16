@@ -1,5 +1,5 @@
 
-import { Shop } from 'pages/ShopPage';
+import { DevicePage } from 'pages/DevicePage';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { NavBar } from '../widgets/Navbar';
@@ -17,7 +17,7 @@ export const App = () => {
 		<Provider store={store}>
 			<BrowserRouter>
 				<NavBar />
-				<Shop />
+				<DevicePage />
 			</BrowserRouter>
 		</Provider>
 	)

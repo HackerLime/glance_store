@@ -16,6 +16,13 @@ export const publicRoutes = [
 	},
 ]
 
+//!
+export const devRoute = {
+	path: DEVICEPAGE_ROUTE + '/:id',
+	component: DevicePage
+}
+//!
+
 export const authRoutes = [
 	{
 		path: LOGIN_ROUTE,
