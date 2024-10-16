@@ -1,6 +1,5 @@
-import React from 'react'
 
-const DeviceTypeBrandName = ({ device, typeName, brandName }) => {
+export const DeviceTypeBrandName = ({ device, typeName, brandName }) => {
 
 	return (
 		<div style={{
@@ -15,5 +14,3 @@ const DeviceTypeBrandName = ({ device, typeName, brandName }) => {
 		</div>
 	)
 }
-
-export default DeviceTypeBrandName

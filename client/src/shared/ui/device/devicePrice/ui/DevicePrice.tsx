@@ -10,7 +10,7 @@ export const DevicePrice: FC<DevicePriceProps> = ({ devicePrice }) => {
 		return Math.ceil(price - price / 100 * percent)
 	}
 
-	const percentProp = true
+	const percentProp = false
 	return (
 		<>
 			{

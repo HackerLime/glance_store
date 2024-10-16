@@ -3,7 +3,7 @@ import SVGFBStarF from '../UI/icons/SVGFBStarF'
 import FeedbackItems from './feedback/FeedbackItems'
 import ReviewImages from './feedback/ReviewImages'
 
-const DevicePageFooter = () => {
+export const DevicePageFooter = () => {
 	const feedBack = { reviews: 325, ratings: 2000, middleRating: 5 }
 
 	return (
@@ -31,4 +31,3 @@ const DevicePageFooter = () => {
 	)
 }
 
-export default DevicePageFooter

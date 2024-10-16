@@ -1,4 +1,3 @@
-import { observer } from 'mobx-react-lite'
 import { useState } from 'react'
 import Image from 'react-bootstrap/Image'
 import styles from './DevicePageMain.module.css'
@@ -7,7 +6,7 @@ import DeviceInfo from './info/DeviceInfo'
 import DeviceAddBasket from './palette/addBasket/DeviceAddBasket'
 import ColorPalette from './palette/ColorPalette'
 
-const DevicePageMain = observer(({ device, brandName, typeName }) => {
+export const DevicePageMain = ({ device, brandName, typeName }) => {
 
 	const [palette, setPallete] = useState([
 		{ id: 1, name: 'Красный', color: 'rgb(255, 0, 0)' },
@@ -40,6 +39,5 @@ const DevicePageMain = observer(({ device, brandName, typeName }) => {
 			</div>
 		</div>
 	)
-})
+}
 
-export default DevicePageMain
