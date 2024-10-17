@@ -1,5 +1,4 @@
-import { observer } from 'mobx-react-lite'
-import { useContext, useEffect, useState } from 'react'
+/* import { useContext, useEffect, useState } from 'react'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import { useScreenWidth } from '../../hooks/useScreenWidth'
 import { fetchBasketDevices, fetchBrands, fetchDevices, fetchTypes } from '../../http/deviceAPI'
@@ -15,9 +14,9 @@ import SVGFilterIcon from '../UI/icons/SVGFilterIcon'
 import BlueLine from '../UI/lines/BlueLine'
 import LoadingAnimation from '../UI/loadingAnimation/LoadingAnimation'
 import DevicesSlider from '../UI/slider/DevicesSlider'
-
-export const Catalog = observer(() => {
-	const { device } = useContext(Context)
+ */
+export const Catalog = () => {
+	/* const { device } = useContext(Context)
 	const [catalogDevices, setCatalogDevices] = useState([])
 	const [typeChecked, setTypeChecked] = useState([])
 	const [brandChecked, setBrandChecked] = useState([])
@@ -89,11 +88,11 @@ export const Catalog = observer(() => {
 			setCancelVisible(true)
 		}
 	}
+ */
 
 
 
-
-	function getPrice() {
+	/*function getPrice() {
 		let priceArr = []
 		catalogDevices.map(i => priceArr.push(i.price))
 		let minPrice = Math.min.apply(null, priceArr)
@@ -122,8 +121,8 @@ export const Catalog = observer(() => {
 
 	const [showOffCanvas, setShowOffCanvas] = useState(false)
 	const closeOffCanvas = () => setShowOffCanvas(false)
-	const openOffCanvas = () => setShowOffCanvas(true)
-	if (isLoading) {
+	const openOffCanvas = () => setShowOffCanvas(true) */
+	/* if (isLoading) {
 		return <LoadingAnimation />
 	}
 	if (screenWidth <= 768) {
@@ -157,12 +156,13 @@ export const Catalog = observer(() => {
 				</div>
 			</>
 		)
-	}
+	} */
 
 	return (
 
 		<div style={{ maxWidth: '1200px', margin: '0px auto', padding: '0 15px' }}>
-			<div><DevicePageHeader breadCrumbs='Каталог' backText='Каталог' /></div>
+			CATALOGPAGE
+			{/* 	<div><DevicePageHeader breadCrumbs='Каталог' backText='Каталог' /></div>
 			<div className='d-flex'>
 				<div style={{ margin: '0 75px 0 0', minWidth: '289px' }}>
 					<FilterVariant sortDevices={sortDevices} filterVariants={variants} />
@@ -192,9 +192,9 @@ export const Catalog = observer(() => {
 						</div>
 					}
 				</div>
-			</div>
+			</div> */}
 		</div>
 
 	)
-})
+}
 

@@ -1,5 +1,5 @@
 
-const FancyboxItem = ({ href, src }) => {
+export const FancyboxItem = ({ href, src }) => {
 	return (
 		<a style={{ marginLeft: '5px' }} data-fancybox="gallery" href={href}>
 			<img src={src} alt='#' />
@@ -7,4 +7,3 @@ const FancyboxItem = ({ href, src }) => {
 	)
 }
 
-export default FancyboxItem

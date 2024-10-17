@@ -1,8 +1,9 @@
 
-import { DevicePage } from 'pages/DevicePage';
+import { Shop } from 'pages/ShopPage';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { NavBar } from '../widgets/Navbar';
+import { devRoute } from './routers/router';
 import { store } from './store/store';
 
 export const App = () => {
@@ -17,7 +18,11 @@ export const App = () => {
 		<Provider store={store}>
 			<BrowserRouter>
 				<NavBar />
-				<DevicePage />
+				<Routes>
+					<Route path={devRoute.path} element={<devRoute.component />} />
+					<Route path='*' element={<Shop />} />
+
+				</Routes>
 			</BrowserRouter>
 		</Provider>
 	)

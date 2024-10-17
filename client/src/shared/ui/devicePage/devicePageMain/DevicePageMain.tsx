@@ -1,43 +1,47 @@
-import { useState } from 'react'
+import { FC } from 'react'
+import { Button } from 'react-bootstrap'
 import Image from 'react-bootstrap/Image'
+import { useGetBrandByIdQuery, useGetTypeByIdQuery } from 'shared/api/devices/devicesApi'
+import { TDevice } from 'shared/types'
 import styles from './DevicePageMain.module.css'
-import DeviceTypeBrandName from './DeviceTypeNameBrand.js/DeviceTypeBrandName'
-import DeviceInfo from './info/DeviceInfo'
-import DeviceAddBasket from './palette/addBasket/DeviceAddBasket'
-import ColorPalette from './palette/ColorPalette'
 
-export const DevicePageMain = ({ device, brandName, typeName }) => {
+type TDevicePageMainProps = {
+	device: TDevice
+}
 
-	const [palette, setPallete] = useState([
-		{ id: 1, name: 'Красный', color: 'rgb(255, 0, 0)' },
-		{ id: 2, name: 'Черный', color: 'rgb(12, 12, 12)' },
-		{ id: 3, name: 'Белый', color: 'rgb(246,246,246)' },
-	]
-	)
+export const DevicePageMain: FC<TDevicePageMainProps> = ({ device }) => {
 
-	return (
-		<div className={styles.devicePageMainWrapper} >
-			<div className={styles.devicePageImage}>
-				<Image src={process.env.REACT_APP_API_URL + '/' + device.img} />
+	const getBrandByIdQuery = useGetBrandByIdQuery(device.brandId)
+	const getTypeByIdQuery = useGetTypeByIdQuery(device.typeId)
+
+
+	if (getBrandByIdQuery.isLoading || getTypeByIdQuery.isLoading) {
+		return <h1>Загрузка...</h1>
+	}
+
+	if (getBrandByIdQuery.isError || getTypeByIdQuery.isError) {
+		return <h1>Ошибка Загрузки</h1>
+	}
+
+	if (getBrandByIdQuery.data && getTypeByIdQuery.data) {
+		return (
+			<div className={styles.devicePageMainWrapper} >
+				<div className={styles.devicePageImage}>
+					<Image src={import.meta.env.VITE_API_URL + '/' + device.img} />
+				</div>
+				<div className={styles.deviceCharacteristicsWrapper}>
+					<div>{getBrandByIdQuery.data.name}</div>
+					<div>{getTypeByIdQuery.data.name}</div>
+				</div>
+				<div style={{ padding: '0 10px' }}>
+					<Button>КНОПКА</Button>
+				</div>
 			</div>
-			<div className={styles.deviceCharacteristicsWrapper}>
-				<DeviceTypeBrandName brandName={brandName} typeName={typeName} device={device} />
-				<ColorPalette palette={palette} />
-				{device.info.length ?
-					<div>
-						<h4 style={{ fontSize: 18, lineHeight: '21px', color: 'rgb(12, 12, 12)', margin: '0 0 20px 0' }}>Характеристики:</h4>
-						{device.info.map((i, idx) => <DeviceInfo key={idx} deviceInfo={i} />)
-						}
-						<h4 style={{ color: "rgb(9,29,158)", fontSize: 18, lineHeight: "21px" }}>Все характеристики</h4>
-					</div>
-					:
-					''
-				}
-			</div>
-			<div style={{ padding: '0 10px' }}>
-				<DeviceAddBasket device={device} />
-			</div>
-		</div>
-	)
+		)
+	}
+
+	return null
+
+
 }
 
