@@ -1,14 +1,4 @@
-export type TDevice = {
-  id: number;
-  name: string;
-  price: number;
-  rating: number;
-  img: string;
-  brandId: number;
-  typeId: number;
-  createdAt: string;
-  updatedAt: string
-}
+import type { TDevice } from 'shared/types';
 
 
 export type AsSliderProps = {

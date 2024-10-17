@@ -1,20 +1,21 @@
-import { useContext } from 'react'
+/* import { useContext } from 'react'
 import Button from 'react-bootstrap/esm/Button'
 import { useNavigate } from 'react-router-dom'
 import { Context } from '../../index'
 import { ADMIN_ROUTE } from '../../router/paths'
-
+ */
 export const Profile = () => {
-	const { user } = useContext(Context)
-	const navigate = useNavigate()
-	const logout = () => {
-		user.setIsAuth(false)
-		localStorage.removeItem('token')
-	}
+	/* 	const { user } = useContext(Context)
+		const navigate = useNavigate()
+		const logout = () => {
+			user.setIsAuth(false)
+			localStorage.removeItem('token')
+		} */
 
 	return (
 		<div className='d-flex align-items-center justify-content-center'>
-			<div className='d-flex flex-column align-items-center'>
+			PROFILEPAGE
+			{/* <div className='d-flex flex-column align-items-center'>
 				{
 					user.isAuth ?
 						<div className='d-flex flex-column align-items-center'>
@@ -24,7 +25,7 @@ export const Profile = () => {
 						</div> :
 						''
 				}
-			</div>
+			</div> */}
 		</div>
 	)
 }

@@ -1,14 +1,15 @@
-import { useContext, useState } from 'react';
+/* import { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { login, registartion } from '../../http/userAPI';
-import { Context } from '../../index';
-import { LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from '../../router/paths';
-
+ import { Link, useLocation, useNavigate } from 'react-router-dom';
+ import { login, registartion } from '../../http/userAPI';
+ import { Context } from '../../index'; */
+/* import { LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from '../../router/paths';
+ */
+import Container from 'react-bootstrap/Container';
 export const Auth = () => {
-	const navigate = useNavigate()
+	/* const navigate = useNavigate()
 	const { user } = useContext(Context)
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
@@ -32,11 +33,12 @@ export const Auth = () => {
 				navigate(SHOP_ROUTE)
 			})
 			.catch(e => alert(`Ошибка registration ${e.response.data.message}`))
-		return userData
-	}
+		return userData */
+
 	return (
 		<Container>
-			<Form style={{ maxWidth: '350px', margin: '0px auto' }}>
+			AUTHPAGE
+			{/* 	<Form style={{ maxWidth: '350px', margin: '0px auto' }}>
 				<h1 style={{ margin: '0 0 30px 0', textAlign: 'center' }}>{isLogin ? 'Авторизация' : 'Регистрация'}</h1>
 				<Form.Group className="mb-3" controlId="formBasicEmail">
 					<Form.Label>Email</Form.Label>
@@ -61,7 +63,7 @@ export const Auth = () => {
 					</Button>
 					<p>нет аккаунта?<Link to={isLogin ? REGISTRATION_ROUTE : LOGIN_ROUTE} style={{ color: 'teal' }}>{isLogin ? 'Зарегестрируйся!' : 'Авторизуйся'}</Link></p>
 				</div>
-			</Form>
+			</Form> */}
 		</Container>
 	)
 }

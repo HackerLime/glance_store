@@ -1,7 +1,6 @@
-import SVGFBStar from '../UI/icons/SVGFBStar'
-import SVGFBStarF from '../UI/icons/SVGFBStarF'
-import FeedbackItems from './feedback/FeedbackItems'
-import ReviewImages from './feedback/ReviewImages'
+import { SVGFBStar, SVGFBStarF } from 'shared/assets/icons'
+import { FeedbackItems } from 'shared/ui/devicePage/feedback'
+import { ReviewImages } from '../reviewImages'
 
 export const DevicePageFooter = () => {
 	const feedBack = { reviews: 325, ratings: 2000, middleRating: 5 }

@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import { Fancybox as NativeFancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
-function Fancybox(props) {
+export const Fancybox = (props) => {
 	const containerRef = useRef(null);
 
 	useEffect(() => {
@@ -23,4 +23,3 @@ function Fancybox(props) {
 	return <div ref={containerRef}>{props.children}</div>;
 }
 
-export default Fancybox;

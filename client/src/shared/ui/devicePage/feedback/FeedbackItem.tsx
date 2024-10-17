@@ -1,6 +1,6 @@
-import SVGStarS from '../../UI/icons/SVGFBStarsmall'
+import { SVGFBStarsmall } from 'shared/assets/icons'
 import styles from './FeedbackItem.module.css'
-const FeedbackItem = ({ user, userRate }) => {
+export const FeedbackItem = ({ user, userRate }) => {
 
 	return (
 		<div className={styles.feedBackItemWrapper}>
@@ -11,11 +11,11 @@ const FeedbackItem = ({ user, userRate }) => {
 				<div style={{ margin: '0 16px 0 0' }}>
 					<div style={{ color: 'rgb(69,69,69)', fontWeight: 300, margin: '0 0 4px 0' }}>{user.name}</div>
 					<div className='d-flex'>
-						<SVGStarS style={{ margin: '0 4px 0 0' }} />
-						<SVGStarS style={{ margin: '0 4px 0 0' }} />
-						<SVGStarS style={{ margin: '0 4px 0 0' }} />
-						<SVGStarS style={{ margin: '0 4px 0 0' }} />
-						<SVGStarS />
+						<SVGFBStarsmall style={{ margin: '0 4px 0 0' }} />
+						<SVGFBStarsmall style={{ margin: '0 4px 0 0' }} />
+						<SVGFBStarsmall style={{ margin: '0 4px 0 0' }} />
+						<SVGFBStarsmall style={{ margin: '0 4px 0 0' }} />
+						<SVGFBStarsmall />
 					</div>
 				</div>
 				<div style={{ fontWeight: 300, lineHeight: "19px", color: 'rgb(12,12,12)' }}>{userRate.date}</div>
@@ -33,4 +33,3 @@ const FeedbackItem = ({ user, userRate }) => {
 	)
 }
 
-export default FeedbackItem

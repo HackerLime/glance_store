@@ -1,31 +1,29 @@
 import { Container } from 'react-bootstrap'
-import { useLocation } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useGetDeviceByIdQuery } from 'shared/api/devices/devicesApi'
+import { DevicePageMain } from 'shared/ui/devicePage'
 /* import { DevicePageFooter } from 'shared/ui/devicePage/devicePageFooter'
  */ import { DevicePageHeader } from 'shared/ui/devicePage/devicePageHeader'
 /* import { DevicePageMain } from 'shared/ui/devicePage/devicePageMain'
  */ import { LoadingAnimation } from 'shared/ui/loadingAnimation'
 export const DevicePage = () => {
-	const location = useLocation()
-	console.log(location)
-	const deviceQuery = useGetDeviceByIdQuery(1)
+	const params = useParams()
+	const { data, isError, isLoading } = useGetDeviceByIdQuery(params.id)
 
-
-	if (deviceQuery.isLoading) {
+	if (isLoading) {
 		return <LoadingAnimation />
 	}
 
-	if (deviceQuery.isError) {
+	if (isError) {
 		return <h1>Ошибка загрузка deviceQuery</h1>
 	}
 
-	if (deviceQuery.data) {
-
+	if (data) {
 		return (
 			<Container>
 				<DevicePageHeader breadCrumbs='Карточка товара' backText='Карточка Товара' />
-				{/* 				<DevicePageMain brandName={brandName} typeName={typeName} device={device} />
- */}{/* 				<DevicePageFooter />
+				<DevicePageMain device={data} />
+				{/* 				<DevicePageFooter />
  */}			</Container>
 
 		)

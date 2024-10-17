@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import FeedbackItem from './FeedbackItem'
-import FBFox from '../../../assets/FBFox.jpg'
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode, Pagination } from 'swiper/modules';
+import { useEffect, useState } from 'react';
+import FBFox from 'shared/assets/img/feedback/FBFox.jpg';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
+import { FreeMode, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { useScreenWidth } from '../../../hooks/useScreenWidth';
+import { FeedbackItem } from './FeedbackItem';
 
-const FeedbackItems = () => {
+export const FeedbackItems = () => {
 	const [mySlidesPerView, setMySlidesPerView] = useState(0.9)
 	const screenWidth = useScreenWidth()
 	const user = { id: 1, img: FBFox, name: 'Илон Маск' }
@@ -57,4 +57,3 @@ const FeedbackItems = () => {
 	)
 }
 
-export default FeedbackItems
