@@ -6,7 +6,7 @@ export const DevicePageFooter = () => {
 	const feedBack = { reviews: 325, ratings: 2000, middleRating: 5 }
 
 	return (
-		<div>
+		<footer>
 			<div>
 				<h6 style={{ fontSize: 32, lineHeight: '38px', color: "rgb(12,12,12)", margin: '0 0 24px 0' }}>Отзывы</h6>
 				<div className='d-flex' style={{ margin: '0 0 24px 0' }} >
@@ -26,7 +26,7 @@ export const DevicePageFooter = () => {
 					<FeedbackItems />
 				</div>
 			</div>
-		</div >
+		</footer >
 	)
 }
 

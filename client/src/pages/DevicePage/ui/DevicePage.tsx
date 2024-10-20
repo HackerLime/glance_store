@@ -1,11 +1,11 @@
 import { Container } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { useGetDeviceByIdQuery } from 'shared/api/devices/devicesApi'
-import { DevicePageMain } from 'shared/ui/devicePage'
-/* import { DevicePageFooter } from 'shared/ui/devicePage/devicePageFooter'
- */ import { DevicePageHeader } from 'shared/ui/devicePage/devicePageHeader'
-/* import { DevicePageMain } from 'shared/ui/devicePage/devicePageMain'
- */ import { LoadingAnimation } from 'shared/ui/loadingAnimation'
+import { DevicePageFooter, DevicePageMain } from 'shared/ui/devicePage'
+import { LoadingAnimation } from 'shared/ui/loadingAnimation'
+import { PageHeader } from 'widgets/pageHeader/ui/PageHeader'
+
+
 export const DevicePage = () => {
 	const params = useParams()
 	const { data, isError, isLoading } = useGetDeviceByIdQuery(params.id)
@@ -21,10 +21,10 @@ export const DevicePage = () => {
 	if (data) {
 		return (
 			<Container>
-				<DevicePageHeader breadCrumbs='Карточка товара' backText='Карточка Товара' />
+				<PageHeader description='Карточка Товара' />
 				<DevicePageMain device={data} />
-				{/* 				<DevicePageFooter />
- */}			</Container>
+				<DevicePageFooter />
+			</Container>
 
 		)
 	}
