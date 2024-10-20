@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap'
 import Image from 'react-bootstrap/Image'
 import { useGetBrandByIdQuery, useGetTypeByIdQuery } from 'shared/api/devices/devicesApi'
 import { TDevice } from 'shared/types'
+import { DevicePrice } from 'shared/ui/device/devicePrice'
 import styles from './DevicePageMain.module.css'
 
 type TDevicePageMainProps = {
@@ -14,7 +15,6 @@ export const DevicePageMain: FC<TDevicePageMainProps> = ({ device }) => {
 	const getBrandByIdQuery = useGetBrandByIdQuery(device.brandId)
 	const getTypeByIdQuery = useGetTypeByIdQuery(device.typeId)
 
-
 	if (getBrandByIdQuery.isLoading || getTypeByIdQuery.isLoading) {
 		return <h1>Загрузка...</h1>
 	}
@@ -25,18 +25,19 @@ export const DevicePageMain: FC<TDevicePageMainProps> = ({ device }) => {
 
 	if (getBrandByIdQuery.data && getTypeByIdQuery.data) {
 		return (
-			<div className={styles.devicePageMainWrapper} >
-				<div className={styles.devicePageImage}>
+			<main className={styles.devicePageMainWrapper} >
+				<section className={styles.devicePageImage}>
 					<Image src={import.meta.env.VITE_API_URL + '/' + device.img} />
-				</div>
-				<div className={styles.deviceCharacteristicsWrapper}>
-					<div>{getBrandByIdQuery.data.name}</div>
-					<div>{getTypeByIdQuery.data.name}</div>
-				</div>
-				<div style={{ padding: '0 10px' }}>
-					<Button>КНОПКА</Button>
-				</div>
-			</div>
+				</section>
+				<section className={styles.deviceCharacteristicsWrapper}>
+					<h2>{getTypeByIdQuery.data.name} {getBrandByIdQuery.data.name} {device.name}</h2>
+					{device.info?.length ? <h2>Надо развернуть info</h2> : null}
+				</section>
+				<section className={styles.devicePage__priceAndAddBasket} >
+					<DevicePrice devicePrice={device.price} isDevicePage={true} />
+					<Button onClick={() => console.log('addBasketAction')}>В корзину</Button>
+				</section>
+			</main>
 		)
 	}
 

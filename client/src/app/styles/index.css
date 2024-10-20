@@ -22,11 +22,11 @@ body {
   min-height: 100vh;
   line-height: 1.5;
   /*  */
- /*  background-color: #f6f6f6; */
+/*     background-color: #f6f6f6; 
+ */
  /*  */
   background-color: #312828; 
   color: inherit;
- 
  padding-top: 91px;
  padding-bottom: 200px;
 }

@@ -1,0 +1,16 @@
+.breadCrumbs__wrapper{
+  margin-bottom:2em ;
+  display: flex;
+  align-items: center;
+}
+
+.breadCrumbs__link{
+text-decoration: none;
+color: #ABABAB;
+}
+
+.breadCrumbs__description{
+  font-size: 0.875em;
+  line-height: 1.1875em;
+  color: #838383;
+}
