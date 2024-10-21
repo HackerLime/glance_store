@@ -30,7 +30,6 @@ export const FeedbackItems = () => {
 		}
 		if (screenWidth < 470) {
 			setMySlidesPerView(1.1)
-			console.log(1)
 		}
 
 
