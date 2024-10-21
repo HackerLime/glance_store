@@ -1,15 +1,15 @@
 import { useState } from 'react'
 import Dropdown from 'react-bootstrap/Dropdown'
-import SVGFilter from '../UI/icons/SVGFilter'
-const FilterVariant = ({ sortDevices, filterVariants }) => {
+import { SVGFilter } from 'shared/assets/icons'
+export const FilterSortBy = ({ sortDevices, filterVariants }) => {
 	const [selectedItem, setSelectedItem] = useState('')
 	const selectAction = (id, name) => {
 		setSelectedItem(name)
 		sortDevices(id)
 	}
 	return (
-		<div className='d-flex align-items-center' style={{ margin: '0 0 24px 0' }}>
-			<div style={{ margin: '0 8px 0 0' }}><SVGFilter /></div>
+		<div className='d-flex align-items-center' style={{ marginBottom: '1.5em' }}>
+			<div style={{ marginRight: '0.5em' }}><SVGFilter /></div>
 			<div>
 				<Dropdown
 				>
@@ -30,4 +30,3 @@ const FilterVariant = ({ sortDevices, filterVariants }) => {
 	)
 }
 
-export default FilterVariant

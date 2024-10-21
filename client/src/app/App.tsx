@@ -3,7 +3,7 @@ import { Shop } from 'pages/ShopPage';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { NavBar } from '../widgets/Navbar';
-import { devRoute } from './routers/router';
+import { publicRoutes } from './routers/router';
 import { store } from './store/store';
 
 export const App = () => {
@@ -19,7 +19,11 @@ export const App = () => {
 			<BrowserRouter>
 				<NavBar />
 				<Routes>
-					<Route path={devRoute.path} element={<devRoute.component />} />
+					{
+						publicRoutes.map(route =>
+							<Route path={route.path} element={<route.component />} />
+						)
+					}
 					<Route path='*' element={<Shop />} />
 
 				</Routes>

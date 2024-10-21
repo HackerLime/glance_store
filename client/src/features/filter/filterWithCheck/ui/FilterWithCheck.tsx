@@ -1,7 +1,7 @@
-import FilterCheckItem from './FilterCheckItem'
-import FilterLabel from './FilterLabel'
+import { FilterLabel } from '../../filterLabel'
+import { FilterCheckItem } from './FilterCheckItem'
 
-const FilterWithCheck = ({ lable, filterParams, setChecked, checked }) => {
+export const FilterWithCheck = ({ lable, filterParams, setChecked, checked }) => {
 
 	return (
 		<div style={{ margin: '0 0 20px 0' }}>
@@ -13,4 +13,3 @@ const FilterWithCheck = ({ lable, filterParams, setChecked, checked }) => {
 	)
 }
 
-export default FilterWithCheck

@@ -1,6 +1,6 @@
 import Form from 'react-bootstrap/Form';
 import classes from './FilterCheckItem.module.css';
-const FilterCheckItem = ({ children, id, setChecked, checked }) => {
+export const FilterCheckItem = ({ children, id, setChecked, checked }) => {
 	const changeChecked = (id, name, isChecked) => {
 		if (isChecked) {
 			setChecked([...checked, { id, name, isChecked }])
@@ -17,4 +17,3 @@ const FilterCheckItem = ({ children, id, setChecked, checked }) => {
 	)
 }
 
-export default FilterCheckItem

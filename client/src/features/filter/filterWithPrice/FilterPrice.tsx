@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/esm/Button'
 import Form from 'react-bootstrap/Form'
 import classes from './FilterPrice.module.css'
 
-const FilterPrice = ({ from, to, sortByPrice }) => {
+export const FilterPrice = ({ from, to, sortByPrice }) => {
 	const [prices, setPrices] = useState({ defaultFrom: '', defaultTo: '' })
 
 	const searchAction = () => {
@@ -30,4 +30,3 @@ const FilterPrice = ({ from, to, sortByPrice }) => {
 	)
 }
 
-export default FilterPrice

@@ -1,62 +1,50 @@
-/* import { useContext, useEffect, useState } from 'react'
+import { Device } from 'entities/device'
+import { FilterSortBy, FilterWithCheck, FilterWithPrice } from 'features/filter'
+import { useState } from 'react'
 import Offcanvas from 'react-bootstrap/Offcanvas'
-import { useScreenWidth } from '../../hooks/useScreenWidth'
-import { fetchBasketDevices, fetchBrands, fetchDevices, fetchTypes } from '../../http/deviceAPI'
-import { Context } from '../../index'
-import FilterVariant from '../Catalog/FilterVariant'
-import FilterWithCheck from '../Catalog/FilterWithCheck'
-import FilterWithPrice from '../Catalog/FilterWithPrice'
-import DevicePageHeader from '../DevicePage/DevicePageHeader'
-import DeviceAsList from '../UI/device/deviceaslist/DeviceAsList'
-import SVGList from '../UI/icons/catalog/catalogpage/SVGList'
-import SVGTile from '../UI/icons/catalog/catalogpage/SVGTile'
-import SVGFilterIcon from '../UI/icons/SVGFilterIcon'
-import BlueLine from '../UI/lines/BlueLine'
-import LoadingAnimation from '../UI/loadingAnimation/LoadingAnimation'
-import DevicesSlider from '../UI/slider/DevicesSlider'
- */
+import { SVGFilterIcon, SVGList, SVGTile } from 'shared/assets/icons'
+import { useScreenWidth } from 'shared/hooks/useScreenWidth'
+import { BlueLine } from 'shared/ui/lines'
+import { LoadingAnimation } from 'shared/ui/loadingAnimation'
+import { DevicesSlider } from 'widgets/devicesSlider'
+import { PageHeader } from 'widgets/pageHeader'
+
 export const Catalog = () => {
-	/* const { device } = useContext(Context)
+
 	const [catalogDevices, setCatalogDevices] = useState([])
 	const [typeChecked, setTypeChecked] = useState([])
 	const [brandChecked, setBrandChecked] = useState([])
 	const [cancelVisible, setCancelVisible] = useState(false)
-	const [isLoading, setIsLoading] = useState(false)
 
-	useEffect(() => {
+
+	/* useEffect(() => {
 		fetchBrands().then(data => device.setBrands(data)).catch(e => console.log(`Ошибка fetchBrands ${e.message}`))
 		fetchTypes().then(data => device.setTypes(data)).catch(e => console.log(`Ошибка fetchTypes ${e.message}`))
 		fetchDevices().then(data => device.setDevices(data.rows)).catch(e => console.log(`Ошибка fetchDevices ${e.message}`))
 
-	}, [])
+	}, []) */
 
-	useEffect(() => {
-		if (localStorage.getItem('token')) {
-			fetchBasketDevices().then(data => device.setBasketDevicesData(data)).catch(e => console.log(e))
-		}
-	}, [])
 
-	useEffect(() => {
-		setCatalogDevices([...device.devices])
-	}, [device.devices])
 
-	useEffect(() => {
-		let checkedTypeIds = []
-		typeChecked.map(i => checkedTypeIds.push(i.id))
-		setCatalogDevices([...catalogDevices].filter(i => checkedTypeIds.includes(i.typeId)))
-		if (!checkedTypeIds.length) {
-			setCatalogDevices([...device.devices])
-		}
-	}, [typeChecked])
 
-	useEffect(() => {
-		let checkedBrandIds = []
-		brandChecked.map(i => checkedBrandIds.push(i.id))
-		setCatalogDevices([...catalogDevices].filter(i => checkedBrandIds.includes(i.typeId)))
-		if (!checkedBrandIds.length) {
-			setCatalogDevices([...device.devices])
-		}
-	}, [brandChecked])
+
+	/* 	useEffect(() => {
+			let checkedTypeIds = []
+			typeChecked.map(i => checkedTypeIds.push(i.id))
+			setCatalogDevices([...catalogDevices].filter(i => checkedTypeIds.includes(i.typeId)))
+			if (!checkedTypeIds.length) {
+				setCatalogDevices([...device.devices])
+			}
+		}, [typeChecked])
+	
+		useEffect(() => {
+			let checkedBrandIds = []
+			brandChecked.map(i => checkedBrandIds.push(i.id))
+			setCatalogDevices([...catalogDevices].filter(i => checkedBrandIds.includes(i.typeId)))
+			if (!checkedBrandIds.length) {
+				setCatalogDevices([...device.devices])
+			}
+		}, [brandChecked]) */
 
 	const variants = [
 		{ id: 1, name: 'сначала Дешевле' },
@@ -88,11 +76,11 @@ export const Catalog = () => {
 			setCancelVisible(true)
 		}
 	}
- */
 
 
 
-	/*function getPrice() {
+
+	function getPrice() {
 		let priceArr = []
 		catalogDevices.map(i => priceArr.push(i.price))
 		let minPrice = Math.min.apply(null, priceArr)
@@ -121,8 +109,8 @@ export const Catalog = () => {
 
 	const [showOffCanvas, setShowOffCanvas] = useState(false)
 	const closeOffCanvas = () => setShowOffCanvas(false)
-	const openOffCanvas = () => setShowOffCanvas(true) */
-	/* if (isLoading) {
+	const openOffCanvas = () => setShowOffCanvas(true)
+	if (isLoading) {
 		return <LoadingAnimation />
 	}
 	if (screenWidth <= 768) {
@@ -140,7 +128,7 @@ export const Catalog = () => {
 					</Offcanvas.Header>
 					<Offcanvas.Body>
 						<div style={{ margin: '0 75px 0 0', minWidth: '289px' }}>
-							<FilterVariant sortDevices={sortDevices} filterVariants={variants} />
+							<FilterSortBy sortDevices={sortDevices} filterVariants={variants} />
 							<div style={{ backgroundColor: 'white', padding: 16, borderRadius: '8px', boxShadow: '1px 1px 20px 0px rgba(0, 0, 0, 0.1)' }}>
 								<FilterWithPrice cancelVisible={cancelVisible} sortByPrice={sortByPrice} from={devicePrice.min} to={devicePrice.max} />
 								<FilterWithCheck checked={typeChecked} setChecked={setTypeChecked} style={{ margin: '0 0 20px 0' }} lable='Тип устройства' filterParams={device.types} />
@@ -151,21 +139,21 @@ export const Catalog = () => {
 				</Offcanvas>
 				<div className='d-flex flex-column' style={{ padding: '0 15px' }}>
 					{catalogDevices.map(i =>
-						<DeviceAsList key={i.id} device={i} />
+						<Device asListItem={true} key={i.id} device={i} />
 					)}
 				</div>
 			</>
 		)
-	} */
+	}
 
 	return (
 
 		<div style={{ maxWidth: '1200px', margin: '0px auto', padding: '0 15px' }}>
 			CATALOGPAGE
-			{/* 	<div><DevicePageHeader breadCrumbs='Каталог' backText='Каталог' /></div>
+			<div><PageHeader breadCrumbs='Каталог' backText='Каталог' /></div>
 			<div className='d-flex'>
 				<div style={{ margin: '0 75px 0 0', minWidth: '289px' }}>
-					<FilterVariant sortDevices={sortDevices} filterVariants={variants} />
+					<FilterSortBy sortDevices={sortDevices} filterVariants={variants} />
 					<div style={{ backgroundColor: 'white', padding: 16, borderRadius: '8px', boxShadow: '1px 1px 20px 0px rgba(0, 0, 0, 0.1)' }}>
 						<FilterWithPrice cancelVisible={cancelVisible} sortByPrice={sortByPrice} from={devicePrice.min} to={devicePrice.max} />
 						<FilterWithCheck checked={typeChecked} setChecked={setTypeChecked} style={{ margin: '0 0 20px 0' }} lable='Тип устройства' filterParams={device.types} />
@@ -187,12 +175,12 @@ export const Catalog = () => {
 						:
 						<div className='d-flex flex-column'>
 							{catalogDevices.map(i =>
-								<DeviceAsList key={i.id} device={i} />
+								<Device asListItem={true} key={i.id} device={i} />
 							)}
 						</div>
 					}
 				</div>
-			</div> */}
+			</div>
 		</div>
 
 	)

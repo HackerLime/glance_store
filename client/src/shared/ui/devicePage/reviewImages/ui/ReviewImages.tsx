@@ -2,7 +2,7 @@ import { Fancybox, FancyboxItem } from 'shared/ui/fancybox'
 import { feedbackStaticImages } from '../utils'
 export const ReviewImages = () => {
 	return (
-		<div className='d-flex'>
+		<div className='d-flex' style={{ marginBottom: '2em' }}>
 			<div>
 				<Fancybox
 					options={{

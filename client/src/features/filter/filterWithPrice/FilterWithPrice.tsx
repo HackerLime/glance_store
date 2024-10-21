@@ -1,7 +1,7 @@
-import FilterLabel from './FilterLabel'
-import FilterPrice from './FilterPrice'
+import { FilterLabel } from '../filterLabel'
+import { FilterPrice } from './FilterPrice'
 
-const FilterWithPrice = ({ from, to, sortByPrice, cancelVisible }) => {
+export const FilterWithPrice = ({ from, to, sortByPrice, cancelVisible }) => {
 
 	return (
 		<div style={{ margin: '0 0 20px 0' }}>
@@ -19,4 +19,3 @@ const FilterWithPrice = ({ from, to, sortByPrice, cancelVisible }) => {
 	)
 }
 
-export default FilterWithPrice
