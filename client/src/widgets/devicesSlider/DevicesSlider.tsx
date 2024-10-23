@@ -17,16 +17,18 @@ type TDevicesSlider = {
 	devices: TDevice[];
 	brands: TBrandAndTypeResponse[];
 	types: TBrandAndTypeResponse[];
+	slidesPerViewProp?: number;
+	spaceBetweenProp?: number
 }
 
-export const DevicesSlider: FC<TDevicesSlider> = ({ devices, brands, types }) => {
+export const DevicesSlider: FC<TDevicesSlider> = ({ devices, brands, types, slidesPerViewProp, spaceBetweenProp }) => {
 
 	const { mySlidesPerView, mySlidesSpaceBetween } = useSliderParams()
 
 	return (
 		<Swiper
-			slidesPerView={mySlidesPerView || 5.5}
-			spaceBetween={mySlidesSpaceBetween || 30}
+			slidesPerView={slidesPerViewProp || mySlidesPerView || 5.5}
+			spaceBetween={spaceBetweenProp || mySlidesSpaceBetween || 30}
 			freeMode={true}
 			modules={[FreeMode, Pagination]}
 			className="mySwiper"

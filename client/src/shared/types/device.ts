@@ -12,3 +12,8 @@ export type TDevice = {
   updatedAt: string
   info?: TDeviceInfoObj[]
 }
+
+export type TBrandAndTypeResponse = {
+  id: number;
+  name: string;
+}
