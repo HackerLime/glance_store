@@ -1,0 +1,1 @@
+export { FilterWithPrice } from './FilterWithPrice';

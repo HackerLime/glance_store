@@ -1,0 +1,20 @@
+.shopCatalogItem__Wrapper{
+cursor: pointer;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+.shopCatalogItem__image_container{
+display: flex;
+align-items: center;
+justify-content: center;
+width: 200px;
+height: 246px;
+background-color:#BCC5FF;
+border-radius: 0.5em;
+margin-bottom: 12px;
+}
+.shopCatalogItem__text{
+  font-size: 1.25em;
+}

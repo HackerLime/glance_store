@@ -1,0 +1,1 @@
+export { DevicePageMain } from './DevicePageMain';

@@ -1,0 +1,1 @@
+export { DevicePageFooter } from './DevicePageFooter';

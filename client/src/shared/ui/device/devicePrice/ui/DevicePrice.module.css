@@ -1,0 +1,38 @@
+.devicePrice{
+	display: flex;
+	margin-bottom:1em;
+	
+	
+	
+}
+
+.devicePrice_devicePage {
+	display: flex;
+	align-items: center;
+	margin-bottom:1.75em;
+}
+
+@media (max-width:320px){
+	.devicePrice{
+		margin-bottom:0.5em;
+	}
+}
+
+.deviceMainPrice{
+	font-size: 1.25em;
+	font-weight: 500;
+	margin-right: 0.5em;
+}
+.deviceMainPrice_devicePage{
+	font-size: 1.5em;
+	font-weight: 500;
+}
+
+.deviceStockPrice{
+	color: rgb(171,171,171);
+	font-size: 0.875em;
+	font-weight: 300;
+	text-decoration: line-through;
+}
+
+
