@@ -1,4 +1,4 @@
-import { useState } from 'react'
+/* import { useState } from 'react'
 
 //! для PriceFilter
 export const [cancelVisible, setCancelVisible] = useState(false)
@@ -10,7 +10,7 @@ export const variants = [
 
 //! Алгоритм Упорядочения по цене min/max
 export const sortDevices = (id) => {
-  /*  switch (id) {
+    switch (id) {
      case 1:
        setCatalogDevices([...catalogDevices].sort((a, b) => a.price - b.price))
        break
@@ -19,14 +19,14 @@ export const sortDevices = (id) => {
        break
      default:
        return catalogDevices
-   } */
+   } 
 }
 
 //! Алгоритм Фильтрации товаров в диапазоне цены min/max
 
 export const devicePrice = getPrice()
 const sortByPrice = (prices) => {
-  /*   if (!prices.defaultFrom && !prices.defaultTo) {
+  /  if (!prices.defaultFrom && !prices.defaultTo) {
       setCancelVisible(false)
       return setCatalogDevices([...device.devices])
     } else {
@@ -34,7 +34,7 @@ const sortByPrice = (prices) => {
       device.devices.map(i => pricesArr.push(i.price))
       pricesArr = pricesArr.filter(i => i >= prices.defaultFrom && i <= prices.defaultTo)
       setCatalogDevices([...catalogDevices].filter(i => pricesArr.includes(i.price)))
-      setCancelVisible(true) */
+      setCancelVisible(true) 
 }
 }
 
@@ -42,12 +42,12 @@ const sortByPrice = (prices) => {
 
 //! алгос для нахождения min и max цены
 export function getPrice() {
- /*  let priceArr = []
+   let priceArr = []
   catalogDevices.map(i => priceArr.push(i.price))
   let minPrice = Math.min.apply(null, priceArr)
   let maxPrice = Math.max.apply(null, priceArr)
   if (Number.isFinite(minPrice) && Number.isFinite(maxPrice)) {
     return { max: maxPrice, min: minPrice }
   } else
-    return { max: 1, min: 0  */}
-} 
+    return { max: 1, min: 0  }
+}  */
