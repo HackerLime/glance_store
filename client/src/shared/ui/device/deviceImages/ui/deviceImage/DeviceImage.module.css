@@ -1,0 +1,8 @@
+.deviceImage__wrapper{
+height: 169px;
+width: 100%;
+}
+.deviceImage__image{
+object-fit: cover;
+min-height: 100%;
+}

@@ -1,0 +1,18 @@
+.navBarMenuWrapper{
+  display: flex;
+  justify-content: space-between;
+  gap: 0 20px;
+}
+
+.navBarMenuItems__authItems{
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+@media(max-width:767px){
+  .navBarMenuItems__authItems{
+    gap: 8px;
+  }
+}
+

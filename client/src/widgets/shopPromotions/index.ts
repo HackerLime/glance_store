@@ -1,0 +1,1 @@
+export { ShopPromotions } from './ui';

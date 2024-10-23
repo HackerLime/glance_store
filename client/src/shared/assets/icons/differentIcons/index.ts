@@ -1,0 +1,11 @@
+export { SVGBasket } from './SVGBasket'
+export { SVGCatalog } from './SVGCatalog'
+export { SVGFBStar } from './SVGFBStar'
+export { SVGFBStarF } from './SVGFBStarF'
+export { SVGFBStarsmall } from './SVGFBStarsmall'
+export { SVGFilter } from './SVGFilter'
+export { SVGFilterIcon } from './SVGFilterIcon'
+export { SVGProfile } from './SVGProfile'
+export { SVGSearch } from './SVGSearch'
+export { SVGSmile } from './SVGSmile'
+

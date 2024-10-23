@@ -1,0 +1,2 @@
+export { DeviceImage } from './DeviceImage';
+

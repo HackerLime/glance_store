@@ -1,0 +1,21 @@
+.deviceWrapper{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	max-width: 169px;
+
+}
+.deviceNamePriceInStock{
+	
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 0 0 20px 0;
+	text-align: center;
+}
+.deviceButton{
+	display: flex;
+	justify-content: center;
+}
+
+

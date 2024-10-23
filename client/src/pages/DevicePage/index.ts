@@ -1,0 +1,2 @@
+export { DevicePage } from './ui';
+

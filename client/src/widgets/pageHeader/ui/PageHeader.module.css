@@ -1,0 +1,14 @@
+.pageHeader__wrapper{
+  margin-bottom: 2.5em;
+}
+.pageHeader__main{
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+}
+.pageHeader__main_description{
+color: #0c0c0c;
+font-size: 2em;
+line-height: 2.375em;
+white-space: nowrap;
+}

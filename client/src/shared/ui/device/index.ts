@@ -1,0 +1,5 @@
+export { DeviceButton } from './deviceButton'
+export { DeviceImages } from './deviceImages'
+export { DeviceInStock } from './deviceInStock'
+export { DeviceName } from './deviceName'
+export { DevicePrice } from './devicePrice'

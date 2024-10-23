@@ -1,0 +1,34 @@
+.devicePageFooter__title{
+  font-size: 2em;
+  line-height: 2.375em;
+  color:#0c0c0c;
+}
+
+.devicePageFooter__feedbackInfo{
+  margin-bottom: 1.5em;
+  color:#454545;
+  font-size: 1.25em;
+  line-height: 1.4375em; 
+}
+
+.feedbackInfo__reviews{
+   margin-right: 1.1875em; 
+}
+
+.feedback__wrapper{
+background-color: #bcc5ff;
+padding: 1.25em 1em;
+overflow: hidden;
+}
+
+.feedback__middleRating{
+  display: flex;
+  margin-bottom: 1em;
+  align-items: center;
+}
+
+.feedback__middleRating span{
+  font-size: 1.25em;
+  color: #0c0c0c;
+  margin-right: 1em;
+}

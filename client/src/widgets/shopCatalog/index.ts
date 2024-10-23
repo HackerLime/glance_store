@@ -1,0 +1,1 @@
+export { ShopCatalog } from './ui';

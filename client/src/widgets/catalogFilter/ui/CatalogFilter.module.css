@@ -1,0 +1,27 @@
+.MobCatalog__icon_wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+  border: 1px dashed black;
+  max-width: 120px;
+  margin-bottom: 15px;
+}
+
+.MobCatalog__icons__text{
+  margin-right: 8px;
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.catalogsFilter__wrapper{
+  margin-right: 75px;
+  min-width: 289px;
+}
+
+.catalogsFilter__filters_container{
+background-color: white;
+padding: 1em;
+border-radius: 0.5em;
+box-shadow: 1px 1px 20px 0px rgba(0, 0, 0, 0.1);
+}
