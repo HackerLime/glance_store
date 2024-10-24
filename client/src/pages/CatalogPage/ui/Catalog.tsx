@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { useGetBrandsQuery, useGetDevicesQuery, useGetTypesQuery } from 'shared/api/devices/devicesApi'
 import { SVGList, SVGTile } from 'shared/assets/icons'
+import { useDeviceApi } from 'shared/hooks/useDeviceApi'
 import { useScreenWidth } from 'shared/hooks/useScreenWidth'
 import { BlueLine } from 'shared/ui/lines'
 import { LoadingAnimation } from 'shared/ui/loadingAnimation'
 import { CatalogFilter } from 'widgets/catalogFilter'
 import { DevicesList } from 'widgets/devicesList'
-import { DevicesSlider } from 'widgets/devicesSlider'
+import { DevicesTiles } from 'widgets/devicesTiles'
 import { PageHeader } from 'widgets/pageHeader'
 
 export const Catalog = () => {
@@ -15,6 +16,11 @@ export const Catalog = () => {
 	const getBrandsResponse = useGetBrandsQuery(undefined)
 	const getTypesResponse = useGetTypesQuery(undefined)
 	const screenWidth = useScreenWidth()
+
+	const newHook = useDeviceApi()
+
+
+
 
 	const [catalogViewStatus, setCatalogViewStatus] = useState('list')
 	const [tileColor, setTileColor] = useState('#ABABAB')
@@ -31,9 +37,6 @@ export const Catalog = () => {
 		setListColor('#0C0C0C')
 		setTileColor('#ABABAB')
 	}
-
-
-
 
 
 	if (getDevicesResponse.isLoading || getBrandsResponse.isLoading || getTypesResponse.isLoading) {
@@ -71,7 +74,7 @@ export const Catalog = () => {
 						{catalogViewStatus === 'tiles' ?
 							<div>
 								<BlueLine />
-								<DevicesSlider devices={getDevicesResponse.data.rows} brands={getBrandsResponse.data} types={getTypesResponse.data} slidesPerViewProp={4.5} />
+								<DevicesTiles brands={getBrandsResponse.data} types={getTypesResponse.data} devices={getDevicesResponse.data.rows} />
 							</div>
 							:
 							<div className='d-flex flex-column'>

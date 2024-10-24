@@ -1,9 +1,13 @@
-import type { PayloadAction } from '@reduxjs/toolkit'
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
+type TInitialState = {
+  brandIds: number[];
+  types: number[];
+  price: { min: number, max: number }
+}
 
-const initialState = {
-  brands: [],
+const initialState: TInitialState = {
+  brandIds: [],
   types: [],
   price: { min: 0, max: 1 }
 }
@@ -12,10 +16,15 @@ const filterSlice = createSlice({
   name: 'filter',
   initialState,
   reducers: {
-    toggleBrandsFilter(state, action) {
-
+    toggleBrand(state, action) {
+      const brandId = action.payload.id
+      if (state.brandIds.includes(brandId)) {
+        state.brandIds.filter(cur => cur !== brandId)
+      } else {
+        state.brandIds.push(action.payload)
+      }
     },
-    toggleTypesFilter(state) {
+    toggleType(state, action) {
 
     },
     setPriceFilter(state, action) {
@@ -24,5 +33,5 @@ const filterSlice = createSlice({
   },
 })
 
-export const { toggleBrandsFilter, toggleTypesFilter, setPriceFilter } = filterSlice.actions
+export const { toggleBrand, toggleType, setPriceFilter } = filterSlice.actions
 export default filterSlice.reducer
