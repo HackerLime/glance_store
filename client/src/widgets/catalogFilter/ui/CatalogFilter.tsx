@@ -1,4 +1,4 @@
-import { FilterWithCheck } from 'features/filter'
+import { FilterWithCheck, FilterWithPrice } from 'features/filter'
 import { FC, useState } from 'react'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import { SVGFilterIcon } from 'shared/assets/icons'
@@ -6,13 +6,17 @@ import { TCatalogFilterProps } from '../types'
 import styles from './CatalogFilter.module.css'
 
 
-export const CatalogFilter: FC<TCatalogFilterProps> = ({ isMobile, isDesktop, types, brands }) => {
-
+export const CatalogFilter: FC<TCatalogFilterProps> = ({ isMobile, isDesktop, types, brands, devices }) => {
+  console.log(devices)
   const [typeChecked, setTypeChecked] = useState([])
   const [brandChecked, setBrandChecked] = useState([])
   const [showOffCanvas, setShowOffCanvas] = useState(false)
   const closeOffCanvas = () => setShowOffCanvas(false)
   const openOffCanvas = () => setShowOffCanvas(true)
+
+
+
+
 
   if (isMobile) {
     return (
@@ -47,8 +51,8 @@ export const CatalogFilter: FC<TCatalogFilterProps> = ({ isMobile, isDesktop, ty
       <aside className={styles.catalogsFilter__wrapper}>
         {/* 					<FilterSortBy sortDevices={sortDevices} filterVariants={variants} />
 	 */}					<div className={styles.catalogsFilter__filters_container}>
-          {/* 						<FilterWithPrice cancelVisible={cancelVisible} sortByPrice={sortByPrice} from={devicePrice.min} to={devicePrice.max} />
-	 */}						<FilterWithCheck checked={typeChecked} setChecked={setTypeChecked} lable='Тип устройства' filterParams={types} />
+          <FilterWithPrice />
+          <FilterWithCheck checked={typeChecked} setChecked={setTypeChecked} lable='Тип устройства' filterParams={types} />
           <FilterWithCheck checked={brandChecked} setChecked={setBrandChecked} lable='Брэнд устройства' filterParams={brands} />
         </div>
       </aside>
