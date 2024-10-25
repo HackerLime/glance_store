@@ -1,29 +1,45 @@
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import Button from 'react-bootstrap/esm/Button'
 import Form from 'react-bootstrap/Form'
-import classes from './FilterPrice.module.css'
+import styles from './FilterPrice.module.css'
 
-export const FilterPrice = ({ from, to, sortByPrice }) => {
-	const [prices, setPrices] = useState({ defaultFrom: '', defaultTo: '' })
+
+type TFilterPriceProps = {
+	sortByPrice: (from: number, to: number) => void;
+	defFrom: number;
+	defTo: number
+}
+
+export const FilterPrice: FC<TFilterPriceProps> = ({ sortByPrice, defFrom, defTo }) => {
+
+
+	type TPriceState = {
+		from: number | null,
+		to: number | null
+	}
+	const [prices, setPrices] = useState<TPriceState>({ from: null, to: null })
 
 	const searchAction = () => {
-		sortByPrice(prices)
-		setPrices({ defaultFrom: '', defaultTo: '' })
+		if (prices.from && prices.to) {
+			sortByPrice(prices.from, prices.to)
+		}
+		setPrices({ from: null, to: null })
 	}
+
 	return (
 		<div>
-			<div className='d-flex align-items-center' style={{ margin: '0 0 10px 0' }} >
+			<div className={styles.formControls__wrapper} >
 				<Form.Control
 					type='number'
-					value={prices.defaultFrom}
-					onChange={e => setPrices({ ...prices, defaultFrom: Number(e.target.value) })}
-					className={classes.pricesFirstElem} placeholder={`от ${from || 0} ₽ `} />
-				<div className={classes.pricesMiddleLine}></div>
+					value={Number(prices.from)}
+					onChange={e => setPrices({ ...prices, from: Number(e.target.value) })}
+					className={styles.pricesFirstElem} placeholder={`от ${defFrom} ₽ `} />
+				<div className={styles.pricesMiddleLine}></div>
 				<Form.Control
 					type='number'
-					value={prices.defaultTo}
-					onChange={e => setPrices({ ...prices, defaultTo: Number(e.target.value) })}
-					className={classes.pricesLastElem} placeholder={`до ${to || 1} ₽ `} />
+					value={Number(prices.to)}
+					onChange={e => setPrices({ ...prices, to: Number(e.target.value) })}
+					className={styles.pricesLastElem} placeholder={`до ${defTo} ₽ `} />
 			</div>
 			<Button onClick={() => searchAction()}>Найти</Button>
 		</div>

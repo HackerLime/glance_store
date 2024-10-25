@@ -1,0 +1,31 @@
+.mobCatalog__wrapper{
+  display: flex;
+  flex-direction: column;
+  padding: 0 1em;
+}
+
+
+.deskCatalog__wrapper{
+   max-width: 1200px;
+   margin: 0 auto;
+   padding: 0 1em;
+}
+
+.deskCatalog__container{
+  display: flex;
+
+}
+
+.deskCatalog__content{
+  display: flex;
+  flex-direction: column;
+  max-width: 860px;
+}
+
+.deskCatalog__content_icons{
+  margin-bottom: 1.5em;
+}
+.deskCatalog__content_devicesList_container{
+display: flex;
+flex-direction: column;
+}

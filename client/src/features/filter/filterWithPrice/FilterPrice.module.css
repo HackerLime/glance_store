@@ -11,3 +11,8 @@ max-width: 89px;
 	background: #C1C1C1;
 	height: 1px;
 }
+.formControls__wrapper{
+	display: flex;
+	align-items: center;
+	margin-bottom: 0.652em;
+}
