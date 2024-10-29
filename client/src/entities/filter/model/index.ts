@@ -1,2 +1,2 @@
-export { setPriceFilter, toggleBrand, toggleType } from './filter.slice';
+export { addPriceRange, toggleBrandId, toggleTypeId } from './filter.slice';
 
