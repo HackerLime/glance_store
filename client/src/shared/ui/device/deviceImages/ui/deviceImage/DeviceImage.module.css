@@ -5,4 +5,5 @@ width: 100%;
 .deviceImage__image{
 object-fit: cover;
 min-height: 100%;
+border-radius: 10px;
 }

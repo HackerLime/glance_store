@@ -1,1 +1,2 @@
-export { setPriceFilter, toggleBrand, toggleType } from './model';
+export { addPriceRange, toggleBrandId, toggleTypeId } from './model';
+

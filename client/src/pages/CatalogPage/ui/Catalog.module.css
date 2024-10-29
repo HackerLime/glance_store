@@ -1,14 +1,17 @@
-.mobCatalog__wrapper{
-  display: flex;
-  flex-direction: column;
+
+
+.catalog__wrapper{
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 0 1em;
 }
 
-
-.deskCatalog__wrapper{
-   max-width: 1200px;
-   margin: 0 auto;
-   padding: 0 1em;
+@media (max-width:768px){
+  .catalog__wrapper{
+    display: flex;
+    flex-direction: column;
+    padding: 0 1em;
+  } 
 }
 
 .deskCatalog__container{
