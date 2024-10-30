@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { TBrandAndTypeResponse, TDevice, TDeviceResponse } from 'shared/types';
 import { baseUrl } from '../config';
 export const devicesApi = createApi({
 
@@ -6,25 +7,25 @@ export const devicesApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
 
-    getDevices: builder.query({
+    getDevices: builder.query<TDeviceResponse, undefined>({
       query: () => '/api/device',
     }),
 
-    getDeviceById: builder.query({
+    getDeviceById: builder.query<TDevice, number>({
       query: (payload) => `/api/device/${payload}`,
     }),
 
-    getBrands: builder.query({
+    getBrands: builder.query<TBrandAndTypeResponse[], undefined>({
       query: () => '/api/brand',
     }),
-    getBrandById: builder.query({
+    getBrandById: builder.query<TBrandAndTypeResponse, undefined>({
       query: (payload) => `/api/brand/${payload}`,
     }),
 
-    getTypes: builder.query({
+    getTypes: builder.query<TBrandAndTypeResponse[], undefined>({
       query: () => '/api/type',
     }),
-    getTypeById: builder.query({
+    getTypeById: builder.query<TBrandAndTypeResponse, undefined>({
       query: (payload) => `/api/type/${payload}`,
     }),
   }),
