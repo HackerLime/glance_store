@@ -10,12 +10,16 @@ import styles from './CatalogFilter.module.css'
 
 export const CatalogFilter: FC<TCatalogFilterProps> = ({ isMobile, isDesktop, types, brands, devices }) => {
 
+  const filter = useSelector<RootState>(state => state.filter)
+  console.log(filter)
+
+  console.log(devices)
   const [showOffCanvas, setShowOffCanvas] = useState(false)
   const closeOffCanvas = () => setShowOffCanvas(false)
   const openOffCanvas = () => setShowOffCanvas(true)
   const [cancelVisible, setCancelVisible] = useState(false)
 
-  const filter = useSelector<RootState>(state => state.filter)
+
 
   const dispatch = useDispatch()
 

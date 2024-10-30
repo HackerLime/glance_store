@@ -1,1 +1,2 @@
-export type { TDevice,TBrandAndTypeResponse } from './device';
+export type { TBrandAndTypeResponse, TDevice, TDeviceResponse } from './device';
+

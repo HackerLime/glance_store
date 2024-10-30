@@ -1,14 +1,18 @@
 import { Device } from 'entities/device';
 import { TDevice } from 'entities/device/model';
 import { FC } from 'react';
-import styles from './DevicesTiles.module.css'
 import type { TBrandAndTypeResponse } from 'shared/types';
+import { SadMessage } from 'shared/ui/sadMessage';
+import styles from './DevicesTiles.module.css';
 type TDevicesTilesProps = {
   devices: TDevice[];
   brands: TBrandAndTypeResponse[];
   types: TBrandAndTypeResponse[];
 }
 export const DevicesTiles: FC<TDevicesTilesProps> = ({ devices, brands, types }) => {
+  if (!devices.length) {
+    return <SadMessage message='Устройств не найдено!' />
+  }
   return (
     <div className={styles.tiles__wrapper} >
       {devices.map(i => {
