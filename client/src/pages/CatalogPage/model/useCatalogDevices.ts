@@ -1,5 +1,6 @@
 import type { RootState } from 'app/store/store';
-import { useSelector } from 'react-redux';
+import { addPriceRange } from 'entities/filter';
+import { useDispatch, useSelector } from 'react-redux';
 import { useGetDevicesQuery } from 'shared/api/devices/devicesApi';
 
 
@@ -8,7 +9,7 @@ export const useCatalogDevices = () => {
 
   const devicesResponse = useGetDevicesQuery(undefined);
   const filter = useSelector((state: RootState) => state.filter);
-
+  const dispatch = useDispatch()
   if (devicesResponse.data) {
     let filteredDevices = devicesResponse.data.rows || []
 
@@ -21,6 +22,8 @@ export const useCatalogDevices = () => {
       const brandIds = new Set(filter.brandIds)
       filteredDevices = filteredDevices.filter(cur => brandIds.has(cur.brandId))
     }
+
+
 
     return filteredDevices
   }

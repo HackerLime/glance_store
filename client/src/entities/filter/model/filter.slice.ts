@@ -10,7 +10,7 @@ type TInitialState = {
 const initialState: TInitialState = {
   brandIds: [],
   typeIds: [],
-  price: { from: 0, to: 1 }
+  price: { from: 0, to: 0 }
 }
 
 const filterSlice = createSlice({

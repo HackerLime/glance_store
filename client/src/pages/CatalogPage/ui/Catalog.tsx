@@ -46,38 +46,39 @@ export const Catalog = () => {
 	if (devicesResponse.isError || brandsResponse.isError || typesResponse.isError) {
 		return <h1>Ошибка загрузки</h1>;
 	}
+	if (devicesResponse.data && brandsResponse.data && typesResponse.data) {
+		if (screenWidth <= 768) {
+			return (
+				<main className={styles.catalog__wrapper}>
+					<CatalogFilter devices={catalogDevices} isMobile={true} brands={brandsResponse.data} types={typesResponse.data} />
+					<DevicesList brands={brandsResponse.data} types={typesResponse.data} devices={catalogDevices} />
+				</main>
+			);
+		}
 
-	if (screenWidth <= 768) {
 		return (
 			<main className={styles.catalog__wrapper}>
-				<CatalogFilter devices={catalogDevices} isMobile={true} brands={brandsResponse.data} types={typesResponse.data} />
-				<DevicesList brands={brandsResponse.data} types={typesResponse.data} devices={catalogDevices} />
+				<PageHeader description='Каталог' />
+				<div className={styles.deskCatalog__container}>
+					<CatalogFilter devices={catalogDevices} isDesktop={true} brands={brandsResponse.data} types={typesResponse.data} />
+					<div className={styles.deskCatalog__content}>
+						<div className={styles.deskCatalog__content_icons}>
+							<SVGTile onClick={tileClick} color={tileColor} style={{ marginRight: '1em', cursor: 'pointer' }} />
+							<SVGList onClick={listClick} color={listColor} style={{ cursor: 'pointer' }} />
+						</div>
+						{catalogViewStatus === 'tiles' ? (
+							<div>
+								<BlueLine />
+								<DevicesTiles brands={brandsResponse.data} types={typesResponse.data} devices={catalogDevices} />
+							</div>
+						) : (
+							<div className={styles.deskCatalog__content_devicesList_container}>
+								<DevicesList brands={brandsResponse.data} types={typesResponse.data} devices={catalogDevices} />
+							</div>
+						)}
+					</div>
+				</div>
 			</main>
 		);
 	}
-
-	return (
-		<main className={styles.catalog__wrapper}>
-			<PageHeader description='Каталог' />
-			<div className={styles.deskCatalog__container}>
-				<CatalogFilter devices={catalogDevices} isDesktop={true} brands={brandsResponse.data} types={typesResponse.data} />
-				<div className={styles.deskCatalog__content}>
-					<div className={styles.deskCatalog__content_icons}>
-						<SVGTile onClick={tileClick} color={tileColor} style={{ marginRight: '1em', cursor: 'pointer' }} />
-						<SVGList onClick={listClick} color={listColor} style={{ cursor: 'pointer' }} />
-					</div>
-					{catalogViewStatus === 'tiles' ? (
-						<div>
-							<BlueLine />
-							<DevicesTiles brands={brandsResponse.data} types={typesResponse.data} devices={catalogDevices} />
-						</div>
-					) : (
-						<div className={styles.deskCatalog__content_devicesList_container}>
-							<DevicesList brands={brandsResponse.data} types={typesResponse.data} devices={catalogDevices} />
-						</div>
-					)}
-				</div>
-			</div>
-		</main>
-	);
 };
