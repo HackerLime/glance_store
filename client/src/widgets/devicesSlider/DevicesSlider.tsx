@@ -2,16 +2,12 @@ import { Device } from 'entities/device';
 import { TDevice } from 'entities/device/model';
 import { FC } from 'react';
 import { useSliderParams } from 'shared/hooks/useSliderParams';
+import type { TBrandAndTypeResponse } from 'shared/types';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 import { FreeMode, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-type TBrandAndTypeResponse = {
-	id: number;
-	name: string;
-}
 
 type TDevicesSlider = {
 	devices: TDevice[];

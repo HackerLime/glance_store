@@ -1,20 +1,31 @@
-import { FilterLabel } from '../filterLabel'
-import { FilterPrice } from './FilterPrice'
+import { FC } from 'react';
+import { FilterLabel } from '../filterLabel';
+import { FilterPrice } from './FilterPrice';
+import styles from './FilterWithPrice.module.css';
 
-export const FilterWithPrice = ({ from, to, sortByPrice, cancelVisible }) => {
+type TFilterWithPriceProps = {
+	defFrom: number;
+	defTo: number;
+	addPriceRangeAction: (from: number, to: number) => void;
+	isCancelVisible: boolean;
+	cancelVisibleAction: () => void
+}
+
+
+export const FilterWithPrice: FC<TFilterWithPriceProps> = ({ defFrom, defTo, addPriceRangeAction, isCancelVisible, cancelVisibleAction }) => {
 
 	return (
-		<div style={{ margin: '0 0 20px 0' }}>
-			<div className='d-flex justify-content-between align-items-start'>
+		<div className={styles.filterWithPrice__wrapper}>
+			<div className={styles.filterWithPrice__labelAndCancel}>
 				<FilterLabel>Цена, ₽ </FilterLabel>
 				{
-					cancelVisible ?
-						<div onClick={() => sortByPrice({ defaultFrom: 0, defaultTo: 0 })} style={{ lineHeight: '16px', cursor: 'pointer', fontWeight: 600, textDecoration: 'underline' }} >Сбросить</div>
+					isCancelVisible ?
+						<div onClick={() => cancelVisibleAction()} className={styles.labelAndCancel__cancel} >Сбросить</div>
 						:
 						''
 				}
 			</div>
-			<FilterPrice sortByPrice={sortByPrice} from={from} to={to} />
+			<FilterPrice addPriceRangeAction={addPriceRangeAction} defFrom={defFrom} defTo={defTo} />
 		</div>
 	)
 }

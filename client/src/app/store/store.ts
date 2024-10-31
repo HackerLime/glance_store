@@ -1,8 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
+import filterReducer from 'entities/filter/model/filter.slice'
 import { devicesApi } from 'shared/api/devices/devicesApi'
 
 export const store = configureStore({
   reducer: {
+    filter: filterReducer
+    ,
     [devicesApi.reducerPath]: devicesApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

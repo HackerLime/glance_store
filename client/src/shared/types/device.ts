@@ -1,5 +1,7 @@
 type TDeviceInfoObj = { title: string, description: string }
 
+
+
 export type TDevice = {
   id: number;
   name: string;
@@ -11,6 +13,10 @@ export type TDevice = {
   createdAt: string;
   updatedAt: string
   info?: TDeviceInfoObj[]
+}
+export type TDeviceResponse = {
+  count: number;
+  rows: TDevice[]
 }
 
 export type TBrandAndTypeResponse = {
