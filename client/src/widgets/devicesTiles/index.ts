@@ -1,0 +1,1 @@
+export { DevicesTiles } from './DevicesTiles';
