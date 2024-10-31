@@ -1,19 +1,4 @@
-import { useState } from 'react'
-import { TDevice } from 'shared/types'
-export const [cancelVisible, setCancelVisible] = useState(false)
-
-export const getPriceRange = (devices: TDevice[]) => {
-  let priceArr: number[] = []
-  devices.map(i => priceArr.push(i.price))
-  let minPrice = Math.min.apply(null, priceArr)
-  let maxPrice = Math.max.apply(null, priceArr)
-  if (Number.isFinite(minPrice) && Number.isFinite(maxPrice)) {
-    return { min: minPrice, max: maxPrice }
-  } else
-    return { min: 0, max: 1 }
-}
-
-type TSortByPriceFilter = (devices: TDevice[], from: number, to: number) => TDevice[]
+export { getFromTo } from './utils';
 
 /* export const sortByPriceFilter: TSortByPriceFilter = (devices, from, to) => {
   if (!from && !to) {
