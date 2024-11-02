@@ -4,7 +4,7 @@ import { authRoutes, privateRoutes, publicRoutes } from './router'
 
 export const AppRouter = () => {
 	const user = {
-		isAuth: true
+		isAuth: false
 	}
 
 	return (
