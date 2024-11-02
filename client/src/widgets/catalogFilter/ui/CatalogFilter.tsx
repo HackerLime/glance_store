@@ -1,6 +1,6 @@
 import { RootState } from 'app/store/store'
 import { addPriceRange, toggleBrandId, toggleTypeId } from 'entities/filter'
-import { FilterWithCheck, FilterWithPrice } from 'features/filter'
+import { FilterSortBy, FilterWithCheck, FilterWithPrice } from 'features/filter'
 import { FC, useEffect, useState } from 'react'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import { useDispatch, useSelector } from 'react-redux'
@@ -52,8 +52,6 @@ export const CatalogFilter: FC<TCatalogFilterProps> = ({ isMobile, isDesktop, ty
   }
 
 
-  console.log(filter)
-
   if (isMobile) {
     return (
       <>
@@ -69,9 +67,7 @@ export const CatalogFilter: FC<TCatalogFilterProps> = ({ isMobile, isDesktop, ty
           </Offcanvas.Header>
           <Offcanvas.Body>
             <div className={styles.catalogsFilter__wrapper}>
-              {/* 	
-              						<FilterSortBy sortDevices={sortDevices} filterVariants={variants} />
- */}
+              <FilterSortBy />
               <div className={styles.catalogsFilter__filters_container}>
                 <FilterWithPrice
                   defFrom={filter.price.from}
@@ -95,9 +91,7 @@ export const CatalogFilter: FC<TCatalogFilterProps> = ({ isMobile, isDesktop, ty
   if (isDesktop) {
     return (
       <aside className={styles.catalogsFilter__wrapper}>
-
-        {/* 					<FilterSortBy sortDevices={sortDevices} filterVariants={variants} />
-	 */}
+        <FilterSortBy />
         <div className={styles.catalogsFilter__filters_container}>
           <FilterWithPrice
             defFrom={filter.price.from}

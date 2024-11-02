@@ -1,9 +1,8 @@
 
-import { Shop } from 'pages/ShopPage';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { NavBar } from '../widgets/Navbar';
-import { publicRoutes } from './routers/router';
+import { AppRouter } from './routers';
 import { store } from './store/store';
 
 export const App = () => {
@@ -18,7 +17,7 @@ export const App = () => {
 		<Provider store={store}>
 			<BrowserRouter>
 				<NavBar />
-				<Routes>
+				{/* 	<Routes>
 					{
 						publicRoutes.map(route =>
 							<Route key={route.path} path={route.path} element={<route.component />} />
@@ -26,7 +25,8 @@ export const App = () => {
 					}
 					<Route path='*' element={<Shop />} />
 
-				</Routes>
+				</Routes> */}
+				<AppRouter />
 			</BrowserRouter>
 		</Provider>
 	)

@@ -1,11 +1,20 @@
+import { addSortByStatus } from 'entities/filter/model/filter.slice'
 import { useState } from 'react'
 import Dropdown from 'react-bootstrap/Dropdown'
+import { useDispatch } from 'react-redux'
 import { SVGFilter } from 'shared/assets/icons'
-export const FilterSortBy = ({ sortDevices, filterVariants }) => {
+import { sortVariants } from './consts'
+
+export const FilterSortBy = () => {
 	const [selectedItem, setSelectedItem] = useState('')
-	const selectAction = (id, name) => {
+	const dispatch = useDispatch()
+
+	type TSelectAction = (name: string, sortKey: 'default' | 'from cheaper' | 'from expensive') => void
+
+	const selectAction: TSelectAction = (name, sortKey) => {
 		setSelectedItem(name)
-		sortDevices(id)
+		dispatch(addSortByStatus(sortKey))
+
 	}
 	return (
 		<div className='d-flex align-items-center' style={{ marginBottom: '1.5em' }}>
@@ -18,11 +27,15 @@ export const FilterSortBy = ({ sortDevices, filterVariants }) => {
 					</Dropdown.Toggle>
 					<Dropdown.Menu
 					>
-						{filterVariants.map(i =>
-							<Dropdown.Item
-								onClick={e => selectAction(i.id, i.name)}
-								key={i.id} value={i.id} >{i.name}</Dropdown.Item>
-						)}
+
+						{
+							sortVariants.map(i =>
+								<Dropdown.Item
+									onClick={() => selectAction(i.name, i.sortKey)}
+									key={i.id}
+								>{i.name}</Dropdown.Item>
+							)
+						}
 					</Dropdown.Menu>
 				</Dropdown>
 			</div>
