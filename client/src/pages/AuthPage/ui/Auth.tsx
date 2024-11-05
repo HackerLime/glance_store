@@ -1,27 +1,40 @@
+import { loginAction } from 'entities/user/model/user.slice';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
-import { Link, useLocation } from 'react-router-dom';
-import { useLoginMutation } from 'shared/api/user/userAPI';
-import { LOGIN_ROUTE, REGISTRATION_ROUTE } from 'shared/routerPaths';
-
+import { useDispatch } from 'react-redux';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { login, registartion } from 'shared/api/user/userAPI';
+import { LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from 'shared/routerPaths';
 
 export const Auth = () => {
 
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const location = useLocation()
-	const { } = useLoginMutation()
+	const dispatch = useDispatch()
+	const navigate = useNavigate()
 
 	const isLogin = location.pathname === '/login'
-	const auth = () => {
+	const authAction = async () => {
 		if (isLogin) {
-			console.log('login!!!')
+			try {
+				const result = await login(email, password)
+				dispatch(loginAction(result))
+				navigate(SHOP_ROUTE)
+			} catch (error) {
+				alert(error.response.data.message)
+			}
+		} else {
+			try {
+				const result = await registartion(email, password)
+				dispatch(loginAction(result))
+			} catch (error) {
+				alert(error.response.data.message)
+			}
 		}
 	}
-
-
 
 
 	return (
@@ -45,7 +58,7 @@ export const Auth = () => {
 
 				<div className='d-flex justify-content-between align-items-center'>
 					<Button
-						onClick={auth}
+						onClick={authAction}
 						variant="outline-primary">
 						{isLogin ? 'Войти' : 'Регистрация'}
 					</Button>

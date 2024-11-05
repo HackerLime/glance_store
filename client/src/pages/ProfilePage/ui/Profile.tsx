@@ -1,21 +1,22 @@
-/* import { useContext } from 'react'
+import { RootState } from 'app/store/store'
+import { logOutAction } from 'entities/user/model/user.slice'
 import Button from 'react-bootstrap/esm/Button'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { Context } from '../../index'
-import { ADMIN_ROUTE } from '../../router/paths'
- */
+import { ADMIN_ROUTE } from 'shared/routerPaths'
+
 export const Profile = () => {
-	/* 	const { user } = useContext(Context)
-		const navigate = useNavigate()
-		const logout = () => {
-			user.setIsAuth(false)
-			localStorage.removeItem('token')
-		} */
+	const user = useSelector((state: RootState) => state.user)
+	const dispatch = useDispatch()
+	const navigate = useNavigate()
+	const logout = () => {
+		dispatch(logOutAction())
+		localStorage.removeItem('token')
+	}
 
 	return (
 		<div className='d-flex align-items-center justify-content-center'>
-			PROFILEPAGE
-			{/* <div className='d-flex flex-column align-items-center'>
+			<div className='d-flex flex-column align-items-center'>
 				{
 					user.isAuth ?
 						<div className='d-flex flex-column align-items-center'>
@@ -25,7 +26,7 @@ export const Profile = () => {
 						</div> :
 						''
 				}
-			</div> */}
+			</div>
 		</div>
 	)
 }
