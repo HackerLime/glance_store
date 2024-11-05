@@ -1,17 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit'
 import filterReducer from 'entities/filter/model/filter.slice'
+
+import userReducer from 'entities/user/model/user.slice'
 import { devicesApi } from 'shared/api/devices/devicesApi'
-import { userApi } from 'shared/api/user/userAPI'
 
 export const store = configureStore({
   reducer: {
-    filter: filterReducer
-    ,
+    filter: filterReducer,
+    user: userReducer,
     [devicesApi.reducerPath]: devicesApi.reducer,
-    [userApi.reducerPath]: userApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(devicesApi.middleware, userApi.middleware)
+    getDefaultMiddleware().concat(devicesApi.middleware)
 
 })
 

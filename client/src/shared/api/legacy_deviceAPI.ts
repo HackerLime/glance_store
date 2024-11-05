@@ -1,5 +1,5 @@
-import { $host, $authHost } from "./index";
-import { jwtDecode } from 'jwt-decode'
+import { jwtDecode } from 'jwt-decode';
+import { $authHost, $host } from "./user/index";
 
 
 

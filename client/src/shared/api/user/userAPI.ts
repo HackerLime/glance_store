@@ -1,18 +1,19 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { baseUrl } from '../config'
+import { jwtDecode } from 'jwt-decode'
+import { $authHost, $host } from './index'
+export const login = async (email, password) => {
+	const { data } = await $host.post('api/user/login', { email, password })
+	localStorage.setItem('token', data.token)
+	return jwtDecode(data.token)
+}
 
-export const userApi = createApi({
-  reducerPath: 'userApi',
-  baseQuery: fetchBaseQuery(baseUrl),
-  endpoints: (builder) => ({
-    login: builder.mutation({
-      query: ({ email, password }) => ({
-        url: '/api/login',
-        method: 'POST',
-        body: { email, password }
-      })
-    }),
-  }),
-})
+export const registartion = async (email, password) => {
+	const { data } = await $host.post('api/user/registration', { email, password, role: "ADMIN" })
+	localStorage.setItem('token', data.token)
+	return jwtDecode(data.token)
+}
 
-export const { useLoginMutation } = userApi
+export const check = async () => {
+	const { data } = await $authHost.get('api/user/auth')
+	localStorage.setItem('token', data.token)
+	return jwtDecode(data.token)
+}
