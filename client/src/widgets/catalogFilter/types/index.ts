@@ -1,1 +1,1 @@
-export type { TCatalogFilterProps, PriceRangeParams } from './types'
+export type { TCatalogFilterProps, PriceRangeParams, TPriceState } from './types'

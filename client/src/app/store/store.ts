@@ -1,15 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit'
 import filterReducer from 'entities/filter/model/filter.slice'
+
+import userReducer from 'entities/user/model/user.slice'
 import { devicesApi } from 'shared/api/devices/devicesApi'
 
 export const store = configureStore({
   reducer: {
-    filter: filterReducer
-    ,
+    filter: filterReducer,
+    user: userReducer,
     [devicesApi.reducerPath]: devicesApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(devicesApi.middleware),
+    getDefaultMiddleware().concat(devicesApi.middleware)
+
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
