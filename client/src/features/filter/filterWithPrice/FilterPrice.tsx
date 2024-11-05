@@ -1,22 +1,22 @@
-import { FC, useState } from 'react'
+import { Dispatch, FC, SetStateAction } from 'react'
 import Button from 'react-bootstrap/esm/Button'
 import Form from 'react-bootstrap/Form'
 import styles from './FilterPrice.module.css'
 
+import type { TPriceState } from 'widgets/catalogFilter/types'
+
 type TFilterPriceProps = {
 	addPriceRangeAction: (from: number, to: number) => void;
 	defFrom: number;
-	defTo: number
+	defTo: number;
+	prices: { from: string, to: string };
+	setPrices: Dispatch<SetStateAction<TPriceState>>
+
 }
 
-export const FilterPrice: FC<TFilterPriceProps> = ({ addPriceRangeAction, defFrom, defTo }) => {
+export const FilterPrice: FC<TFilterPriceProps> = ({ addPriceRangeAction, defFrom, defTo, prices, setPrices }) => {
 
-	type TPriceState = {
-		from: string,
-		to: string
-	}
 
-	const [prices, setPrices] = useState<TPriceState>({ from: '', to: '' })
 
 
 

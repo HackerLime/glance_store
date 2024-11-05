@@ -1,44 +1,45 @@
-/* import { useContext, useState } from 'react';
+import { loginAction } from 'entities/user/model/user.slice';
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
- import { Link, useLocation, useNavigate } from 'react-router-dom';
- import { login, registartion } from '../../http/userAPI';
- import { Context } from '../../index'; */
-/* import { LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from '../../router/paths';
- */
-import Container from 'react-bootstrap/Container';
+import { useDispatch } from 'react-redux';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { login, registartion } from 'shared/api/user/userAPI';
+import { LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from 'shared/routerPaths';
+
 export const Auth = () => {
-	/* const navigate = useNavigate()
-	const { user } = useContext(Context)
+
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const location = useLocation()
+	const dispatch = useDispatch()
+	const navigate = useNavigate()
+
 	const isLogin = location.pathname === '/login'
-	const auth = async () => {
-		let userData;
+	const authAction = async () => {
 		if (isLogin) {
-			userData = await login(email, password).then(data => {
-				user.setUser(data)
-				user.setIsAuth(true)
+			try {
+				const result = await login(email, password)
+				dispatch(loginAction(result))
 				navigate(SHOP_ROUTE)
-			})
-				.catch(e => alert(`Ошибка login ${e.response.data.message}`))
-			return userData
+			} catch (error) {
+				alert(error.response.data.message)
+			}
+		} else {
+			try {
+				const result = await registartion(email, password)
+				dispatch(loginAction(result))
+			} catch (error) {
+				alert(error.response.data.message)
+			}
 		}
-		userData = await registartion(email, password)
-			.then(data => {
-				user.setUser(data)
-				user.setIsAuth(true)
-				navigate(SHOP_ROUTE)
-			})
-			.catch(e => alert(`Ошибка registration ${e.response.data.message}`))
-		return userData */
+	}
+
 
 	return (
 		<Container>
-			AUTHPAGE
-			{/* 	<Form style={{ maxWidth: '350px', margin: '0px auto' }}>
+			<Form style={{ maxWidth: '350px', margin: '0px auto' }}>
 				<h1 style={{ margin: '0 0 30px 0', textAlign: 'center' }}>{isLogin ? 'Авторизация' : 'Регистрация'}</h1>
 				<Form.Group className="mb-3" controlId="formBasicEmail">
 					<Form.Label>Email</Form.Label>
@@ -57,14 +58,36 @@ export const Auth = () => {
 
 				<div className='d-flex justify-content-between align-items-center'>
 					<Button
-						onClick={auth}
+						onClick={authAction}
 						variant="outline-primary">
 						{isLogin ? 'Войти' : 'Регистрация'}
 					</Button>
 					<p>нет аккаунта?<Link to={isLogin ? REGISTRATION_ROUTE : LOGIN_ROUTE} style={{ color: 'teal' }}>{isLogin ? 'Зарегестрируйся!' : 'Авторизуйся'}</Link></p>
 				</div>
-			</Form> */}
+			</Form>
 		</Container>
 	)
 }
+
+/* 
+/* import { login, registartion } from '../../http/userAPI'; */
+
+/* 	let userData;
+		if (isLogin) {
+			userData = await login(email, password).then(data => {
+				user.setUser(data)
+				user.setIsAuth(true)
+				navigate(SHOP_ROUTE)
+			})
+				.catch(e => alert(`Ошибка login ${e.response.data.message}`))
+			return userData
+		}
+		userData = await registartion(email, password)
+			.then(data => {
+				user.setUser(data)
+				user.setIsAuth(true)
+				navigate(SHOP_ROUTE)
+			})
+			.catch(e => alert(`Ошибка registration ${e.response.data.message}`))
+		return userData */
 

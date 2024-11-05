@@ -20,3 +20,8 @@ type TMobileFilterProps = {
 export type TCatalogFilterProps = TDeskFilterProps | TMobileFilterProps
 
 export type PriceRangeParams = (from: number, to: number) => void
+
+export type TPriceState = {
+  from: string,
+  to: string
+}

@@ -5,12 +5,14 @@ type TInitialState = {
   brandIds: number[];
   typeIds: number[];
   price: { from: number, to: number }
+  sortBy: 'default' | 'from expensive' | 'from cheaper'
 }
 
 const initialState: TInitialState = {
   brandIds: [],
   typeIds: [],
-  price: { from: 0, to: 0 }
+  price: { from: 0, to: 0 },
+  sortBy: 'default'
 }
 
 const filterSlice = createSlice({
@@ -37,8 +39,11 @@ const filterSlice = createSlice({
     addPriceRange(state, action: PayloadAction<{ from: number, to: number }>) {
       state.price = action.payload
     },
+    addSortByStatus(state, action: PayloadAction<'default' | 'from expensive' | 'from cheaper'>) {
+      state.sortBy = action.payload
+    }
   },
 })
 
-export const { toggleBrandId, toggleTypeId, addPriceRange } = filterSlice.actions
+export const { toggleBrandId, toggleTypeId, addPriceRange, addSortByStatus } = filterSlice.actions
 export default filterSlice.reducer
