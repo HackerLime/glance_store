@@ -3,14 +3,17 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import { useCreateTypeMutation } from 'shared/api/devices/devicesApi';
 
 export const CreateType = ({ show, setShow }) => {
+	const [createType] = useCreateTypeMutation()
+
 	const hideModal = () => {
 		setShow(false)
 	}
 	const [typeName, setTypeName] = useState('')
 	const newType = () => {
-		//todo Запрос на добавление типа
+		createType({ name: typeName })
 		hideModal()
 		setTypeName('')
 	}
