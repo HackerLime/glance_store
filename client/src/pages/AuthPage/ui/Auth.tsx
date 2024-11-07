@@ -1,38 +1,28 @@
-import { loginAction } from 'entities/user/model/user.slice';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
-import { useDispatch } from 'react-redux';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { login, registartion } from 'shared/api/user/userAPI';
-import { LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from 'shared/routerPaths';
+import { Link, useLocation } from 'react-router-dom';
+import { useUserLoginMutation } from 'shared/api/user/user.api';
+import { LOGIN_ROUTE, REGISTRATION_ROUTE } from 'shared/routerPaths';
 
 export const Auth = () => {
 
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const location = useLocation()
-	const dispatch = useDispatch()
-	const navigate = useNavigate()
+	const [userLogin] = useUserLoginMutation()
 
 	const isLogin = location.pathname === '/login'
 	const authAction = async () => {
 		if (isLogin) {
-			try {
-				const result = await login(email, password)
-				dispatch(loginAction(result))
-				navigate(SHOP_ROUTE)
-			} catch (error) {
-				alert(error.response.data.message)
-			}
+			userLogin({ email, password })
+				.then(e => console.log(e))
+				.catch(e => alert(e.data.message))
+
+			//todo при ошибке с api,все равно выполняется блок then,надо исправить
 		} else {
-			try {
-				const result = await registartion(email, password)
-				dispatch(loginAction(result))
-			} catch (error) {
-				alert(error.response.data.message)
-			}
+			console.log('regAction')
 		}
 	}
 

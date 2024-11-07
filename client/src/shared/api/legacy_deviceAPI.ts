@@ -47,6 +47,7 @@ export const addBasketDevice = async (deviceId, basketId) => {
 }
 
 
+
 export const fetchBasketDevices = async () => {
 	const { id } = jwtDecode(localStorage.getItem('token'))
 	const { data } = await $authHost.post('/api/basket/get', { basketId: id })
