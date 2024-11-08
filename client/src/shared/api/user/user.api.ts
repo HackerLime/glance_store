@@ -21,7 +21,7 @@ export const userApi = createApi({
   baseQuery,
   endpoints: (builder) => ({
 
-    userLogin: builder.mutation({
+    tryLogin: builder.mutation({
       query: (credentials) => ({
         url: 'api/user/login',
         method: 'POST',
@@ -32,16 +32,30 @@ export const userApi = createApi({
           const { data } = await queryFulfilled
           dispatch(loginAction(data.token))
         } catch (err) {
-          console.error(err)
+          console.error(err.error)
+
         }
       },
-
+    }),
+    tryRegistration: builder.mutation({
+      query: (credentials) => ({
+        url: 'api/user/registration',
+        method: 'POST',
+        body: credentials
+      }),
+      async onQueryStarted(credentials, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled
+          dispatch(loginAction(data.token))
+        } catch (err) {
+          console.error(err.error)
+        }
+      },
     })
-
   })
 })
 
-export const { useUserLoginMutation } = userApi
+export const { useTryLoginMutation, useTryRegistrationMutation } = userApi
 
 /* 
 import { jwtDecode } from 'jwt-decode'

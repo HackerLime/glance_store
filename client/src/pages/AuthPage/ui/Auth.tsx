@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
+import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
-import { useUserLoginMutation } from 'shared/api/user/user.api';
+import { userApi, useTryLoginMutation, useTryRegistrationMutation } from 'shared/api/user/user.api';
 import { LOGIN_ROUTE, REGISTRATION_ROUTE } from 'shared/routerPaths';
 
 export const Auth = () => {
@@ -11,20 +12,30 @@ export const Auth = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const location = useLocation()
-	const [userLogin] = useUserLoginMutation()
+	const [tryLogin, tryLoginStatus] = useTryLoginMutation()
+	const [tryRegistration, tryRegistrationStatus] = useTryRegistrationMutation()
+	const dispatch = useDispatch()
+
 
 	const isLogin = location.pathname === '/login'
 	const authAction = async () => {
 		if (isLogin) {
-			userLogin({ email, password })
-				.then(e => console.log(e))
-				.catch(e => alert(e.data.message))
-
-			//todo при ошибке с api,все равно выполняется блок then,надо исправить
+			tryLogin({ email, password })
 		} else {
-			console.log('regAction')
+			tryRegistration({ email, password, role: 'USER' })
 		}
 	}
+
+	useEffect(() => {
+		if (tryLoginStatus.isError) {
+			alert(tryLoginStatus.error.data.message || 'Ошибка Авторизации')
+			dispatch(userApi.util.resetApiState())
+		}
+		if (tryRegistrationStatus.isError) {
+			alert(tryRegistrationStatus.error.data.message || 'Ошибка Регистрации')
+			dispatch(userApi.util.resetApiState())
+		}
+	}, [tryLoginStatus.isError, tryRegistrationStatus.isError])
 
 
 	return (
