@@ -20,11 +20,9 @@ const baseQuery = fetchBaseQuery({
 
 export const devicesApi = createApi({
 
-
-
-
   reducerPath: 'devicesApi',
   baseQuery,
+  tagTypes: ['Device'],
   endpoints: (builder) => ({
 
     getDevices: builder.query<TDeviceResponse, undefined>({
@@ -64,7 +62,6 @@ export const devicesApi = createApi({
         method: 'POST',
         body: payload
       }),
-
     }),
     createType: builder.mutation({
       query: (payload) => ({
