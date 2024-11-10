@@ -1,15 +1,18 @@
 import { RootState } from 'app/store/store'
 import { Shop } from 'pages'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
-
+import { useEffect } from 'react'
+import { useCheckUserQuery } from 'shared/api/user/user.api'
 import { useCheckToken } from 'shared/hooks'
 import { authRoutes, privateRoutes, publicRoutes } from './router'
 
 export const AppRouter = () => {
 	const user = useSelector((state: RootState) => state.user)
-	const tokenIsValid = useCheckToken()
-	const dispatch = useDispatch()
+	useEffect(() => {
+		useCheckToken()
+	}, [])
+	useCheckUserQuery(undefined)
 
 
 

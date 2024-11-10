@@ -9,7 +9,6 @@ import { store } from './store/store';
 export const App = () => {
 
 	return (
-
 		<Provider store={store}>
 			<BrowserRouter>
 				<NavBar />

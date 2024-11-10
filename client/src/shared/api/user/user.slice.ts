@@ -20,8 +20,6 @@ const userSlice = createSlice({
       state.isAuth = false
     }
   },
-
-
 })
 
 export const { loginAction, logOutAction } = userSlice.actions
