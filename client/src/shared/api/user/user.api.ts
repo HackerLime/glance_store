@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery, } from '@reduxjs/toolkit/query/react';
 import { baseUrl } from '../config';
-import { loginAction } from './user.slice';
+import { loginAction, logOutAction } from './user.slice';
 const baseQuery = fetchBaseQuery({
   baseUrl,
   prepareHeaders: (headers, { endpoint }) => {
@@ -9,7 +9,7 @@ const baseQuery = fetchBaseQuery({
       'checkUser'
     ]
     if (token && authorizedEndpoints.includes(endpoint)) {
-      headers.set('Authorization', token)
+      headers.set('Authorization', `Bearer ${token}`)
     }
     return headers
   }
@@ -39,7 +39,7 @@ export const userApi = createApi({
     }),
     tryRegistration: builder.mutation({
       query: (credentials) => ({
-        url: 'api/user/registration',
+        url: `api/user/registration`,
         method: 'POST',
         body: credentials
       }),
@@ -51,11 +51,26 @@ export const userApi = createApi({
           console.error(err.error)
         }
       },
+    }),
+    checkUser: builder.query({
+      query: () => ({
+        url: `api/user/auth`,
+        method: 'GET',
+      }),
+      async onQueryStarted(payload, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled
+          dispatch(loginAction(data.token))
+        } catch (err) {
+          console.error(err.error)
+          dispatch(logOutAction())
+        }
+      },
     })
   })
 })
 
-export const { useTryLoginMutation, useTryRegistrationMutation } = userApi
+export const { useTryLoginMutation, useTryRegistrationMutation, useCheckUserQuery } = userApi
 
 /* 
 import { jwtDecode } from 'jwt-decode'

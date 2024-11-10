@@ -16,7 +16,6 @@ export const Auth = () => {
 	const [tryRegistration, tryRegistrationStatus] = useTryRegistrationMutation()
 	const dispatch = useDispatch()
 
-
 	const isLogin = location.pathname === '/login'
 	const authAction = async () => {
 		if (isLogin) {
@@ -69,26 +68,3 @@ export const Auth = () => {
 		</Container>
 	)
 }
-
-/* 
-/* import { login, registartion } from '../../http/userAPI'; */
-
-/* 	let userData;
-		if (isLogin) {
-			userData = await login(email, password).then(data => {
-				user.setUser(data)
-				user.setIsAuth(true)
-				navigate(SHOP_ROUTE)
-			})
-				.catch(e => alert(`Ошибка login ${e.response.data.message}`))
-			return userData
-		}
-		userData = await registartion(email, password)
-			.then(data => {
-				user.setUser(data)
-				user.setIsAuth(true)
-				navigate(SHOP_ROUTE)
-			})
-			.catch(e => alert(`Ошибка registration ${e.response.data.message}`))
-		return userData */
-
