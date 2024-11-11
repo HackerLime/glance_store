@@ -1,3 +1,4 @@
+import { TDevice } from 'shared/types';
 
 type basketDeviceData = {
   id: number;
@@ -14,8 +15,8 @@ export type TAddBasketDeviceParams = {
 
 export type TAddBasketDeviceResponse = basketDeviceData
 
-export type TFetchBasketDevicesParams = { basketId: number }
-export type TFetchBasketDevicesResponse = { data: [] } | { data: basketDeviceData[] }
+export type TGetBasketDevicesParams = { basketId: number }
+export type TGetBasketDevicesResponse = { data: [] } | { data: TDevice[] }
 
 export type TDeleteBasketDeviceParams = {
   deviceId: number;
