@@ -1,5 +1,6 @@
+const { Op } = require('sequelize')
 const ApiError = require('../error/ApiError')
-const { BasketDevice } = require('../models/models')
+const { BasketDevice, Device } = require('../models/models')
 
 
 
@@ -23,6 +24,19 @@ class BasketController {
 					basketId
 				}
 			})
+			//*
+			if (basketDevices.length) {
+				const devicesIds = basketDevices.map(device => device.deviceId)
+				const devices = await Device.findAll({
+					where: {
+						id: {
+							[Op.in]: devicesIds
+						}
+					}
+				})
+				return res.json(devices)
+			}
+			//*
 			return res.json(basketDevices)
 		} catch (e) {
 			next(ApiError.badRequest(e.message))

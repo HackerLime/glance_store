@@ -3,14 +3,18 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import { useCreateBrandMutation } from 'shared/api/devices/devicesApi';
 
 export const CreateBrand = ({ show, setShow }) => {
+	const [createBrand] = useCreateBrandMutation()
+
+
 	const hideModal = () => {
 		setShow(false)
 	}
 	const [brandName, setBrandName] = useState('')
 	const newBrand = () => {
-		//todo Запрос на добавление бренда
+		createBrand({ name: brandName })
 		hideModal()
 		setBrandName('')
 	}

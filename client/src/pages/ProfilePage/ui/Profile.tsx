@@ -1,8 +1,8 @@
 import { RootState } from 'app/store/store'
-import { logOutAction } from 'entities/user/model/user.slice'
 import Button from 'react-bootstrap/esm/Button'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { logOutAction } from 'shared/api/user/user.slice'
 import { ADMIN_ROUTE } from 'shared/routerPaths'
 
 export const Profile = () => {
