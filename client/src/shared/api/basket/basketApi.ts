@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { baseUrl } from '../config';
-import type { TAddBasketDeviceParams, TAddBasketDeviceResponse, TDeleteBasketDeviceParams, TDeleteBasketDeviceResponse, TFetchBasketDevicesParams, TFetchBasketDevicesResponse } from './types';
+import type { TAddBasketDeviceParams, TAddBasketDeviceResponse, TDeleteBasketDeviceParams, TDeleteBasketDeviceResponse, TGetBasketDevicesParams, TGetBasketDevicesResponse } from './types';
 
 const baseQuery = fetchBaseQuery({
   baseUrl,
@@ -30,7 +30,7 @@ export const basketApi = createApi({
       })
     })
     ,
-    fetchBasketDevices: builder.mutation<TFetchBasketDevicesResponse, TFetchBasketDevicesParams>({
+    getBasketDevices: builder.query<TGetBasketDevicesResponse, TGetBasketDevicesParams>({
       query: (payload) => ({
         url: '/api/basket/get',
         method: 'POST',
@@ -49,6 +49,6 @@ export const basketApi = createApi({
   })
 })
 
-export const { useAddBasketDeviceMutation, useFetchBasketDevicesMutation, useDeleteBasketDeviceMutation } = basketApi
+export const { useAddBasketDeviceMutation, useGetBasketDevicesQuery, useDeleteBasketDeviceMutation } = basketApi
 
 

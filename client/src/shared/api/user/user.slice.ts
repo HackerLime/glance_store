@@ -1,6 +1,20 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { jwtDecode } from 'jwt-decode'
-const initialState = {
+import { createSlice } from '@reduxjs/toolkit';
+import { jwtDecode } from 'jwt-decode';
+
+type TUser = {
+  id: number;
+  email: string;
+  exp: number;
+  iat: number;
+  role: string
+}
+
+type TUserState = {
+  user: TUser | null;
+  isAuth: boolean
+}
+
+const initialState: TUserState = {
   user: null,
   isAuth: false,
 }
