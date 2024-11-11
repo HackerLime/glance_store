@@ -1,8 +1,8 @@
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/esm/Button'
 import { useNavigate } from 'react-router-dom'
+import { SVGBasketEmpty } from 'shared/assets/icons'
 import { CATALOG_ROUTE } from 'shared/routerPaths'
-import SVGBasketEmpty from '../../icons/basket/SVGBasketEmpty'
 
 export const BasketEmpty = () => {
 	const navigate = useNavigate()

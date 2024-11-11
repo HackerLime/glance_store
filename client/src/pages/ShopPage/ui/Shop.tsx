@@ -5,7 +5,6 @@ import { ShopPromotions } from 'widgets/shopPromotions'
 
 export const Shop = () => {
 
-
 	return (
 		<Container >
 			<ShopCarousel />

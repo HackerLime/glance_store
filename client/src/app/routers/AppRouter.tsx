@@ -1,27 +1,20 @@
 import { RootState } from 'app/store/store'
-import { logOutAction, loginAction } from 'entities/user/model/user.slice'
 import { Shop } from 'pages'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
-import { check } from 'shared/api/user/userAPI'
+import { useEffect } from 'react'
+import { useCheckUserQuery } from 'shared/api/user/user.api'
 import { useCheckToken } from 'shared/hooks'
 import { authRoutes, privateRoutes, publicRoutes } from './router'
-import { useEffect } from 'react'
 
 export const AppRouter = () => {
 	const user = useSelector((state: RootState) => state.user)
-	const tokenIsValid = useCheckToken()
-	const dispatch = useDispatch()
-
 	useEffect(() => {
-		if (tokenIsValid) {
-			check().then(e => dispatch(loginAction(e)))
-		} else {
-			dispatch(logOutAction())
-			localStorage.removeItem('token')
-		}
-
+		useCheckToken()
 	}, [])
+	useCheckUserQuery(undefined)
+
+
 
 	return (
 		<Routes>

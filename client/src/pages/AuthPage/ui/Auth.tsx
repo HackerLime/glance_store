@@ -1,40 +1,40 @@
-import { loginAction } from 'entities/user/model/user.slice';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import { useDispatch } from 'react-redux';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { login, registartion } from 'shared/api/user/userAPI';
-import { LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from 'shared/routerPaths';
+import { Link, useLocation } from 'react-router-dom';
+import { userApi, useTryLoginMutation, useTryRegistrationMutation } from 'shared/api/user/user.api';
+import { LOGIN_ROUTE, REGISTRATION_ROUTE } from 'shared/routerPaths';
 
 export const Auth = () => {
 
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const location = useLocation()
+	const [tryLogin, tryLoginStatus] = useTryLoginMutation()
+	const [tryRegistration, tryRegistrationStatus] = useTryRegistrationMutation()
 	const dispatch = useDispatch()
-	const navigate = useNavigate()
 
 	const isLogin = location.pathname === '/login'
 	const authAction = async () => {
 		if (isLogin) {
-			try {
-				const result = await login(email, password)
-				dispatch(loginAction(result))
-				navigate(SHOP_ROUTE)
-			} catch (error) {
-				alert(error.response.data.message)
-			}
+			tryLogin({ email, password })
 		} else {
-			try {
-				const result = await registartion(email, password)
-				dispatch(loginAction(result))
-			} catch (error) {
-				alert(error.response.data.message)
-			}
+			tryRegistration({ email, password, role: 'USER' })
 		}
 	}
+
+	useEffect(() => {
+		if (tryLoginStatus.isError) {
+			alert(tryLoginStatus.error.data.message || 'Ошибка Авторизации')
+			dispatch(userApi.util.resetApiState())
+		}
+		if (tryRegistrationStatus.isError) {
+			alert(tryRegistrationStatus.error.data.message || 'Ошибка Регистрации')
+			dispatch(userApi.util.resetApiState())
+		}
+	}, [tryLoginStatus.isError, tryRegistrationStatus.isError])
 
 
 	return (
@@ -68,26 +68,3 @@ export const Auth = () => {
 		</Container>
 	)
 }
-
-/* 
-/* import { login, registartion } from '../../http/userAPI'; */
-
-/* 	let userData;
-		if (isLogin) {
-			userData = await login(email, password).then(data => {
-				user.setUser(data)
-				user.setIsAuth(true)
-				navigate(SHOP_ROUTE)
-			})
-				.catch(e => alert(`Ошибка login ${e.response.data.message}`))
-			return userData
-		}
-		userData = await registartion(email, password)
-			.then(data => {
-				user.setUser(data)
-				user.setIsAuth(true)
-				navigate(SHOP_ROUTE)
-			})
-			.catch(e => alert(`Ошибка registration ${e.response.data.message}`))
-		return userData */
-

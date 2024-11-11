@@ -1,127 +1,56 @@
-/* import { useEffect, useState } from 'react'
-import Button from 'react-bootstrap/esm/Button'
-import Image from 'react-bootstrap/esm/Image'
-import { Link } from 'react-router-dom' */
-/* import { deleteBasketDevice, fetchBasketDevices } from '../../http/deviceAPI'
-import { SHOP_ROUTE } from '../../router/paths'
-import BasketEmpty from '../UI/basket/BasketEmpty'
-import DeviceAsList from '../UI/device/deviceaslist/DeviceAsList'
-import lessThanImg from '../UI/icons/device/lessThan.svg'
-import SVGDelete from '../UI/icons/remove/SVGDelete'
-import LoadingAnimation from '../UI/loadingAnimation/LoadingAnimation' */
-
+import type { RootState } from 'app/store/store'
+import { Device } from 'entities/device'
+import { useSelector } from 'react-redux'
+import { useGetBasketDevicesQuery } from 'shared/api/basket/basketApi'
+import { useGetBrandsQuery, useGetTypesQuery } from 'shared/api/devices/devicesApi'
+import { BasketEmpty } from 'shared/ui/basket'
 
 export const Basket = () => {
-	/* 	const { device, user } = useContext(Context)
-	 *//* 	const [basketPrice, setBasketPrice] = useState(0)
-	 const [allChecked, setAllChecked] = useState(false)
-	 const [isLoading, setIsLoading] = useState(false)
- 
-	 useEffect(() => {
-		 setIsLoading(true)
-		 if (localStorage.getItem('token')) {
-			 fetchBasketDevices()
-				 .then(data => device.setBasketDevicesData(data))
-				 .catch(e => console.log(e))
-				 .finally(e => {
-					 device.setBasketDevices([...device.devices])
-					 let arr = []
-					 device.basketDevicesData.map(i => arr.push(i.deviceId))
-					 device.setBasketDevices(device.basketDevices.filter(i => arr.includes(i.id)))
-					 device.setBasketDevicesIsCheckedFalse()
-					 setIsLoading(false)
-				 }
-				 )
-		 }
-	 }, [device])
- 
-	 useEffect(() => {
-		 device.isAllBasketDevicesChecked ? setAllChecked(true) : setAllChecked(false)
-	 }, [device.isAllBasketDevicesChecked])
- 
-	 useEffect(() => {
-		 setBasketPrice(device.isCheckedBasketDevicesPrice)
-	 }, [device.isCheckedBasketDevicesPrice])
- 
-	 const checkAll = (bool) => {
-		 setAllChecked(bool)
-		 if (bool) {
-			 device.setBasketDevicesIsCheckedTrue()
-		 } else {
-			 device.setBasketDevicesIsCheckedFalse()
-		 }
-	 }
- 
-	 const destroyBasketDevice = (gettedDeviceId) => {
-		 console.log(Number.isInteger(gettedDeviceId))
-		 try {
-			 deleteBasketDevice(user.user.id, gettedDeviceId)
-		 } catch (e) {
-			 console.log(e)
-		 }
-		 if (Array.isArray(gettedDeviceId)) {
-			 device.setBasketDevices([...device.basketDevices].filter(i => !gettedDeviceId.includes(i.id)))
-			 device.setBasketDevicesData([...device.basketDevicesData].filter(i => !gettedDeviceId.includes(i.deviceId)))
-			 return
-		 }
-		 if (Number.isInteger(gettedDeviceId)) {
-			 device.setBasketDevices([...device.basketDevices].filter(i => i.id !== gettedDeviceId))
-			 device.setBasketDevicesData([...device.basketDevicesData].filter(i => i.deviceId !== gettedDeviceId))
-		 }
-	 }
-	 if (isLoading) {
-		 return <LoadingAnimation />
-	 }
-	 if (!device.basketDevices.length) {
-		 return <div><BasketEmpty /></div>
-	 } */
 
-	return (
-		<div className='d-flex justify-content-center' style={{ maxWidth: '1200px', margin: '0px auto' }}>
-			BASKETPAGE
-			{/* <div style={{ maxWidth: '892px', padding: '0 15px' }} className='d-flex flex-column'>
-				<div style={{ marginBottom: '30px' }}>
-					<div className='d-flex align-items-center' style={{ margin: '0 0 32px 0' }}><Link style={{ textDecoration: 'none', color: '#ABABAB', fontSize: '16' }} to={SHOP_ROUTE}>Главная /</Link><h2 style={{ fontSize: 14, lineHeight: '19px', color: '#838383' }}>Корзина</h2></div>
-					<div className='d-flex align-items-center' style={{ maxWidth: 285 }}>
-						<Link to={SHOP_ROUTE}><Image src={lessThanImg} style={{ width: 13, height: 26, margin: '0 20px 0 0' }} /></Link>
-						<h6 style={{ color: 'rgb(12,12,12)', fontSize: 32, lineHeight: "38px", whiteSpace: 'nowrap' }} >Корзина</h6>
-					</div>
-				</div>
-				<div className='d-flex align-items-center justify-content-between' style={{ marginBottom: '20px', userSelect: 'none' }}>
-					{device.checkedBasketDevicesIds.length ?
-						<div className='d-flex align-items-center' style={{ cursor: 'pointer' }} onClick={() => destroyBasketDevice(device.checkedBasketDevicesIds)}>
-							<div><SVGDelete /></div>
-							<div>Удалить</div>
-						</div> :
-						''
+	//todo Запрос на получение basketDevices
+	//todo Работа с выбранными позициями (Считать стоимость выбранных товаров форм,Удаление )
+	const userState = useSelector((state: RootState) => state.user)
+
+	const basketDevices = useGetBasketDevicesQuery({ basketId: userState.user?.id })
+	const brands = useGetBrandsQuery(undefined)
+	const types = useGetTypesQuery(undefined)
+
+
+	if (basketDevices.isLoading || brands.isLoading || types.isLoading) {
+		return <h1>Загрузка...</h1>
+	}
+
+	if (basketDevices.isError || brands.isError || types.isError) {
+		return <h1>Ошибка загрузки...</h1>
+	}
+
+
+
+	if (basketDevices.data && brands.data && types.data) {
+
+		if (basketDevices.data.length) {
+			return (
+				<>
+					{
+						basketDevices.data.map(device => {
+							const brand = brands.data.find(brand => brand.id === device.brandId)
+							const type = types.data.find(type => type.id === device.typeId)
+							//todo надо поменять asListItem на asBasketListItem
+							return (
+								< Device asListItem={true} brandName={brand?.name || 'unknown brandName'} typeName={type?.name || 'unknown typeName'} device={device} key={device.id} />
+							)
+						}
+						)
 					}
-					<div></div>
-					<div className='d-flex' style={{ justifySelf: 'end' }}>
-						<div>Выбрать всё</div>
-						<div style={{ marginLeft: '10px' }}>
-							<input checked={allChecked} onChange={e => checkAll(e.target.checked)}
-								type='checkbox' style={{ height: '1.2rem', width: '1.2rem' }} />
-						</div>
-					</div>
-				</div>
-				<div style={{ marginBottom: '25px' }}>
-					{device.basketDevices.map((i, idx) =>
-						<DeviceAsList destroyAction={destroyBasketDevice} key={idx} device={i} isChecked={i.isChecked} />
-					)
-					}
-				</div>
-				{
-					basketPrice ?
-						<div style={{ borderTop: '1px solid rgb(193, 193, 193)', borderBottom: '1px solid rgb(193, 193, 193)', padding: '25px 0' }} className='d-flex flex-column align-items-center'>
-							<div><span style={{ fontSize: '18px', color: 'rgb(69,69,69)' }}>Итого:</span></div>
-							<div style={{ marginBottom: '20px' }} ><span style={{ fontSize: '18px', fontWeight: '500', color: 'rgb(12,12,12)' }}>{basketPrice} ₽</span></div>
-							<Button>Оформить заказ</Button>
-						</div>
-						:
-						''
-				}
-			</div> */}
-		</div>
-	)
+				</>)
+		} else {
+			return <BasketEmpty />
+		}
+
+	}
+
+
+
+	return <h1>Что то пошло не так</h1>
 }
 
