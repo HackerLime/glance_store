@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux'
 import { useGetBasketDevicesQuery } from 'shared/api/basket/basketApi'
 import { useGetBrandsQuery, useGetTypesQuery } from 'shared/api/devices/devicesApi'
 import { BasketEmpty } from 'shared/ui/basket'
-
+import { PageHeader } from 'widgets/pageHeader'
+import styles from './Basket.module.css'
 export const Basket = () => {
 
 	//todo Запрос на получение basketDevices
@@ -27,25 +28,31 @@ export const Basket = () => {
 
 
 	if (basketDevices.data && brands.data && types.data) {
-
-		if (basketDevices.data.length) {
-			return (
-				<>
-					{
+		return (
+			<div className={styles.content__wrapper}>
+				<PageHeader description='Корзина' />
+				{
+					basketDevices.data.length ? (
 						basketDevices.data.map(device => {
-							const brand = brands.data.find(brand => brand.id === device.brandId)
-							const type = types.data.find(type => type.id === device.typeId)
-							//todo надо поменять asListItem на asBasketListItem
+							const brand = brands.data.find(brand => brand.id === device.brandId);
+							const type = types.data.find(type => type.id === device.typeId);
+
 							return (
-								< Device asListItem={true} brandName={brand?.name || 'unknown brandName'} typeName={type?.name || 'unknown typeName'} device={device} key={device.id} />
-							)
-						}
-						)
-					}
-				</>)
-		} else {
-			return <BasketEmpty />
-		}
+								<Device
+									asBasketListItem={true}
+									brandName={brand?.name || 'unknown brandName'}
+									typeName={type?.name || 'unknown typeName'}
+									device={device}
+									key={device.id}
+								/>
+							);
+						})
+					) : (
+						<BasketEmpty />
+					)
+				}
+			</div>
+		)
 
 	}
 
