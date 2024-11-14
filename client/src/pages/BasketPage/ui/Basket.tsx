@@ -8,14 +8,16 @@ import { PageHeader } from 'widgets/pageHeader'
 import styles from './Basket.module.css'
 export const Basket = () => {
 
-	//todo Запрос на получение basketDevices
 	//todo Работа с выбранными позициями (Считать стоимость выбранных товаров форм,Удаление )
+	//todo 
+
 	const userState = useSelector((state: RootState) => state.user)
+	const basketState = useSelector((state: RootState) => state.basket)
+
 
 	const basketDevices = useGetBasketDevicesQuery({ basketId: userState.user?.id })
 	const brands = useGetBrandsQuery(undefined)
 	const types = useGetTypesQuery(undefined)
-
 
 	if (basketDevices.isLoading || brands.isLoading || types.isLoading) {
 		return <h1>Загрузка...</h1>
@@ -24,8 +26,6 @@ export const Basket = () => {
 	if (basketDevices.isError || brands.isError || types.isError) {
 		return <h1>Ошибка загрузки...</h1>
 	}
-
-
 
 	if (basketDevices.data && brands.data && types.data) {
 		return (
@@ -36,7 +36,6 @@ export const Basket = () => {
 						basketDevices.data.map(device => {
 							const brand = brands.data.find(brand => brand.id === device.brandId);
 							const type = types.data.find(type => type.id === device.typeId);
-
 							return (
 								<Device
 									asBasketListItem={true}
@@ -51,12 +50,12 @@ export const Basket = () => {
 						<BasketEmpty />
 					)
 				}
+				{
+					basketState.checkedDevices.length ? <h1 style={{ textAlign: 'center' }} >{basketState.checkedDevices.length}</h1> : ''
+				}
 			</div>
 		)
-
 	}
-
-
 
 	return <h1>Что то пошло не так</h1>
 }

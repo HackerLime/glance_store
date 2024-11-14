@@ -1,5 +1,9 @@
-import { FC } from 'react'
+import { RootState } from 'app/store/store'
+import { FC, useState } from 'react'
 import { Form } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { changePriceById, toggleCheckedDevice } from 'shared/api/basket/basket.slice'
+import { useDeleteBasketDeviceMutation } from 'shared/api/basket/basketApi'
 import { SVGDelete } from 'shared/assets/icons/remove/SVGDelete'
 import { BasketCounter } from 'shared/ui/basket'
 import { DeviceImages } from 'shared/ui/device/deviceImages'
@@ -12,21 +16,45 @@ import styles from './DeviceAsBasketListItem.module.css'
 
 export const DeviceAsBasketListItem: FC<TDeviceItemProps> = ({ device, brandName, typeName }) => {
 
+  const [priceState, setPriceState] = useState(device.price)
+  const hashedPrice = device.price
+  const basketState = useSelector((state: RootState) => state.basket)
+  const userState = useSelector((state: RootState) => state.user)
+
+  console.log(basketState)
+  const [deleteBasketDevice] = useDeleteBasketDeviceMutation()
+  const dispatch = useDispatch()
+
+  const checkAction = (device) => {
+    dispatch(toggleCheckedDevice(device))
+  }
+
+  const counterChangeAction = (counterState: number): void => {
+    setPriceState(hashedPrice * counterState)
+    dispatch(changePriceById({ id: device.id, price: hashedPrice * counterState }))
+  }
+
+  const deleteAction = () => {
+    deleteBasketDevice({ basketId: userState.user?.id, deviceId: device.id })
+  }
+
+
 
   return (
     <div className={styles.wrapper}>
       <BlueLine />
-
       <div className={styles.content}>
         <div className={styles.contentImage_wrapper}> <DeviceImages deviceImages={device.img} /></div>
         <div className={styles.contentInfo_wrapper} >
-          <div className={styles.check_wrapper}> <Form.Check /> </div>
+          <div className={styles.check_wrapper}>
+            <Form.Check onChange={e => checkAction(device)} />
+          </div>
           <DeviceName brandName={brandName} typeName={typeName} deviceName={device.name} deviceId={device.id} />
           <DeviceInStock device={device} />
-          <DevicePrice devicePrice={device.price} />
+          <DevicePrice devicePrice={priceState} />
           <div className='d-flex'>
-            <SVGDelete style={{ cursor: 'pointer' }} />
-            <BasketCounter />
+            <SVGDelete style={{ cursor: 'pointer' }} onClick={() => deleteAction()} />
+            <BasketCounter counterChangeAction={counterChangeAction} />
           </div>
         </div>
       </div>
