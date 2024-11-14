@@ -21,13 +21,16 @@ const baseQuery = fetchBaseQuery({
 
 export const basketApi = createApi({
   baseQuery,
+  tagTypes: ['basketDevices']
+  ,
   endpoints: (builder) => ({
     addBasketDevice: builder.mutation<TAddBasketDeviceResponse, TAddBasketDeviceParams>({
       query: (payload) => ({
         url: '/api/basket/create',
         method: 'POST',
         body: payload
-      })
+      }),
+      invalidatesTags: ['basketDevices']
     })
     ,
     getBasketDevices: builder.query<TGetBasketDevicesResponse, TGetBasketDevicesParams>({
@@ -35,7 +38,8 @@ export const basketApi = createApi({
         url: '/api/basket/get',
         method: 'POST',
         body: payload
-      })
+      }),
+      providesTags: ['basketDevices']
     })
     ,
     deleteBasketDevice: builder.mutation<TDeleteBasketDeviceResponse, TDeleteBasketDeviceParams>({
@@ -43,7 +47,8 @@ export const basketApi = createApi({
         url: '/api/basket/destroy',
         method: 'POST',
         body: payload
-      })
+      }),
+      invalidatesTags: ['basketDevices']
     })
     ,
   })

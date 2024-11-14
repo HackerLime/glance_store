@@ -1,48 +1,27 @@
-import { useState } from 'react'
+import { RootState } from 'app/store/store'
+import { Button } from 'react-bootstrap'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { BASKET_ROUTE } from 'shared/routerPaths'
-import styles from './DeviceButton.module.css'
-export const DeviceButton = ({ deviceId, isDeviceInBasket }) => {
-	const [isClicked, setIsClicked] = useState(false)
+import { useAddBasketDeviceMutation } from 'shared/api/basket/basketApi'
+import { REGISTRATION_ROUTE } from 'shared/routerPaths'
+export const DeviceButton = ({ deviceId }) => {
+
+	const [addBasketDevice] = useAddBasketDeviceMutation()
+	const userState = useSelector((state: RootState) => state.user)
+
 	const navigate = useNavigate()
 	const addBasketDeviceAction = () => {
-		/* if (!localStorage.getItem('token')) {
+		if (!localStorage.getItem('token')) {
+			console.log('fail')
 			return navigate(REGISTRATION_ROUTE)
 		} else {
-			addBasketDevice(deviceId, store.user.user.id).then(data => console.log(data)).catch(e => console.log(e))
-			setIsClicked(true)
-		} */
-		console.log('addBasketDeviceAction')
+			addBasketDevice({ deviceId, basketId: userState.user.id })
+		}
 	}
 
-
-	if (isDeviceInBasket) {
-		return (
-			<button
-				onClick={() => navigate(BASKET_ROUTE)}
-				style={{
-					maxHeight: '44px',
-					maxWidth: '200px',
-				}}
-				className={styles.inBasketBtn}
-			>
-				<h3 className={styles.inBasketBtnText}>Я в Корзине</h3>
-			</button>
-		)
-	} else {
-		return (
-			<button
-				onClick={() => !isClicked ? addBasketDeviceAction() : navigate(BASKET_ROUTE)}
-				style={{
-					maxHeight: '44px',
-					maxWidth: '200px',
-				}}
-
-				className={isClicked ? styles.inBasketBtn : styles.defaultBtn}>
-				<h3 className={isClicked ? styles.inBasketBtnText : styles.defaultBtnText}>{isClicked ? 'Я в Корзине' : 'в Корзину'}</h3>
-			</button >
-		)
-	}
+	return (
+		<Button onClick={addBasketDeviceAction}>Кнопка</Button>
+	)
 
 
 }
