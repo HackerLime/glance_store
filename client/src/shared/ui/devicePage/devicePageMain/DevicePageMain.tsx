@@ -1,8 +1,8 @@
 import { FC } from 'react'
-import { Button } from 'react-bootstrap'
 import Image from 'react-bootstrap/Image'
 import { useGetBrandByIdQuery, useGetTypeByIdQuery } from 'shared/api/devices/devicesApi'
 import { TDevice } from 'shared/types'
+import { DeviceButton } from 'shared/ui/device/deviceButton'
 import { DevicePrice } from 'shared/ui/device/devicePrice'
 import styles from './DevicePageMain.module.css'
 
@@ -35,7 +35,7 @@ export const DevicePageMain: FC<TDevicePageMainProps> = ({ device }) => {
 				</section>
 				<section className={styles.devicePage__priceAndAddBasket} >
 					<DevicePrice devicePrice={device.price} isDevicePage={true} />
-					<Button onClick={() => console.log('addBasketAction')}>В корзину</Button>
+					<DeviceButton deviceId={device.id} />
 				</section>
 			</main>
 		)
