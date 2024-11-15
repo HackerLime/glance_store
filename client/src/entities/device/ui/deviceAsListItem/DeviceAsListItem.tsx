@@ -30,7 +30,7 @@ export const DeviceAsListItem: FC<TDeviceItemProps> = ({ device, brandName, type
 						</div>
 						<div className='d-flex'>
 							<div className={styles.buttonBlock} >
-								<DeviceButton deviceId={device.id} isDeviceInBasket={false} />
+								<DeviceButton deviceId={device.id} />
 							</div>
 						</div>
 					</div>

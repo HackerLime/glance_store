@@ -1,0 +1,19 @@
+.counter__wrapper{
+  display: flex;
+  max-width: 108px;
+}
+.counter__button{
+  
+  height: 2.25em;
+  width: 2.25em;
+  border: 1px solid teal;
+}
+
+.counter__value{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.25em;
+  width: 2.25em;
+  border: 1px solid teal;
+}

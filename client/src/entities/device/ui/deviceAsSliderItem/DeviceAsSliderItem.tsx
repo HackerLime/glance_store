@@ -25,7 +25,7 @@ export const DeviceAsSliderItem: FC<TDeviceItemProps> = ({ device, brandName, ty
 				<DeviceInStock device={device} />
 			</div>
 			<div className={styles.deviceButton} >
-				<DeviceButton deviceId={device.id} isDeviceInBasket={false} />
+				<DeviceButton deviceId={device.id} />
 			</div>
 		</div>
 	)

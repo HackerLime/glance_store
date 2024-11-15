@@ -1,44 +1,11 @@
-.defaultBtn{
-	border: none;
-	background-color: rgb(9, 29, 158);
-	border-radius: 8px;
-	padding: 14px 51.5px;
-	display: flex;
-	align-items: center;
+.myButton{
+padding-top: 10px;
+padding-bottom:10px ;
+border: none;
+outline: none;
+background-color: #221A8E;
+color: #f6f6f6;
+border-radius: 0.5em;
+width: 100%;
 }
 
-@media (max-width:500px){
-	.defaultBtn{
-		padding: 14px 25px;
-	}
-}
-
-.defaultBtnText{
-	color: rgb(246, 246, 246);
-	font-size: 14px;
-	line-height: 16px;
-	font-weight: 500;
-	white-space: nowrap
-}
-
-.inBasketBtn{
-	border: 1px solid rgb(9, 29, 158);
-	border-radius: 8px;
-	padding: 14px 51.5px;
-	display: flex;
-	align-items: center;
-
-}
-
-@media (max-width:500px){
-	.inBasketBtn{
-		padding: 14px 25px;
-	}
-}
-.inBasketBtnText{
-	color: rgb(9, 29, 158);
-	font-size: 14px;
-	line-height: 16px;
-	font-weight: 500;
-	white-space: nowrap
-}
