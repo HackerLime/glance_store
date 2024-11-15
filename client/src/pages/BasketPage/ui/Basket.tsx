@@ -50,9 +50,7 @@ export const Basket = () => {
 						<BasketEmpty />
 					)
 				}
-				{
-					basketState.checkedDevices.length ? <h1 style={{ textAlign: 'center' }} >{basketState.checkedDevices.length}</h1> : ''
-				}
+
 			</div>
 		)
 	}
