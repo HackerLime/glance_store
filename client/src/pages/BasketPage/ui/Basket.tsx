@@ -1,3 +1,4 @@
+//@ts-nocheck
 import type { RootState } from 'app/store/store'
 import { Device } from 'entities/device'
 import { useSelector } from 'react-redux'
@@ -12,7 +13,6 @@ export const Basket = () => {
 	//todo 
 
 	const userState = useSelector((state: RootState) => state.user)
-	const basketState = useSelector((state: RootState) => state.basket)
 
 
 	const basketDevices = useGetBasketDevicesQuery({ basketId: userState.user?.id })

@@ -1,7 +1,7 @@
 import { Device } from 'entities/device';
-import { TDevice } from 'entities/device/model';
 import { FC } from 'react';
 import type { TBrandAndTypeResponse } from 'shared/types';
+import { TDevice } from 'shared/types';
 import { SadMessage } from 'shared/ui/sadMessage';
 import styles from './DevicesTiles.module.css';
 type TDevicesTilesProps = {

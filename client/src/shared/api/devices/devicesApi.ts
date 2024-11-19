@@ -29,7 +29,7 @@ export const devicesApi = createApi({
       query: () => '/api/device',
     }),
 
-    getDeviceById: builder.query<TDevice, number>({
+    getDeviceById: builder.query<TDevice, string>({
       query: (payload) => `/api/device/${payload}`,
     }),
 

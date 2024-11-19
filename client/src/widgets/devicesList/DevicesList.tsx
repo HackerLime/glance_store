@@ -1,7 +1,6 @@
 import { Device } from 'entities/device';
-import { TDevice } from 'entities/device/model';
 import { FC } from 'react';
-import type { TBrandAndTypeResponse } from 'shared/types';
+import type { TBrandAndTypeResponse, TDevice } from 'shared/types';
 import { SadMessage } from 'shared/ui/sadMessage';
 
 

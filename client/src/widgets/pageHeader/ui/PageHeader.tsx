@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { SVGLessThan } from 'shared/assets/icons';
+
 import { SHOP_ROUTE } from 'shared/routerPaths';
 import { BreadCrumbs } from 'shared/ui/breadCrumbs';
 import styles from './PageHeader.module.css';
@@ -16,7 +16,6 @@ export const PageHeader: FC<TPageHeaderProps> = ({ description }) => {
       <BreadCrumbs description={description} />
       <div className={styles.pageHeader__main} >
         <Link to={SHOP_ROUTE}>
-          <SVGLessThan />
         </Link>
         <span
           className={styles.pageHeader__main_description}
