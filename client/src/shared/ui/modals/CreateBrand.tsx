@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { useCreateBrandMutation } from 'shared/api/devices/devicesApi';
+import type { TModalProps } from './types';
 
-export const CreateBrand = ({ show, setShow }) => {
+export const CreateBrand: FC<TModalProps> = ({ show, setShow }) => {
 	const [createBrand] = useCreateBrandMutation()
 
 

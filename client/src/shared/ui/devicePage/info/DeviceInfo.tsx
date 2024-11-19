@@ -1,6 +1,5 @@
-import React from 'react'
 
-const DeviceInfo = ({ deviceInfo }) => {
+export const DeviceInfo = ({ deviceInfo }) => {
 	return (
 		<div>
 			<div
@@ -15,4 +14,3 @@ const DeviceInfo = ({ deviceInfo }) => {
 	)
 }
 
-export default DeviceInfo

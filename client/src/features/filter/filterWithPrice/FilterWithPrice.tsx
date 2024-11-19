@@ -1,9 +1,8 @@
-import { FC, useState } from 'react';
+import { Dispatch, FC, SetStateAction } from 'react';
+import type { TPriceState } from 'widgets/catalogFilter/types';
 import { FilterLabel } from '../filterLabel';
 import { FilterPrice } from './FilterPrice';
 import styles from './FilterWithPrice.module.css';
-import { Dispatch, SetStateAction } from 'react'
-import type { TPriceState } from 'widgets/catalogFilter/types'
 type TFilterWithPriceProps = {
 	defFrom: number;
 	defTo: number;

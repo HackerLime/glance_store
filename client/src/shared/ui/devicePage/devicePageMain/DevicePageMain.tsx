@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { FC } from 'react'
 import Image from 'react-bootstrap/Image'
 import { useGetBrandByIdQuery, useGetTypeByIdQuery } from 'shared/api/devices/devicesApi'

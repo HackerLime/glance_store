@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { useCreateTypeMutation } from 'shared/api/devices/devicesApi';
+import type { TModalProps } from './types';
 
-export const CreateType = ({ show, setShow }) => {
+
+export const CreateType: FC<TModalProps> = ({ show, setShow }) => {
 	const [createType] = useCreateTypeMutation()
 
 	const hideModal = () => {

@@ -47,7 +47,7 @@ export const DeviceAsBasketListItem: FC<TDeviceItemProps> = ({ device, brandName
         <div className={styles.contentImage_wrapper}> <DeviceImages deviceImages={device.img} /></div>
         <div className={styles.contentInfo_wrapper} >
           <div className={styles.check_wrapper}>
-            <Form.Check onChange={e => checkAction(device)} />
+            <Form.Check onChange={() => checkAction(device)} />
           </div>
           <DeviceName brandName={brandName} typeName={typeName} deviceName={device.name} deviceId={device.id} />
           <DeviceInStock device={device} />

@@ -1,6 +1,4 @@
-import { RootState } from 'app/store/store';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useGetBrandsQuery, useGetDevicesQuery, useGetTypesQuery } from 'shared/api/devices/devicesApi';
 import { SVGList, SVGTile } from 'shared/assets/icons';
 import { useScreenWidth } from 'shared/hooks/useScreenWidth';
@@ -18,7 +16,7 @@ export const Catalog = () => {
 	const devicesResponse = useGetDevicesQuery(undefined);
 	const brandsResponse = useGetBrandsQuery(undefined);
 	const typesResponse = useGetTypesQuery(undefined);
-	const filter = useSelector((state: RootState) => state.filter);
+
 	const [catalogViewStatus, setCatalogViewStatus] = useState('list');
 	const [tileColor, setTileColor] = useState('#ABABAB');
 	const [listColor, setListColor] = useState('#0C0C0C');
