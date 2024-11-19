@@ -10,7 +10,7 @@ export {
   SVGSearch, SVGSmile
 } from './differentIcons';
 
-export { SVGBigIphone, SVGLessThan } from './device';
+export { SVGBigIphone } from './device';
 
 export { iconBasket, iconCatalog, iconProfile } from './NavbarMenu';
 export { SVGDelete } from './remove';

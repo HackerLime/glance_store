@@ -27,7 +27,7 @@ export const userApi = createApi({
         method: 'POST',
         body: credentials
       }),
-      async onQueryStarted(credentials, { dispatch, queryFulfilled }) {
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled
           dispatch(loginAction(data.token))
@@ -43,7 +43,7 @@ export const userApi = createApi({
         method: 'POST',
         body: credentials
       }),
-      async onQueryStarted(credentials, { dispatch, queryFulfilled }) {
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled
           dispatch(loginAction(data.token))
@@ -57,7 +57,7 @@ export const userApi = createApi({
         url: `api/user/auth`,
         method: 'GET',
       }),
-      async onQueryStarted(payload, { dispatch, queryFulfilled }) {
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled
           dispatch(loginAction(data.token))
@@ -72,24 +72,3 @@ export const userApi = createApi({
 
 export const { useTryLoginMutation, useTryRegistrationMutation, useCheckUserQuery } = userApi
 
-/* 
-import { jwtDecode } from 'jwt-decode'
-import { $authHost, $host } from './index'
-export const login = async (email, password) => {
-  const { data } = await $host.post('api/user/login', { email, password })
-  localStorage.setItem('token', data.token)
-  return jwtDecode(data.token)
-}
-
-export const registartion = async (email, password) => {
-  const { data } = await $host.post('api/user/registration', { email, password, role: "ADMIN" })
-  localStorage.setItem('token', data.token)
-  return jwtDecode(data.token)
-}
-
-export const check = async () => {
-  const { data } = await $authHost.get('api/user/auth')
-  localStorage.setItem('token', data.token)
-  return jwtDecode(data.token)
-}
-*/
