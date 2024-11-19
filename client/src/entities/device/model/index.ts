@@ -1,2 +1,2 @@
-export type { AsBasketListProps, AsListProps, AsSliderProps, TDevice, TDeviceItemProps, TDeviceProps } from './types';
+export type { AsBasketListProps, AsListProps, AsSliderProps, TDeviceItemProps, TDeviceProps } from './types';
 

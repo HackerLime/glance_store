@@ -1,4 +1,5 @@
-import { useState } from 'react';
+//@ts-nocheck
+import { FC, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -7,20 +8,21 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import { useCreateDeviceMutation, useGetBrandsQuery, useGetTypesQuery } from 'shared/api/devices/devicesApi';
+import type { TInfoState, TModalProps, TSelectedItemState } from './types';
 
 
-export const CreateDevice = ({ show, setShow }) => {
+export const CreateDevice: FC<TModalProps> = ({ show, setShow }) => {
 
 	const brandsQuery = useGetBrandsQuery(undefined)
 	const typesQuery = useGetTypesQuery(undefined)
 	const [createDevice] = useCreateDeviceMutation()
 
-	const [info, setInfo] = useState([])
+	const [info, setInfo] = useState<TInfoState>([])
 	const [name, setName] = useState('')
 	const [price, setPrice] = useState('')
 	const [file, setFile] = useState(null)
-	const [selectedType, setSelectedType] = useState({})
-	const [selectedBrand, setSelectedBrand] = useState({})
+	const [selectedType, setSelectedType] = useState<TSelectedItemState>(null)
+	const [selectedBrand, setSelectedBrand] = useState<TSelectedItemState>(null)
 
 	if (brandsQuery.isLoading || typesQuery.isLoading) {
 		return <h1>Загрузка...</h1>
@@ -34,21 +36,21 @@ export const CreateDevice = ({ show, setShow }) => {
 	const addInfo = () => {
 		setInfo([...info, { number: Date.now(), title: '', description: '' }])
 	}
-	const removeInfo = (num) => {
+	const removeInfo = (num: number) => {
 		setInfo(info.filter(i => i.number !== num))
 	}
-	const changeInfo = (num, key, value) => {
+	const changeInfo = (num: number, key: string, value: string) => {
 		setInfo(info.map(i => i.number === num ? { ...i, [key]: value } : i))
 	}
-	const selectFile = e => {
+	const selectFile = (e) => {
 		setFile(e.target.files[0])
 	}
 	const hideModal = () => {
 		setShow(false)
-		setSelectedType({})
-		setSelectedBrand({})
+		setSelectedType(null)
+		setSelectedBrand(null)
 		setName('')
-		setPrice(0)
+		setPrice('')
 		setFile(null)
 		setInfo([])
 	}
@@ -57,12 +59,12 @@ export const CreateDevice = ({ show, setShow }) => {
 		const formData = new FormData()
 		formData.append('name', name)
 		formData.append('price', `${price}`)
-		formData.append('img', file)
-		formData.append('brandId', selectedBrand.id)
-		formData.append('typeId', selectedType.id)
+		formData.append('img', file ? file : 'null')
+		formData.append('brandId', selectedBrand ? String(selectedBrand.id) : 'null')
+		formData.append('typeId', selectedType ? String(selectedType.id) : 'null')
 		formData.append('info', JSON.stringify(info))
 		console.log(formData)
-		createDevice(formData).then(data => hideModal()).catch(e => console.log(e.response.data)
+		createDevice(formData).then(() => hideModal()).catch(e => console.log(e.response.data)
 		)
 	}
 
@@ -79,7 +81,7 @@ export const CreateDevice = ({ show, setShow }) => {
 						<Dropdown className='mb-2'>
 							<Dropdown.Toggle variant="info" id="dropdown-basic">
 
-								{selectedType.name || `Выберите тип`}
+								{selectedType ? selectedType.name : `Выберите тип`}
 							</Dropdown.Toggle>
 							<Dropdown.Menu>
 								{typesQuery.data.map(type =>
@@ -90,7 +92,7 @@ export const CreateDevice = ({ show, setShow }) => {
 						<Dropdown className='mb-2'>
 							<Dropdown.Toggle variant="info" id="dropdown-basic">
 
-								{selectedBrand.name || 'Выберите брэнд'}
+								{selectedBrand ? selectedBrand.name : 'Выберите брэнд'}
 							</Dropdown.Toggle>
 							<Dropdown.Menu>
 								{brandsQuery.data.map(brand =>
@@ -107,7 +109,7 @@ export const CreateDevice = ({ show, setShow }) => {
 							onChange={e => setPrice(e.target.value)}
 							className='mb-2' type='number' placeholder='Введите стоимость' />
 						<Form.Control
-							onChange={selectFile}
+							onChange={e => selectFile(e)}
 							className='mb-3' type='file' />
 						<Button
 							className='mb-3'
@@ -117,11 +119,11 @@ export const CreateDevice = ({ show, setShow }) => {
 						{info.map((i, idx) =>
 							<Row key={idx} className='mb-2' >
 								<Col ><Form.Control
-									value={info.title}
+									value={i.title}
 									onChange={e => changeInfo(i.number, 'title', e.target.value)}
 								/></Col>
 								<Col ><Form.Control
-									value={info.description}
+									value={i.description}
 									onChange={e => changeInfo(i.number, 'description', e.target.value)}
 								/></Col>
 								<Col md={3}>
