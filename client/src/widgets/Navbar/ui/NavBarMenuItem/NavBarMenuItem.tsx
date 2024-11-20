@@ -7,12 +7,14 @@ type NavBarMenuItemPropsType = {
 	icon: JSX.Element;
 	name: string;
 	route: string;
+	bgColor: string;
 }
 
-export const NavBarMenuItem: FC<NavBarMenuItemPropsType> = ({ icon, name, route }) => {
+export const NavBarMenuItem: FC<NavBarMenuItemPropsType> = ({ icon, name, route, bgColor }) => {
 
 	return (
 		<Link
+			style={{ backgroundColor: bgColor }}
 			to={route}
 			className={styles.wrapper}>
 			<div className={styles.icon} >{icon}</div>

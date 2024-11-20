@@ -10,8 +10,8 @@ type TPageHeaderProps = {
 }
 
 export const PageHeader: FC<TPageHeaderProps> = ({ description }) => {
-  return (
 
+  return (
     <header className={styles.pageHeader__wrapper}>
       <BreadCrumbs description={description} />
       <div className={styles.pageHeader__main} >
@@ -25,4 +25,5 @@ export const PageHeader: FC<TPageHeaderProps> = ({ description }) => {
       </div>
     </header>
   )
+
 }

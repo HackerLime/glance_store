@@ -48,7 +48,7 @@ export const userApi = createApi({
           const { data } = await queryFulfilled
           dispatch(loginAction(data.token))
         } catch (err) {
-          console.error(err.error)
+          console.error(err)
         }
       },
     }),
@@ -62,7 +62,7 @@ export const userApi = createApi({
           const { data } = await queryFulfilled
           dispatch(loginAction(data.token))
         } catch (err) {
-          console.error(err.error)
+          console.error(err)
           dispatch(logOutAction())
         }
       },

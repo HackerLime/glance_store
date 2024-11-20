@@ -4,12 +4,13 @@ import { useNavigate } from 'react-router-dom'
 import { useAddBasketDeviceMutation } from 'shared/api/basket/basketApi'
 import { REGISTRATION_ROUTE } from 'shared/routerPaths'
 import styles from './DeviceButton.module.css'
+
 export const DeviceButton = ({ deviceId }) => {
 
 	const [addBasketDevice] = useAddBasketDeviceMutation()
 	const userState = useSelector((state: RootState) => state.user)
-
 	const navigate = useNavigate()
+
 	const addBasketDeviceAction = () => {
 		if (!localStorage.getItem('token')) {
 			console.log('fail')

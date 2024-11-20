@@ -5,9 +5,10 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { userApi, useTryLoginMutation, useTryRegistrationMutation } from 'shared/api/user/user.api';
 import { LOGIN_ROUTE, REGISTRATION_ROUTE } from 'shared/routerPaths';
-
 export const Auth = () => {
 
 	const [email, setEmail] = useState('')
@@ -16,6 +17,19 @@ export const Auth = () => {
 	const [tryLogin, tryLoginStatus] = useTryLoginMutation()
 	const [tryRegistration, tryRegistrationStatus] = useTryRegistrationMutation()
 	const dispatch = useDispatch()
+	const errNotify = (message) => {
+		toast.error(message, {
+			position: "bottom-center",
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: false,
+			draggable: true,
+			progress: undefined,
+			theme: "colored",
+		});
+	}
+
 
 	const isLogin = location.pathname === '/login'
 	const authAction = async () => {
@@ -28,12 +42,22 @@ export const Auth = () => {
 
 	useEffect(() => {
 		if (tryLoginStatus.isError) {
-			alert(tryLoginStatus.error.data.message || 'Ошибка Авторизации')
+			if ('error' in tryLoginStatus.error) {
+				dispatch(userApi.util.resetApiState())
+				return errNotify(tryLoginStatus.error.error)
+			}
 			dispatch(userApi.util.resetApiState())
+			return errNotify(tryLoginStatus.error.data.message || 'Ошибка авторизации')
+
 		}
 		if (tryRegistrationStatus.isError) {
-			alert(tryRegistrationStatus.error.data.message || 'Ошибка Регистрации')
+			if ('error' in tryRegistrationStatus.error) {
+				dispatch(userApi.util.resetApiState())
+				return errNotify(tryRegistrationStatus.error.error)
+			}
 			dispatch(userApi.util.resetApiState())
+			return errNotify(tryRegistrationStatus.error.data.message || 'Ошибка регистрации')
+
 		}
 	}, [tryLoginStatus.isError, tryRegistrationStatus.isError])
 
@@ -66,6 +90,19 @@ export const Auth = () => {
 					<p>нет аккаунта?<Link to={isLogin ? REGISTRATION_ROUTE : LOGIN_ROUTE} style={{ color: 'teal' }}>{isLogin ? 'Зарегестрируйся!' : 'Авторизуйся'}</Link></p>
 				</div>
 			</Form>
+			<ToastContainer
+				position="bottom-center"
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover={false}
+				theme="colored"
+
+			/>
 		</Container>
 	)
 }
