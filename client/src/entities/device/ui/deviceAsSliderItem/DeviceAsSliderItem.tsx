@@ -6,13 +6,7 @@ import styles from './DeviceAsSliderItem.module.css'
 
 
 export const DeviceAsSliderItem: FC<TDeviceItemProps> = ({ device, brandName, typeName }) => {
-	//todo надо реализовать код ниже
-	/* 	const [isDeviceInBasket, setIsDeviceInBasket] = useState(false)
-		useEffect(() => {
-			if (store.device.inBasketDevicesId.includes(device.id)) {
-				setIsDeviceInBasket(true)
-			}
-		}, [device.id, store.device.inBasketDevicesId]) */
+
 
 	return (
 		<div className={styles.deviceWrapper} >

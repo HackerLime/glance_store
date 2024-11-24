@@ -8,11 +8,13 @@ type TPriceState = {
 }
 
 type TBasketSliceState = {
+  totalCount: number;
   checkedDevices: TDevice[];
   changedPriceState: TPriceState[]
 };
 
 const initialState: TBasketSliceState = {
+  totalCount: 0,
   checkedDevices: [],
   changedPriceState: [],
 };
@@ -39,8 +41,14 @@ const basketSlice = createSlice({
       }
 
     },
+    setTotalCount(state, action: PayloadAction<number>) {
+      if (state.totalCount !== action.payload) {
+        state.totalCount = action.payload
+      }
+
+    },
   },
 });
 
-export const { toggleCheckedDevice, changePriceById } = basketSlice.actions;
+export const { toggleCheckedDevice, changePriceById, setTotalCount } = basketSlice.actions;
 export default basketSlice.reducer;
