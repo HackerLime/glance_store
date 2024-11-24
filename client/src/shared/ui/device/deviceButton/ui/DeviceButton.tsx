@@ -1,4 +1,5 @@
 import { RootState } from 'app/store/store'
+import { Button } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useAddBasketDeviceMutation } from 'shared/api/basket/basketApi'
@@ -7,7 +8,7 @@ import styles from './DeviceButton.module.css'
 
 export const DeviceButton = ({ deviceId }) => {
 
-	const [addBasketDevice] = useAddBasketDeviceMutation()
+	const [addBasketDevice, { isLoading }] = useAddBasketDeviceMutation()
 	const userState = useSelector((state: RootState) => state.user)
 	const navigate = useNavigate()
 
@@ -21,7 +22,11 @@ export const DeviceButton = ({ deviceId }) => {
 	}
 
 	return (
-		<button className={styles.myButton} onClick={addBasketDeviceAction}>В корзину</button>
+
+		<Button className={styles.myButton} onClick={addBasketDeviceAction}>
+			<span>	{isLoading ? 'Загрузка' : 'В корзину'}</span>
+		</Button>
+
 	)
 
 

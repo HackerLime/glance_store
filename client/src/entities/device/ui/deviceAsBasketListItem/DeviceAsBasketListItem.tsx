@@ -18,10 +18,10 @@ export const DeviceAsBasketListItem: FC<TDeviceItemProps> = ({ device, brandName
 
   const [priceState, setPriceState] = useState(device.price)
   const hashedPrice = device.price
+  //@ts-ignore
   const basketState = useSelector((state: RootState) => state.basket)
   const userState = useSelector((state: RootState) => state.user)
 
-  console.log(basketState)
   const [deleteBasketDevice] = useDeleteBasketDeviceMutation()
   const dispatch = useDispatch()
 

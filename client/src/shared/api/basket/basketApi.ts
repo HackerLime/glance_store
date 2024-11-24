@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { baseUrl } from '../config';
+import { setTotalCount } from './basket.slice';
 import type { TAddBasketDeviceParams, TAddBasketDeviceResponse, TDeleteBasketDeviceParams, TDeleteBasketDeviceResponse, TGetBasketDevicesParams, TGetBasketDevicesResponse } from './types';
 
 const baseQuery = fetchBaseQuery({
@@ -39,6 +40,17 @@ export const basketApi = createApi({
         method: 'POST',
         body: payload
       }),
+
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled
+          //@ts-ignore
+          dispatch(setTotalCount(data.length))
+        } catch (err) {
+          console.error(err)
+        }
+      },
+
       providesTags: ['basketDevices']
     })
     ,
