@@ -9,8 +9,7 @@ import { PageHeader } from 'widgets/pageHeader'
 import styles from './Basket.module.css'
 export const Basket = () => {
 
-	//todo Работа с выбранными позициями (Считать стоимость выбранных товаров форм,Удаление )
-	//todo 
+
 
 	const userState = useSelector((state: RootState) => state.user)
 
