@@ -1,11 +1,12 @@
 .myButton{
-padding-top: 10px;
+ padding-top: 10px;
 padding-bottom:10px ;
+width: 100%; 
 border: none;
 outline: none;
 background-color: #221A8E;
 color: #f6f6f6;
 border-radius: 0.5em;
-width: 100%;
+
 }
 
