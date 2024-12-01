@@ -28,7 +28,7 @@ export const DevicePageMain: FC<TDevicePageMainProps> = ({ device }) => {
 		return (
 			<main className={styles.devicePageMainWrapper} >
 				<section className={styles.devicePageImage}>
-					<Image src={import.meta.env.VITE_API_URL + '/' + device.img} />
+					<Image src={device.img} />
 				</section>
 				<section className={styles.deviceCharacteristicsWrapper}>
 					<h2>{getTypeByIdQuery.data.name} {getBrandByIdQuery.data.name} {device.name}</h2>
