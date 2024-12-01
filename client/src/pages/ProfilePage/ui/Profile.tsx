@@ -22,7 +22,12 @@ export const Profile = () => {
 						<div className='d-flex flex-column align-items-center'>
 							<p style={{ fontSize: '20px', margin: '0 0 10px 0' }}>ваш Email:{user.user.email}</p>
 							<Button style={{ margin: '0 0 10px 0' }} variant='danger' className='me-2' onClick={() => logout()} >Выйти</Button>
-							<Button variant='success' onClick={() => navigate(ADMIN_ROUTE)} >Админка</Button>
+							{
+								user.user.role === 'ADMIN' ?
+									<Button variant='success' onClick={() => navigate(ADMIN_ROUTE)} >Админка</Button>
+									:
+									null
+							}
 						</div> :
 						''
 				}
