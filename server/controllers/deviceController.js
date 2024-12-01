@@ -1,16 +1,15 @@
-const uuid = require('uuid')
-const path = require('path')
 const { Device, DeviceInfo } = require('../models/models')
 const ApiError = require('../error/ApiError')
+let s3 = require('../config/config')
+
 class DeviceController {
 	async create(req, res, next) {
 		try {
 			let { name, price, brandId, typeId, info } = req.body
-			let { img } = req.files
-			let fileName = uuid.v4() + '.jpg'
-			img.mv(path.resolve(__dirname, '..', 'static', fileName))
+			let buffer = req.files.img.data
+			let { Location } = await s3.Upload({ buffer }, '/staticImages/');
 
-			const device = await Device.create({ name, price, brandId, typeId, img: fileName })
+			const device = await Device.create({ name, price, brandId, typeId, img: Location })
 
 			if (info) {
 				info = JSON.parse(info)
@@ -22,6 +21,8 @@ class DeviceController {
 					}))
 			}
 			return res.json(device)
+
+
 		} catch (e) {
 			next(ApiError.badRequest(e.message))
 		}
