@@ -1,22 +1,44 @@
 //@ts-nocheck
-import { useEffect, useState } from 'react';
-import Button from 'react-bootstrap/Button';
+import { useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
+import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { userApi, useTryLoginMutation, useTryRegistrationMutation } from 'shared/api/user/user.api';
 import { LOGIN_ROUTE, REGISTRATION_ROUTE } from 'shared/routerPaths';
-export const Auth = () => {
+import { emailPattern, passwordPattern } from '../lib';
+import styles from './Auth.module.css';
+import { AuthPageInput } from './authpageInput';
 
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
+export const Auth = () => {
+	const { register, formState, handleSubmit } = useForm({
+		mode: 'onChange'
+	})
 	const location = useLocation()
+	const isLogin = location.pathname === '/login'
 	const [tryLogin, tryLoginStatus] = useTryLoginMutation()
 	const [tryRegistration, tryRegistrationStatus] = useTryRegistrationMutation()
 	const dispatch = useDispatch()
+
+	const emailError = formState.errors['email']?.message as string | undefined
+	const passwordError = formState.errors['password']?.message as string | undefined
+	type TOnSubmitData = { email: string, password: string }
+	type TOnSubmit = (data: TOnSubmitData) => void;
+
+	const authAction = async (email, password) => {
+		if (isLogin) {
+			tryLogin({ email, password })
+		} else {
+			tryRegistration({ email, password, role: 'USER' })
+		}
+	}
+
+	const onSubmit: TOnSubmit = ({ email, password }) => {
+		authAction(email, password)
+	}
+
 	const errNotify = (message) => {
 		toast.error(message, {
 			position: "bottom-center",
@@ -28,16 +50,6 @@ export const Auth = () => {
 			progress: undefined,
 			theme: "colored",
 		});
-	}
-
-
-	const isLogin = location.pathname === '/login'
-	const authAction = async () => {
-		if (isLogin) {
-			tryLogin({ email, password })
-		} else {
-			tryRegistration({ email, password, role: 'USER' })
-		}
 	}
 
 	useEffect(() => {
@@ -64,32 +76,36 @@ export const Auth = () => {
 
 	return (
 		<Container>
-			<Form style={{ maxWidth: '350px', margin: '0px auto' }}>
-				<h1 style={{ margin: '0 0 30px 0', textAlign: 'center' }}>{isLogin ? 'Авторизация' : 'Регистрация'}</h1>
-				<Form.Group className="mb-3" controlId="formBasicEmail">
-					<Form.Label>Email</Form.Label>
-					<Form.Control
-						value={email}
-						onChange={e => setEmail(e.target.value)}
-						type="email" placeholder="Введите Email" />
-				</Form.Group>
-				<Form.Group className="mb-3" controlId="formBasicPassword">
-					<Form.Label>Пароль</Form.Label>
-					<Form.Control
-						value={password}
-						onChange={e => setPassword(e.target.value)}
-						type="password" placeholder="Введите пароль" />
-				</Form.Group>
-
-				<div className='d-flex justify-content-between align-items-center'>
-					<Button
-						onClick={authAction}
-						variant="outline-primary">
+			<form className={styles.authForm} onSubmit={handleSubmit(onSubmit)}>
+				<h1 className={styles.authPageHeader}>{isLogin ? 'Авторизация' : 'Регистрация'}</h1>
+				<div className={styles.authForm__inputContainer}>
+					<AuthPageInput
+						register={register}
+						name={'email'}
+						labelText={'Email'}
+						placeholderText={'Введите Email'}
+						isError={emailError}
+						requiredText={'*Введите email'}
+						pattern={emailPattern}
+					/>
+					<AuthPageInput
+						register={register}
+						name={'password'}
+						labelText={'Пароль'}
+						placeholderText={'Введите пароль'}
+						isError={passwordError}
+						requiredText={'*Введите пароль'}
+						pattern={passwordPattern}
+						type={'password'}
+					/>
+				</div>
+				<div className={styles.authForm__actionsContainer}>
+					<button className={styles.authForm__button} type='submit'>
 						{isLogin ? 'Войти' : 'Регистрация'}
-					</Button>
+					</button>
 					<p>нет аккаунта?<Link to={isLogin ? REGISTRATION_ROUTE : LOGIN_ROUTE} style={{ color: 'teal' }}>{isLogin ? 'Зарегестрируйся!' : 'Авторизуйся'}</Link></p>
 				</div>
-			</Form>
+			</form>
 			<ToastContainer
 				position="bottom-center"
 				autoClose={5000}
@@ -101,7 +117,6 @@ export const Auth = () => {
 				draggable
 				pauseOnHover={false}
 				theme="colored"
-
 			/>
 		</Container>
 	)
