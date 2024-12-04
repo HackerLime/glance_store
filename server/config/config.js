@@ -4,6 +4,6 @@ module.exports = new EasyYandexS3({
     accessKeyId: process.env.BUCKET_PUBLIC_KEY,
     secretAccessKey: process.env.BUCKET_SECRET_KEY,
   },
-  Bucket: process.env.BUCKET_NAME, // например, "my-storage",
-  debug: true, // Дебаг в консоли, потом можете удалить в релизеd
+  Bucket: process.env.BUCKET_NAME,
+  debug: true,
 });

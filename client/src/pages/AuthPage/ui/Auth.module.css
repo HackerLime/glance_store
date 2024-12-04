@@ -1,0 +1,45 @@
+.authForm{
+max-width: 350px;
+margin: 0px auto;
+display: flex;
+flex-direction: column;
+}
+
+.formInput{
+  border: 1px solid #454545;
+  border-radius: 8px;
+  padding: 11px 8px;
+  margin-bottom:1.5em; ;
+}
+.formInputLabel{
+  margin-bottom: 0.5em;
+}
+
+.authPageHeader{
+margin-bottom: 1.875rem;
+text-align: center;
+
+}
+
+.authForm__inputContainer{
+  margin-bottom: 3.2em;
+}
+
+.authForm__actionsContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.authForm__button{
+  border: 1px solid #BCC5FF;
+  background-color: #BCC5FF;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  border-radius: 0.5rem;
+}
+.authForm__button:hover{
+  background-color: #bcc5ffde;
+}
+.authForm__button:active{
+  background-color: #bcc5ff69;
+}
