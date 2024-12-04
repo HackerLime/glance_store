@@ -1,0 +1,1 @@
+export { AuthPageInput } from './AuthPageInput';
