@@ -2,11 +2,7 @@
   "compilerOptions": {
     "target": "ES2020",
     "useDefineForClassFields": true,
-    "lib": [
-      "ES2020",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
     /* Bundler mode */
@@ -19,34 +15,20 @@
     "jsx": "react-jsx",
     /* Linting */
     /*  */
-    "strict": false,
+    "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     /*  */
     "baseUrl": "src",
     "paths": {
-      "entities/*": [
-        "entities/*"
-      ],
-      "pages/*": [
-        "pages/*"
-      ],
-      "shared/*": [
-        "shared/*"
-      ],
-      "app/*": [
-        "app/*"
-      ],
-      "widgets/*": [
-        "widgets/*"
-      ],
-      "features/*": [
-        "features/*"
-      ],
+      "entities/*": ["entities/*"],
+      "pages/*": ["pages/*"],
+      "shared/*": ["shared/*"],
+      "app/*": ["app/*"],
+      "widgets/*": ["widgets/*"],
+      "features/*": ["features/*"]
     }
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

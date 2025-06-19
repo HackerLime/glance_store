@@ -1,0 +1,17 @@
+.adminContainer {
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+  margin: 0px auto;
+}
+.brandVisibleBtn {
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+.typeVisibleBtn {
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+.deviceVisibleBtn {
+  font-size: 20px;
+}
